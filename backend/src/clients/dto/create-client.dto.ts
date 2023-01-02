@@ -1,8 +1,8 @@
-export class CreatePetShopDto {
+export class CreateClientDto {
     name: string;
     email: string;
     password: string;
-    cnpj: string;
+    cpf: string;
     contact: string;
     cep: string;
     address: string;
