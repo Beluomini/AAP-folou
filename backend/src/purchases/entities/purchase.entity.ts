@@ -19,13 +19,13 @@ export class Purchase {
   id_product: string;
 
   @Prop()
-  quantity: string;
+  quantity: number;
 
   @Prop()
-  unit_price: string;
+  unit_price: number;
 
   @Prop()
-  total_price: string;
+  total_price: number;
 
   @Prop()
   description: string;

@@ -18,7 +18,7 @@ export class Order {
     payment_date: String;
 
     @Prop()
-    price: String;
+    price: number;
 
     @Prop()
     buy_method: String;
