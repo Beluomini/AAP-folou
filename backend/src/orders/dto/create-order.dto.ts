@@ -1,6 +1,6 @@
 export class CreateOrderDto {
-    fk_user_id: String;
-    fk_pet_shop_id: String;
+    fk_id_user: String;
+    fk_id_pet_shop: String;
     create_date: String;
     payment_date: String;
     price: String;
