@@ -5,25 +5,25 @@ export type ClientDocument = HydratedDocument<Client>;
 
 @Schema()
 export class Client {
-  @Prop()
+  @Prop({ required: true })
   name: string;
 
-  @Prop()
+  @Prop({ required: true, unique: true })
   email: string;
 
-  @Prop()
+  @Prop({ required: true })
   password: string;
 
-  @Prop()
+  @Prop({ required: true, unique: true })
   cpf: string;
 
-  @Prop()
+  @Prop({})
   contact: string;
 
-  @Prop()
+  @Prop({ required: true })
   cep: string;
 
-  @Prop()
+  @Prop({ required: true })
   address: string;
 }
 

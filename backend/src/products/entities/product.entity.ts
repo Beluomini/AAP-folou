@@ -1,21 +1,23 @@
+import { Type } from "@nestjs/common";
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { HydratedDocument } from "mongoose";
+import mongoose, { HydratedDocument } from "mongoose";
+import { PetShop } from "src/pet-shops/entities/pet-shop.entity";
 
 export type ProductDocument = HydratedDocument<Product>;
 
 @Schema()
 export class Product {
 
-  @Prop()
-  fk_id_pet_shop: string;
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: PetShop.name, required: true })
+  fk_id_pet_shop: PetShop;
 
-  @Prop()
+  @Prop({ required: true })
   name: string;
 
-  @Prop()
+  @Prop({})
   description: string;
 
-  @Prop()
+  @Prop({ required: true })
   price: number;
 
   @Prop()
@@ -24,7 +26,7 @@ export class Product {
   @Prop()
   image: string;
 
-  @Prop()
+  @Prop({ required: true })
   category: string;
 
 }

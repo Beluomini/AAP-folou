@@ -1,27 +1,31 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { HydratedDocument } from "mongoose";
+import mongoose, { HydratedDocument } from "mongoose";
+import { Client } from "src/clients/entities/client.entity";
+import { Order } from "src/orders/entities/order.entity";
+import { PetShop } from "src/pet-shops/entities/pet-shop.entity";
+import { Product } from "src/products/entities/product.entity";
 
 export type PurchaseDocument = HydratedDocument<Purchase>;
 
 @Schema()
 export class Purchase {
 
-  @Prop()
-  id_pet_shop: string;
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: PetShop.name, required: true })
+  fk_id_pet_shop: PetShop;
 
-  @Prop()
-  id_client: string;
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: Client.name, required: true })
+  fk_id_client: Client;
 
-  @Prop()
-  id_order: string;
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: Order.name, required: true })
+  fk_id_order: Order;
 
-  @Prop()
-  id_product: string;
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: Product.name, required: true })
+  fk_id_product: Product;
 
-  @Prop()
+  @Prop({ required: true })
   quantity: number;
 
-  @Prop()
+  @Prop({ required: true })
   unit_price: number;
 
   @Prop()

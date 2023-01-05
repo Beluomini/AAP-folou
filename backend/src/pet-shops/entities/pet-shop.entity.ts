@@ -5,25 +5,25 @@ export type PetShopDocument = HydratedDocument<PetShop>;
 
 @Schema()
 export class PetShop {
-  @Prop()
+  @Prop({ required: true })
   name: string;
 
-  @Prop()
+  @Prop({ required: true, unique: true })
   email: string;
 
-  @Prop()
+  @Prop({ required: true })
   password: string;
 
-  @Prop()
+  @Prop({ required: true, unique: true })
   cnpj: string;
 
   @Prop()
   contact: string;
 
-  @Prop()
+  @Prop({ required: true })
   cep: string;
 
-  @Prop()
+  @Prop({ required: true })
   address: string;
 }
 

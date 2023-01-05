@@ -1,32 +1,34 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import mongoose, { HydratedDocument } from 'mongoose';
+import { Client } from 'src/clients/entities/client.entity';
+import { PetShop } from 'src/pet-shops/entities/pet-shop.entity';
 
 export type OrderDocument = HydratedDocument<Order>;
 
 @Schema()
 export class Order {
-    @Prop()
-    fk_user_id: String;
+    @Prop({ type: mongoose.Schema.Types.ObjectId, ref: Client.name, required: true })
+    fk_id_client: Client;
 
-    @Prop()
-    fk_pet_shop_id: String;
+    @Prop({ type: mongoose.Schema.Types.ObjectId, ref: PetShop.name, required: true })
+    fk_id_pet_shop: PetShop;
 
-    @Prop()
-    create_date: String;
+    @Prop({ default: Date.now, required: true })
+    create_date: Date;
 
-    @Prop()
-    payment_date: String;
+    @Prop({})
+    payment_date: Date;
 
-    @Prop()
+    @Prop({ required: true })
     price: number;
 
-    @Prop()
-    buy_method: String;
+    @Prop({ required: true })
+    payment_method: String;
 
-    @Prop()
+    @Prop({})
     fk_cupom: String;
 
-    @Prop()
+    @Prop({})
     status: String;
 }
 
