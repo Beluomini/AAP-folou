@@ -34,6 +34,6 @@ export class PurchasesService {
   }
 
   remove(id: string) {
-    return this.purchaseModel.deleteOne({ _id: id}).exec();
+    return this.purchaseModel.deleteOne({ _id: id }).exec();
   }
 }
