@@ -1,6 +1,13 @@
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link, useHistory } from 'react-router-dom';
+
+import React, { useState, useEffect } from 'react';
+
 import { ContainerPage } from '../../components/Main'
 import { PagHome } from './styledHome';
+
+import Input from '../form/Input';
+import Select from '../form/Select';
+import SubmitButton from '../form/SubmitButton';
 
 function Home() {
 
@@ -12,20 +19,17 @@ function Home() {
     return (
         <ContainerPage>
             <PagHome>
-                <h1>Home</h1>
                 <div className='minhaloja'>
-                    <button onClick={exibirPlanos}> Minha Loja </button>
+                    <SubmitButton text='Minha Loja' />
                 </div>
-                <div className='planos'>
-                    <select name='opcoesplano'>
-                        <option disabled selected>Plano 1</option>
-                        <option  >Plano 2</option>
-                        <option  >Plano 2</option>
-                    </select>
-
-                </div>
-                <div className='brinquedos'>
-                    <button onClick={exibirPlanos}> Brinquedos </button>
+                <div className='corpohome'>
+                    <div className='planos'>
+                        <Select text='Planos' name='planos_id' />
+                    </div>
+                    <div className='brinquedos'>
+                        <Select text='Brinquedos' name='brinquedos_id' />
+                        <SubmitButton text='Adiconar Categorias' name="addcat_id" />
+                    </div>
                 </div>
             </PagHome>
         </ContainerPage>

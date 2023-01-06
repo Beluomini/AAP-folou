@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { ContainerPage } from '../../components/Main'
 import { PagConfig } from './styledConfig';
@@ -7,7 +7,21 @@ import Input from '../form/Input';
 import Select from '../form/Select';
 import SubmitButton from '../form/SubmitButton';
 
-function Configuracoes() {
+function Configuracoes(props) {
+
+    //const { btnText } = props;
+    const [servico, setServico] = useState([]);
+    const [animais, setAnimais] = useState([]);
+
+
+    // useEffect(() => {
+    //     api.getServicoList().then((resposta) => setServico(resposta.data));
+    //   }, []);
+
+    // useEffect(() => {
+    //     api.getAnimaisList().then((resposta) => setAnimais(resposta.data));
+    //   }, []);
+
 
     function exibirPlanos() {
         return (
@@ -28,7 +42,7 @@ function Configuracoes() {
             <PagConfig>
                 <h1>Edição dos dados</h1>
                 <form>
-                    <div className='form_control'>
+                    <div className='form_dados'>
                         <Input type='text' text='Nome Estabelecimento ' name='nome' placeholder='Nome do Estabelecimento' />
                         <Input type='text' text='Telefone para Contato' name='telefone' placeholder="Telefone para Contato" />
                         <Input type='text' text='Email' name='email' placeholder="Email" />
@@ -44,9 +58,12 @@ function Configuracoes() {
                         <Input type='text' text='Complemento' name='complemento' placeholder="Complemento" />
                     </div>
                 </form>
-                <div className='servico'>
-                    <Select text='Serviços' name='servico' />
+
+                <div className='select_form'>
+                    <Select text='Serviços' name='servico_id' />
+                    <Select text='Animais' name='animais_id' />
                 </div>
+
                 <div>
                     <SubmitButton text='Salvar' />
                 </div>

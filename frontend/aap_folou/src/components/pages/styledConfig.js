@@ -12,7 +12,6 @@ export const PagConfig = styled.div`
     border-radius: 5px;
     box-shadow: 0px 0px 3px #ccc;
 
-
     form{
         text-align: center;
         width: 50%;
@@ -20,30 +19,12 @@ export const PagConfig = styled.div`
         margin: auto;
     }
 
-    .form_control{    
-        margin-bottom: 1em;
-        margin: auto;
+    .form_dados{         
         margin-right: 50px;
     }
 
-    .fomr_control label{
-        margin-bottom: 0.6em;
-        font-weight: bold;
-        font-size: 15px;
+    .select_form{
+        padding: 20px;
     }
 
-    .form_control input{
-        padding: 0.7em;
-        border-radius: 10px;
-        border: none;
-    }
-
-    .form_control input::placeholder{
-        color: #7b7b7b;
-    }
-
-    .endereco{
-        margin-bottom: 1em;
-        margin: auto;
-    }
 `;

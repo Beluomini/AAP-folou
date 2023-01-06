@@ -8,6 +8,9 @@ function Select(props) {
                 <label htmlFor={name}>{text}</label>
                 <select name={name} id={name}>
                     <option>Selecione uma opção</option>
+                    {/* {options.map((option) => (
+                        <option value={option.id}>{option.nome}</option>
+                    ))} */}
                 </select>
             </div>
         </StyleSelect>

@@ -1,22 +1,20 @@
 import styled from 'styled-components';
 
 export const StyleSelect = styled.div`
-    .form_control{
+    .form_control{  
         display: flex;
         flex-direction: column;
-        margin-bottom: 10px;
-
-    
+        margin: auto;
+        width: 25%;
     }
-
-    .form_control label{
-        margin-bottom: 10px;
+    .fomr_control label{
+        margin-bottom: 1em;
         font-weight: bold;
-        }
-
-    .fomr_control select{
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
+    }
+    .form_control select{
+        padding: 0.7em;
+        border-radius: 10px;
+        border: none;
+        margin: 5px;
     }
 `;

@@ -13,25 +13,18 @@ export const PagHome = styled.div`
     box-shadow: 0px 0px 3px #ccc;
 
 
-    button{
-        align-items: center;
-        padding: 10px;
-        border-radius: 5px;
-        outline: none;
-        font-size: 20px;
-        margin-bottom: 20px;
-        margin-top: 20px;
-        transition: 0.4s;
-        border: 0px;
-        width: 50%;
-        background-color: #A78D73;
+    .minhaloja {
+        button{
+            width: 100%;    
+        }
     }
 
-    select{
-        align-items: center;
-        width: 50%;
-        color: black;
-        background-color: #A78D73;
+    .corpohome{
+        padding: 150px 20px 0px 20px;
+    }
+
+    .planos{
+        margin-bottom: 100px;
     }
 
 `;
