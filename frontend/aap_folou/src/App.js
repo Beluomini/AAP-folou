@@ -1,31 +1,29 @@
 //ROUTES = SWITCH
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import Home from './components/pages/Home';
-import Dados from './components/pages/Dados';
-import Historico from './components/pages/Historico';
-import Cupons from './components/pages/Cupons';
-import Endereco from './components/pages/Endereco';
-import Pagamentos from './components/pages/Pagamentos';
-import Configuracoes from './components/pages/Configuracoes';
+import './App.css';
+import React, { useState } from 'react';
 
-import Navbar from './components/layout/Navbar';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
+import Navbar from './components/Header/Navbar';
+
+import Configuracoes from './components/pages/Configuracoes';
+import Home from './components/pages/Home';
+import Pedidos from './components/pages/Pedidos';
+import Produtos from './components/pages/Produtos';
+
 
 function App() {
   return (
     <Router>
-      <div className='barranav'>
-        <Navbar />
-      </div>
 
-      <div className='conteudo'>
+      <Navbar />
+
+      <div>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/dados" element={<Dados />} />
-          <Route path="/historico" element={<Historico />} />
-          <Route path="/cupons" element={<Cupons />} />
+          <Route path="/pedidos" element={<Pedidos />} />
+          <Route path="/produtos" element={<Produtos />} />
           <Route path="/configuracoes" element={<Configuracoes />} />
-          <Route path="/endereco" element={<Endereco />} />
-          <Route path="/pagamentos" element={<Pagamentos />} />
         </Routes>
       </div>
     </Router>

@@ -1,21 +1,36 @@
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import styles from './Home.module.css';
+import { ContainerPage } from '../../components/Main'
+import { PagHome } from './styledHome';
 
 function Home() {
 
+    function exibirPlanos() {
+        return (
+            alert('Deu certo')
+        )
+    }
     return (
-        <section className={styles.home_container}>
-            <h1>HOME</h1>
-            <p>Imagens</p>
+        <ContainerPage>
+            <PagHome>
+                <h1>Home</h1>
+                <div className='minhaloja'>
+                    <button onClick={exibirPlanos}> Minha Loja </button>
+                </div>
+                <div className='planos'>
+                    <select name='opcoesplano'>
+                        <option disabled selected>Plano 1</option>
+                        <option  >Plano 2</option>
+                        <option  >Plano 2</option>
+                    </select>
 
-            <ul>
-                <li>
-                    <a href='/'>Pets Shops</a>
-                </li>
-            </ul>
-        </section>
+                </div>
+                <div className='brinquedos'>
+                    <button onClick={exibirPlanos}> Brinquedos </button>
+                </div>
+            </PagHome>
+        </ContainerPage>
 
     );
 }
 
-export default Home
+export default Home;
