@@ -1,0 +1,54 @@
+{
+  "pedidos": [
+    {
+      "id": 1,
+      "nome": "Pedido 1",
+      "cliente": 1,
+      "produto_id": 1
+    },
+    {
+      "id": 2,
+      "nome": "Pedido 2",
+      "cliente": 2,
+      "produto_id": 1
+    },
+    {
+      "id": 3,
+      "nome": "Pedido 3",
+      "cliente": 3,
+      "produto_id": 1
+    }
+  ],
+
+  "produtos": [
+    {
+      "id": 1,
+      "nome": "Produto 1",
+      "valor": 100
+    }
+  ],
+
+  "servicos": [
+    {
+      "id": 1,
+      "nome": "Tosa 1",
+      "valor": 100
+    },
+    {
+      "id": 2,
+      "nome": "Banho 1",
+      "valor": 100
+    }
+  ],
+
+  "animais": [
+    {
+      "id": 1,
+      "nome": "Cachorro"
+    },
+    {
+      "id": 2,
+      "nome": "Gato "
+    }
+  ]
+}

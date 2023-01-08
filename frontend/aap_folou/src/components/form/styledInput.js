@@ -2,16 +2,17 @@ import styled from 'styled-components';
 
 export const StyleInput = styled.div`
     .form_control{    
-        margin-bottom: 1em;
+        margin-bottom: 20px;
         margin: auto;
+        padding: 5px;
     }
     .fomr_control label{
-        margin-bottom: 1em;
+        margin-bottom: 10px;
         font-weight: bold;
-        font-size: 15px;
+        font-size: 10px;
     }
     .form_control input{
-        padding: 0.7em;
+        padding: 10px;
         border-radius: 10px;
         border: none;
     }

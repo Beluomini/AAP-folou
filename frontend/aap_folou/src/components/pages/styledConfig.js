@@ -13,17 +13,24 @@ export const PagConfig = styled.div`
     box-shadow: 0px 0px 3px #ccc;
 
     form{
-        text-align: center;
         width: 50%;
         display: flex;
         margin: auto;
+        text-align: center;
     }
 
-    .form_dados{         
+    .form_dados{       
+        width: 100%;
+        display: flex; 
+        flex-direction :column ;
         margin-right: 50px;
+        justify-content: space-between;
     }
 
     .select_form{
+        width: 100%;
+        margin-right: 50px;
+        justify-content: space-between;
         padding: 20px;
     }
 

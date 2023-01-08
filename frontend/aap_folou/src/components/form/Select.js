@@ -1,16 +1,18 @@
 import { StyleSelect } from "./styledSelect";
 
-function Select(props) {
-    const { text, name, value, handleOnChange, options } = props;
+function Select({ text, nome, value, handleOnChange, options }) {
+    console.log(options, text, nome, value);
     return (
         <StyleSelect>
             <div className="form_control">
-                <label htmlFor={name}>{text}</label>
-                <select name={name} id={name}>
+                <label htmlFor={nome}>{text}</label>
+                <select name={nome} id={nome}>
                     <option>Selecione uma opção</option>
-                    {/* {options.map((option) => (
-                        <option value={option.id}>{option.nome}</option>
-                    ))} */}
+                    {options?.map((option) => (
+                        <option value={option.id} key={option.id}>
+                            {option.nome}
+                        </option>
+                    ))}
                 </select>
             </div>
         </StyleSelect>

@@ -12,10 +12,10 @@ export const PagProdutos = styled.div`
     box-shadow: 0px 0px 3px #ccc;
 
     form{
-        text-align: center;
         width: 50%;
-        
         margin: auto;
+        text-align: center;
+        padding: 10px;
     }
 
     .produtos {

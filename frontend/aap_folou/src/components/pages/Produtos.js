@@ -14,13 +14,13 @@ function Produtos() {
             <h1>Produtos</h1>
             <PagProdutos>
                 <div className='produtos'>
-                    <h2>Produto 1</h2>
+                    <h2>Produto Dados dinamicos</h2>
                 </div>
 
                 <form>
                     <Input type='text' text='Nome do Produto ' name='nome' placeholder='Nome do Produto' />
-                    <Input type='text' text='Quantidade deste Produto' name='quantidade' placeholder="Quantidade deste Produto" />
-                    <Input type='text' text='Valor deste Produto' name='valor' placeholder="Valor do Produto" />
+                    <Input type='text' text='Quantidade deste Produto ' name='quantidade' placeholder="Quantidade deste Produto" />
+                    <Input type='text' text='Valor deste Produto ' name='valor' placeholder="Valor do Produto" />
                 </form>
 
                 <div className='btnnovoprod'>

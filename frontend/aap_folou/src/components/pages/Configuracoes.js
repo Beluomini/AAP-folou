@@ -6,47 +6,54 @@ import { PagConfig } from './styledConfig';
 import Input from '../form/Input';
 import Select from '../form/Select';
 import SubmitButton from '../form/SubmitButton';
+import { useFetcher } from 'react-router-dom';
 
 function Configuracoes(props) {
 
     //const { btnText } = props;
-    const [servico, setServico] = useState([]);
+    const [servicos, setServicos] = useState([]);
     const [animais, setAnimais] = useState([]);
 
+    useEffect(() => {
+        fetch(`http://localhost:5000/servicos`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                setServicos(data);
+                console.log(data);
+            })
+            .catch((err) => console.log(err));
+    }, []);
 
-    // useEffect(() => {
-    //     api.getServicoList().then((resposta) => setServico(resposta.data));
-    //   }, []);
-
-    // useEffect(() => {
-    //     api.getAnimaisList().then((resposta) => setAnimais(resposta.data));
-    //   }, []);
-
-
-    function exibirPlanos() {
-        return (
-            alert('Deu certo')
-        )
-    }
-    // function handleChange(event) {
-    //     this.setState({ value: event.target.value });
-    // }
-
-    // function handleSubmit(event) {
-    //     alert('A name was submitted: ' + this.state.value);
-    //     event.preventDefault();
-    // }
+    useEffect(() => {
+        fetch(`http://localhost:5000/animais`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                setAnimais(data);
+                console.log(data);
+            })
+            .catch((err) => console.log(err));
+    }, []);
 
     return (
         <ContainerPage>
             <PagConfig>
-                <h1>Edição dos dados</h1>
+                <h1>Edição dos dados do seu PetShop</h1>
                 <form>
                     <div className='form_dados'>
-                        <Input type='text' text='Nome Estabelecimento ' name='nome' placeholder='Nome do Estabelecimento' />
+                        <Input type='text' text='Nome Estabelecimento' name='nome' placeholder='Nome do Estabelecimento' />
                         <Input type='text' text='Telefone para Contato' name='telefone' placeholder="Telefone para Contato" />
-                        <Input type='text' text='Email' name='email' placeholder="Email" />
-                        <Input type='text' text='Senha' name='senha' placeholder="Senha" />
+                        <Input type='text' text='Insira seu Email ' name='email' placeholder="Email" />
+                        <Input type='text' text='Insira sua Senha ' name='senha' placeholder="Senha" />
                         <Input type='text' text='Confirmar Senha' name='csenha' placeholder="Confirmação Senha" />
                     </div>
                     <div className='endereco'>
@@ -60,8 +67,10 @@ function Configuracoes(props) {
                 </form>
 
                 <div className='select_form'>
-                    <Select text='Serviços' name='servico_id' />
-                    <Select text='Animais' name='animais_id' />
+                    <Select text='Serviços' name='servicos' options={servicos} />
+                    <Input type='text' text='Adicionar novo Serviço ' name='addservico' placeholder="Novo Serviço" />
+                    <Select text='Animais' name='animais' options={animais} />
+                    <Input type='text' text='Adicionar novo Animal ' name='addanimal' placeholder="Novo Animal" />
                 </div>
 
                 <div>
