@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose, { HydratedDocument } from 'mongoose';
+import mongoose, { DateUnit, HydratedDocument } from 'mongoose';
 import { Client } from 'src/clients/entities/client.entity';
 import { PetShop } from 'src/pet-shops/entities/pet-shop.entity';
 
@@ -13,7 +13,7 @@ export class Order {
     @Prop({ type: mongoose.Schema.Types.ObjectId, ref: PetShop.name, required: true })
     fk_id_pet_shop: PetShop;
 
-    @Prop({ default: Date.now, required: true })
+    @Prop({ default: new Date() })
     create_date: Date;
 
     @Prop({})
