@@ -1,6 +1,6 @@
 import { StyleInput } from "./styledInput";
 
-function Input({ text, nome, type, value, handleOnChange, placeholder }) {
+function Input({ text, nome, type, value, placeholder, handleOnChange }) {
 
     return (
         <StyleInput>

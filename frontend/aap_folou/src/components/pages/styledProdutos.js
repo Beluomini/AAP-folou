@@ -10,6 +10,9 @@ export const PagProdutos = styled.div`
     text-align: center;
     border-radius: 5px;
     box-shadow: 0px 0px 3px #ccc;
+    display: flex;
+    flex-direction:column;
+    flex-wrap: wrap;
 
     form{
         width: 50%;

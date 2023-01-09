@@ -79,7 +79,6 @@ function Pedidos() {
                 ))}
             </PagPedidos>
         </ContainerPage>
-
     );
 }
 

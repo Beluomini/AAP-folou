@@ -142,16 +142,17 @@
       ]
     }
   ],
-
   "produtos": [
     {
       "id": 1,
       "nome": "Produto 1",
       "quantidade": 1,
       "valor": 100
+    },
+    {
+      "id": 2
     }
   ],
-
   "servicos": [
     {
       "id": 1,
@@ -164,7 +165,6 @@
       "valor": 100
     }
   ],
-
   "animais": [
     {
       "id": 1,
@@ -175,7 +175,6 @@
       "nome": "Gato "
     }
   ],
-
   "petshop": [
     {
       "id": 1,
