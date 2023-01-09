@@ -15,7 +15,7 @@ function Produtos() {
 
     //pegando os produtos do banco de dados
     useEffect(() => {
-        fetch('http://localhost:5000/produtos', {
+        fetch('http://localhost:3333/products', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
