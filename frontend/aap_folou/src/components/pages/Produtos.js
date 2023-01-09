@@ -24,10 +24,24 @@ function Produtos() {
             .then((res) => res.json())
             .then((data) => {
                 setProdutos(data);
-                console.log(data)
             })
             .catch((err) => console.log(err));
     }, []);
+
+    //delete de pedidos pelo id
+    function removeProduto(id) {
+        fetch(`http://localhost:5000/produtos/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                setProdutos(produtos.filter((produto) => produto.id !== id));
+            })
+            .catch((err) => console.log(err));
+    }
 
     return (
         <ContainerPage>
@@ -38,10 +52,9 @@ function Produtos() {
                         <ProdutosList
                             id={produtos.id}
                             key={produtos.id}
-                            cliente={produtos.cliente}
                             nome={produtos.nome}
-                            servicos={produtos.servicos}
-                            produtos={produtos.produtos}
+                            valor={produtos.valor}
+                            handleRemove={removeProduto}
                         />
                     ))}
                 </div>

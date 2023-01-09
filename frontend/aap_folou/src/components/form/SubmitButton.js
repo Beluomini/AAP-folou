@@ -1,6 +1,11 @@
 import { StyleSubmitButton } from './styledSubmitButton';
 
-function SubmitButton({ text }) {
+function SubmitButton({ text, oncClick }) {
+
+    function criar(onClick) {
+        //criar no banco
+    }
+
     return (
         <StyleSubmitButton >
             <div>

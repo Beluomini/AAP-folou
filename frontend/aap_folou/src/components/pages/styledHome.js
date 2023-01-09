@@ -12,11 +12,15 @@ export const PagHome = styled.div`
     border-radius: 5px;
     box-shadow: 0px 0px 3px #ccc;
 
-
     .minhaloja {
-        button{
-            width: 100%;    
-        }
+        height: 75px;
+        background-color: #D0BAA0;
+        padding: 30px;
+        max-width: auto;
+        margin-bottom: 25px;
+        text-align: center;
+        border-radius: 5px;
+        box-shadow: 0px 0px 3px #ccc;
     }
 
     .corpohome{

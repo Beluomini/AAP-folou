@@ -2,14 +2,16 @@ import styled from "styled-components";
 
 export const PedidoList = styled.div`
 
-        height: 250px;
+        max-height: 300px;
         background-color: #D0BAA0;
         padding: 30px;
         max-width: 300px;
+        margin-left: 70px;
         margin-bottom: 25px;
         text-align: center;
         border-radius: 5px;
         box-shadow: 0px 0px 3px #ccc;
+        align-items: center;
     
         p{
                 margin: 0px;

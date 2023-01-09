@@ -28,7 +28,6 @@ function Pedidos() {
             .then((res) => res.json())
             .then((data) => {
                 setPedidos(data);
-                console.log(data)
             })
             .catch((err) => console.log(err));
     }, []);
@@ -67,19 +66,17 @@ function Pedidos() {
         <ContainerPage>
             <h1>Pedidos</h1>
             <PagPedidos>
-                <div>
-                    {pedidos?.map((pedido) => (
-                        <PedidosList
-                            id={pedido.id}
-                            key={pedido.id}
-                            cliente={pedido.cliente}
-                            nome={pedido.nome}
-                            servicos={pedido.servicos}
-                            produtos={pedido.produtos}
-                            handleRemove={removePedido}
-                        />
-                    ))}
-                </div>
+                {pedidos?.map((pedido) => (
+                    <PedidosList
+                        id={pedido.id}
+                        key={pedido.id}
+                        cliente={pedido.cliente}
+                        nome={pedido.nome}
+                        servicos={pedido.servicos}
+                        produtos={pedido.produtos}
+                        handleRemove={removePedido}
+                    />
+                ))}
             </PagPedidos>
         </ContainerPage>
 

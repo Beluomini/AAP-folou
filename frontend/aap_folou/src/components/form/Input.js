@@ -1,7 +1,7 @@
 import { StyleInput } from "./styledInput";
 
 function Input({ text, nome, type, value, handleOnChange, placeholder }) {
-    console.log(value)
+
     return (
         <StyleInput>
             <div className="form_control">

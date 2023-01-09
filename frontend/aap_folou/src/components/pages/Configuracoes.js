@@ -7,7 +7,7 @@ import Input from '../form/Input';
 import Select from '../form/Select';
 import SubmitButton from '../form/SubmitButton';
 
-function Configuracoes({ hadleSubmit }) {
+function Configuracoes() {
 
     const [servicos, setServicos] = useState([]);
     const [animais, setAnimais] = useState([]);

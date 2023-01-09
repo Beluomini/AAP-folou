@@ -11,5 +11,7 @@ export const PagPedidos = styled.div`
     border-radius: 5px;
     box-shadow: 0px 0px 3px #ccc;
     display: flex;
-    flex-direction: column;
+    flex-direction:column;
+    flex-wrap: wrap;
+    
 `;
