@@ -6,13 +6,26 @@ import { PagConfig } from './styledConfig';
 import Input from '../form/Input';
 import Select from '../form/Select';
 import SubmitButton from '../form/SubmitButton';
-import { useFetcher } from 'react-router-dom';
 
-function Configuracoes(props) {
+function Configuracoes({ hadleSubmit }) {
 
-    //const { btnText } = props;
     const [servicos, setServicos] = useState([]);
     const [animais, setAnimais] = useState([]);
+    const [petshop, setPetShop] = useState([])
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/petshop`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                setPetShop(data);
+            })
+            .catch((err) => console.log(err));
+    }, []);
 
     useEffect(() => {
         fetch(`http://localhost:5000/servicos`, {
@@ -24,7 +37,6 @@ function Configuracoes(props) {
             .then((res) => res.json())
             .then((data) => {
                 setServicos(data);
-                console.log(data);
             })
             .catch((err) => console.log(err));
     }, []);
@@ -39,30 +51,40 @@ function Configuracoes(props) {
             .then((res) => res.json())
             .then((data) => {
                 setAnimais(data);
-                console.log(data);
             })
             .catch((err) => console.log(err));
     }, []);
 
+    const submit = (e) => {
+        e.preventDefault();
+        hadleSubmit(petshop)
+    }
+
+    function handleChange(e) {
+        e.preventDefault();
+
+    }
+
     return (
         <ContainerPage>
+            <h1>Edição dos dados do seu PetShop</h1>
             <PagConfig>
-                <h1>Edição dos dados do seu PetShop</h1>
                 <form>
                     <div className='form_dados'>
-                        <Input type='text' text='Nome Estabelecimento' name='nome' placeholder='Nome do Estabelecimento' />
-                        <Input type='text' text='Telefone para Contato' name='telefone' placeholder="Telefone para Contato" />
-                        <Input type='text' text='Insira seu Email ' name='email' placeholder="Email" />
-                        <Input type='text' text='Insira sua Senha ' name='senha' placeholder="Senha" />
-                        <Input type='text' text='Confirmar Senha' name='csenha' placeholder="Confirmação Senha" />
+                        {petshop?.map((petshop) => (<Input type='text' value={petshop.nome} text='Nome Estabelecimento' name='nome' placeholder='Nome do Estabelecimento' />))}
+                        {petshop?.map((petshop) => (<Input type='text' value={petshop.endereco} text='Insira o Endereço ' name='endereco' placeholder="Endereço" />))}
+                        {petshop?.map((petshop) => (<Input type='text' value={petshop.telefone} text='Telefone para Contato' name='telefone' placeholder="Telefone para Contato" />))}
+                        {petshop?.map((petshop) => (<Input type='text' value={petshop.email} text='Insira o Email ' name='email' placeholder="Email" />))}
+                        {petshop?.map((petshop) => (<Input type='text' value={petshop.senha} text='Insira sua Senha ' name='senha' placeholder="Senha" />))}
+                        {petshop?.map((petshop) => (<Input type='text' value={petshop.confirma_senha} text='Confirmar Senha' name='csenha' placeholder="Confirmação Senha" handleOnChange={handleChange} />))}
                     </div>
                     <div className='endereco'>
-                        <Input type='text' text='CEP' name='cep' placeholder="CEP" />
-                        <Input type='text' text='Cidade' name='cidade' placeholder="Cidade" />
-                        <Input type='text' text='Estado' name='estado' placeholder="Estado" />
-                        <Input type='text' text='Rua/Avenida' name='rua' placeholder="Rua/Avenida" />
-                        <Input type='text' text='Número' name='numero' placeholder="Número" />
-                        <Input type='text' text='Complemento' name='complemento' placeholder="Complemento" />
+                        {petshop?.map((petshop) => (<Input type='text' value={petshop.cep} text='CEP' name='cep' placeholder="CEP" />))}
+                        {petshop?.map((petshop) => (<Input type='text' value={petshop.cidade} text='Cidade' name='cidade' placeholder="Cidade" />))}
+                        {petshop?.map((petshop) => (<Input type='text' value={petshop.estado} text='Estado' name='estado' placeholder="Estado" />))}
+                        {petshop?.map((petshop) => (<Input type='text' value={petshop.rua} text='Rua/Avenida' name='rua' placeholder="Rua/Avenida" />))}
+                        {petshop?.map((petshop) => (<Input type='text' value={petshop.numero} text='Número' name='numero' placeholder="Número" />))}
+                        {petshop?.map((petshop) => (<Input type='text' value={petshop.complemento} text='Complemento' name='complemento' placeholder="Complemento" />))}
                     </div>
                 </form>
 

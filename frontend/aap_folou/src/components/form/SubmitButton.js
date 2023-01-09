@@ -1,7 +1,6 @@
 import { StyleSubmitButton } from './styledSubmitButton';
 
-function SubmitButton(props) {
-    const { text } = props;
+function SubmitButton({ text }) {
     return (
         <StyleSubmitButton >
             <div>

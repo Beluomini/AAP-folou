@@ -10,6 +10,7 @@ import Configuracoes from './components/pages/Configuracoes';
 import Home from './components/pages/Home';
 import Pedidos from './components/pages/Pedidos';
 import Produtos from './components/pages/Produtos';
+import PedidoCliente from './components/pages/PedidoCliente';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/pedidos" element={<Pedidos />} />
+          <Route path="/pedidos/:id" element={<PedidoCliente />} />
           <Route path="/produtos" element={<Produtos />} />
           <Route path="/configuracoes" element={<Configuracoes />} />
         </Routes>

@@ -1,15 +1,15 @@
 import { StyleInput } from "./styledInput";
 
-function Input(props) {
-    const { text, name, type, value, handleOnChange, placeholder } = props;
+function Input({ text, nome, type, value, handleOnChange, placeholder }) {
+    console.log(value)
     return (
         <StyleInput>
             <div className="form_control">
-                <label htmlFor={name}>{text}</label>
+                <label htmlFor={nome}>{text}</label>
                 <input
                     type={type}
-                    name={name}
-                    id={name}
+                    nome={nome}
+                    id={nome}
                     value={value}
                     onChange={handleOnChange}
                     placeholder={placeholder}

@@ -5,9 +5,7 @@ import { FaTrashAlt } from 'react-icons/fa';
 
 import { PedidoList } from './styledPedidosList';
 
-function PedidosList(props) {
-
-    const { id, name, servico, brinquedo, handlView, handleRemove } = props;
+function PedidosList({ id, nome, cliente, servicos, produtos, handlView, handleRemove }) {
 
     const remove = (e) => {
         e.preventDefault();
@@ -16,15 +14,16 @@ function PedidosList(props) {
 
     return (
         <PedidoList>
-            <h4>{name}Dados dinamicos da lista de pedidos</h4>
-            <p>{servico}</p>
-            <p>{brinquedo}</p>
+            <p>Cliente: {cliente}</p>
+            <p>{nome}</p>
+            <p>Serviços: {servicos?.map((servicos) => (servicos.nome))} </p>
+            <p>Produtos: {produtos?.map((produtos) => (produtos.nome))}</p>
 
-            <div>
+            <div className='botoes'>
                 <Link to={`/pedidos/${id}`}>
                     <GrFormView /> Ver Pedido
                 </Link>
-                <button>
+                <button onClick={remove}>
                     <FaTrashAlt /> Excluir
                 </button>
             </div>

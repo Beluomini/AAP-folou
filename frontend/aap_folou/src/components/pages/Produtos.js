@@ -7,14 +7,43 @@ import Input from '../form/Input';
 import Select from '../form/Select';
 import SubmitButton from '../form/SubmitButton';
 
+import ProdutosList from '../list/ProdutosList';
+
 function Produtos() {
+
+    const [produtos, setProdutos] = useState([]);
+
+    useEffect(() => {
+
+        fetch('http://localhost:5000/produtos', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                setProdutos(data);
+                console.log(data)
+            })
+            .catch((err) => console.log(err));
+    }, []);
 
     return (
         <ContainerPage>
             <h1>Produtos</h1>
             <PagProdutos>
                 <div className='produtos'>
-                    <h2>Produto Dados dinamicos</h2>
+                    {produtos?.map((produtos) => (
+                        <ProdutosList
+                            id={produtos.id}
+                            key={produtos.id}
+                            cliente={produtos.cliente}
+                            nome={produtos.nome}
+                            servicos={produtos.servicos}
+                            produtos={produtos.produtos}
+                        />
+                    ))}
                 </div>
 
                 <form>

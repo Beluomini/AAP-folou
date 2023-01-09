@@ -7,7 +7,7 @@ export const PagConfig = styled.div`
     padding: 30px;
     max-width: 1000px;
     margin: auto;
-    margin-top: 50px;
+    
     text-align: center;
     border-radius: 5px;
     box-shadow: 0px 0px 3px #ccc;

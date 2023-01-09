@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const PagPedidos = styled.div`
-    height: 800px;
+    height: 1000px;
     background-color: #766452;
     color: black;
     padding: 30px;

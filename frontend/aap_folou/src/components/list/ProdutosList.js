@@ -1,17 +1,22 @@
-function ProdutosList(props) {
+import { ProdutoList } from './styledProdutosList';
 
-    const { id, name, brinquedo, handlClick } = props;
+function ProdutosList({ id, nome, produtos, handleRemove }) {
 
+    const remove = (e) => {
+        e.preventDefault();
+        handleRemove(id);
+    }
     return (
-        <div>
-            <h4>{name}</h4>
-            <p>{brinquedo}</p>
+        <ProdutoList>
+            <p>{nome}</p>
+            <p>Produtos: {produtos?.map((produtos) => (produtos.nome))}</p>
 
-            <div>
-                <p>Novo produto</p>
+            <div className='botoes'>
+                <button onClick={remove}>
+                    <FaTrashAlt /> Excluir
+                </button>
             </div>
-        </div>
-
+        </ProdutoList>
     )
 }
 

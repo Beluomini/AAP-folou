@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 
 import { ContainerPage } from '../../components/Main'
 import { PagPedidos } from './styledPedidos';
@@ -13,6 +14,8 @@ function Pedidos() {
 
     const [pedidos, setPedidos] = useState([]);
 
+    const navigate = useNavigate();
+
     //pegando os pedidos do banco de dados
     useEffect(() => {
 
@@ -21,17 +24,17 @@ function Pedidos() {
             headers: {
                 'Content-Type': 'application/json',
             }
-
         })
             .then((res) => res.json())
             .then((data) => {
                 setPedidos(data);
-                console.log(data);
+                console.log(data)
             })
             .catch((err) => console.log(err));
     }, []);
 
-    function viewPedido(id) {
+    //direcionando para a pagina de pedidos unicos de acordo com o id
+    function viewPedidoUnico(id) {
         fetch(`http://localhost:5000/pedidos/${id}`, {
             method: 'GET',
             headers: {
@@ -40,11 +43,12 @@ function Pedidos() {
         })
             .then((res) => res.json())
             .then((data) => {
-                console.log(data);
+                navigate(`/pedidos/${id}`);
             })
             .catch((err) => console.log(err));
     }
 
+    //delete de pedidos pelo id
     function removePedido(id) {
         fetch(`http://localhost:5000/pedidos/${id}`, {
             method: 'DELETE',
@@ -64,18 +68,17 @@ function Pedidos() {
             <h1>Pedidos</h1>
             <PagPedidos>
                 <div>
-                    <PedidosList />
-                    {/* {pedidos.length > 0 &&
-                        pedidos.map((pedido) => (
-                            <PedidosList
-                                id={pedido.id}
-                                name={pedido.nome}
-                                servico={pedido.servico}
-                                produto={pedido.produto}
-                                handleView={viewPedido}
-                                handleRemove={removePedido}
-                            />
-                        ))} */}
+                    {pedidos?.map((pedido) => (
+                        <PedidosList
+                            id={pedido.id}
+                            key={pedido.id}
+                            cliente={pedido.cliente}
+                            nome={pedido.nome}
+                            servicos={pedido.servicos}
+                            produtos={pedido.produtos}
+                            handleRemove={removePedido}
+                        />
+                    ))}
                 </div>
             </PagPedidos>
         </ContainerPage>
