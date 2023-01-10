@@ -144,13 +144,42 @@
   ],
   "produtos": [
     {
-      "id": 1,
-      "nome": "Produto 1",
-      "quantidade": 1,
-      "valor": 100
+      "nome": "primeiro produto",
+      "quantidade": "1",
+      "valor": "199",
+      "id": 1
     },
     {
+      "0": {
+        "nome": "primeiro produto",
+        "quantidade": "1",
+        "valor": "199",
+        "id": 1
+      },
+      "nome": "produto 1",
       "id": 2
+    },
+    {
+      "0": {
+        "nome": "primeiro produto",
+        "quantidade": "1",
+        "valor": "199",
+        "id": 1
+      },
+      "1": {
+        "0": {
+          "nome": "primeiro produto",
+          "quantidade": "1",
+          "valor": "199",
+          "id": 1
+        },
+        "nome": "produto 1",
+        "id": 2
+      },
+      "nome": "produto 2",
+      "quantidade": "1",
+      "valor": "111",
+      "id": 3
     }
   ],
   "servicos": [

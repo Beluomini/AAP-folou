@@ -1,7 +1,7 @@
 import { ProdutoList } from './styledProdutosList';
 import { FaTrashAlt } from 'react-icons/fa';
 
-function ProdutosList({ id, nome, valor, handleRemove }) {
+function ProdutosList({ id, nome, valor, quantidade, handleRemove }) {
 
     const remove = (e) => {
         e.preventDefault();
@@ -10,7 +10,8 @@ function ProdutosList({ id, nome, valor, handleRemove }) {
     return (
         <ProdutoList>
             <p>{nome}</p>
-            <p>R${valor}</p>
+            <p>Quantidade: {quantidade}</p>
+            <p>R${valor}/Unidade</p>
             <div className='botoes'>
                 <button onClick={remove}>
                     <FaTrashAlt /> Excluir

@@ -1,18 +1,17 @@
 import { StyleInput } from "./styledInput";
 
-function Input({ text, nome, type, value, placeholder, handleOnChange }) {
-
+function Input({ type, text, name, placeholder, handleOnChange, value }) {
     return (
         <StyleInput>
             <div className="form_control">
-                <label htmlFor={nome}>{text}</label>
+                <label htmlFor={name}>{text}</label>
                 <input
                     type={type}
-                    nome={nome}
-                    id={nome}
-                    value={value}
-                    onChange={handleOnChange}
+                    id={name}
+                    name={name}
                     placeholder={placeholder}
+                    onChange={handleOnChange}
+                    value={value}
                 />
             </div>
         </StyleInput>
