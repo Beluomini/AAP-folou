@@ -144,41 +144,21 @@
   ],
   "produtos": [
     {
-      "nome": "primeiro produto",
+      "nome": "produto 1",
       "quantidade": "1",
-      "valor": "199",
+      "valor": "100",
       "id": 1
     },
     {
-      "0": {
-        "nome": "primeiro produto",
-        "quantidade": "1",
-        "valor": "199",
-        "id": 1
-      },
-      "nome": "produto 1",
+      "nome": "produto 2",
+      "quantidade": "2",
+      "valor": "100",
       "id": 2
     },
     {
-      "0": {
-        "nome": "primeiro produto",
-        "quantidade": "1",
-        "valor": "199",
-        "id": 1
-      },
-      "1": {
-        "0": {
-          "nome": "primeiro produto",
-          "quantidade": "1",
-          "valor": "199",
-          "id": 1
-        },
-        "nome": "produto 1",
-        "id": 2
-      },
-      "nome": "produto 2",
+      "nome": "produto 3 ",
       "quantidade": "1",
-      "valor": "111",
+      "valor": "100",
       "id": 3
     }
   ],

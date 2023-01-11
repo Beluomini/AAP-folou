@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Field } from "react-final-form";
 
 import { ContainerPage } from '../../components/Main'
 import { PagProdutos } from './styledProdutos';
@@ -9,11 +8,11 @@ import Select from '../form/Select';
 import SubmitButton from '../form/SubmitButton';
 
 import ProdutosList from '../list/ProdutosList';
-import { FaRProject } from 'react-icons/fa';
 
 function Produtos() {
 
-    const [produtos, setProdutos] = useState({});
+    const [produtos, setProdutos] = useState([]); //lista de objetos de produtos
+    const [newProdut, setNewProdut] = useState({}); //novo produto é um objeto q vai ser inserido na lista de produtos
 
     //pegando os produtos do banco de dados
     useEffect(() => {
@@ -25,6 +24,7 @@ function Produtos() {
         })
             .then((res) => res.json())
             .then((data) => {
+                console.log(data)
                 setProdutos(data);
             })
             .catch((err) => console.log(err));
@@ -63,13 +63,17 @@ function Produtos() {
     }
 
     const submit = (e) => {
-        e.preventDefault();
-        criarProduto(produtos);
+        //e.preventDefault();
+        criarProduto(newProdut);
+        setProdutos(newProdut);
+        setNewProdut({}); //limpa o form de novo produto
+        console.log(produtos)
+        console.log(newProdut)
+
     }
 
     function handleChange(e) {
-        setProdutos(({ ...produtos, [e.target.name]: e.target.value }))
-        console.log(produtos)
+        setNewProdut(newProdut => (({ ...newProdut, [e.target.name]: e.target.value })))
     }
 
     return (
@@ -90,7 +94,8 @@ function Produtos() {
                 <div>
                     <form onSubmit={submit}>
                         <Input type='text' text='Nome do Produto ' name='nome' placeholder='Nome do Produto' handleOnChange={handleChange} value={produtos.nome} />
-                        <Input type='text' text='Quantidade deste Produto ' name='quantidade' placeholder="Quantidade deste Produto" handleOnChange={handleChange} value={produtos.quantidade} />
+                        <Input type='text' text='Quantidade deste Produto ' name='quantidade'
+                            placeholder="Quantidade deste Produto" handleOnChange={handleChange} value={produtos.quantidade} />
                         <Input type='text' text='Valor deste Produto ' name='valor' placeholder="Valor do Produto" handleOnChange={handleChange} value={produtos.valor} />
                         <SubmitButton type="submit" text='Adicionar Novo Produto' />
                     </form>
