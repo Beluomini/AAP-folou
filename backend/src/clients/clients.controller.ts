@@ -3,7 +3,6 @@ import { ApiCreatedResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ClientsService } from './clients.service';
 import { CreateClientDto } from './dto/create-client.dto';
 import { UpdateClientDto } from './dto/update-client.dto';
-import { Client } from './entities/client.entity';
 
 @ApiTags('clients')
 @Controller('clients')
@@ -13,7 +12,7 @@ export class ClientsController {
   @Post()
   @ApiCreatedResponse({ 
     description: 'The client has been successfully created.',
-    type: Client,
+    type: CreateClientDto,
   })
   create(@Body() createClientDto: CreateClientDto) {
     return this.clientsService.create(createClientDto);
