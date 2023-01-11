@@ -23,6 +23,10 @@ export class ClientsService {
     return this.clientModel.findById(id);
   }
 
+  findOneByCpf(cpf: string) {
+    return this.clientModel.findOne({ cpf });
+  }
+
   update(id: string, updateClientDto: UpdateClientDto) {
     return this.clientModel.findByIdAndUpdate({
       _id: id
