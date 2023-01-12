@@ -9,6 +9,8 @@ import SubmitButton from '../form/SubmitButton';
 
 import ProdutosList from '../list/ProdutosList';
 
+import api from "../../services/api";
+
 function Produtos() {
 
     const [produtos, setProdutos] = useState([]); //lista de objetos de produtos
@@ -16,18 +18,10 @@ function Produtos() {
 
     //pegando os produtos do banco de dados
     useEffect(() => {
-        fetch('http://localhost:5000/produtos', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-            .then((res) => res.json())
+        api.getProducts().then((resposta) => setProdutos(resposta))
             .then((data) => {
-                console.log(data)
-                setProdutos(data);
+                console.log(data);
             })
-            .catch((err) => console.log(err));
     }, []);
 
     //delete de pedidos pelo id
@@ -85,8 +79,8 @@ function Produtos() {
                         <ProdutosList
                             id={produtos.id}
                             key={produtos.id}
-                            nome={produtos.nome}
-                            valor={produtos.valor}
+                            name={produtos.name}
+                            price={produtos.price}
                             quantidade={produtos.quantidade}
                             handleRemove={removeProduto}
                         />
