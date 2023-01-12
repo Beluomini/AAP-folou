@@ -23,6 +23,10 @@ export class PetShopsService {
     return this.petShopModel.findById(id);
   }
 
+  findOneByCnpj(cnpj: string) {
+    return this.petShopModel.findOne({ cnpj });
+  }
+
   update(id: string, updatePetShopDto: UpdatePetShopDto) {
     return this.petShopModel.findByIdAndUpdate({
       _id: id
