@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose, { DateUnit, HydratedDocument } from 'mongoose';
+import { maxLength } from 'class-validator';
+import mongoose, { HydratedDocument, Types } from 'mongoose';
 import { Client } from 'src/clients/entities/client.entity';
 import { PetShop } from 'src/pet-shops/entities/pet-shop.entity';
 
@@ -7,28 +8,60 @@ export type OrderDocument = HydratedDocument<Order>;
 
 @Schema()
 export class Order {
-    @Prop({ type: mongoose.Schema.Types.ObjectId, ref: Client.name, required: true })
+    @Prop({ 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Client', 
+        required: true
+    })
     fk_id_client: Client;
 
-    @Prop({ type: mongoose.Schema.Types.ObjectId, ref: PetShop.name, required: true })
+    @Prop({ 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'PetShop', 
+        required: true 
+    })
     fk_id_pet_shop: PetShop;
 
-    @Prop({ default: new Date() })
+    @Prop({ 
+        type: Date,
+        default: new Date()
+    })
     create_date: Date;
 
-    @Prop({})
+    @Prop({
+        type: Date
+    })
     payment_date: Date;
 
-    @Prop({ required: true })
+    @Prop({ 
+        type: Number,
+        required: true,
+        min: 0
+    })
     price: number;
 
-    @Prop({ required: true })
+    @Prop({
+        type: String,
+        required: true,
+        enum: ['CREDIT_CARD', 'DEBIT_CARD', 'MONEY', 'PIX'],
+        default: 'MONEY',
+        uppercase: true
+    })
     payment_method: String;
 
-    @Prop({})
+    @Prop({
+        type: String,
+        maxLength: 10
+    })
     fk_cupom: String;
 
-    @Prop({})
+    @Prop({
+        type: String,
+        required: true,
+        enum: ['SENT', 'VISUALIZED', 'PROCESSING', 'CANCELED', 'FINISHED'],
+        default: 'SENT',
+        uppercase: true
+    })
     status: String;
 }
 
