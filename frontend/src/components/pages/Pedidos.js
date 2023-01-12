@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from "react-router-dom";
 
 import { ContainerPage } from '../../components/Main'
 import { PagPedidos } from './styledPedidos';
@@ -13,8 +12,6 @@ import PedidosList from '../list/PedidosList';
 function Pedidos() {
 
     const [pedidos, setPedidos] = useState([]);
-
-    const navigate = useNavigate();
 
     //pegando os pedidos do banco de dados
     useEffect(() => {
@@ -31,21 +28,6 @@ function Pedidos() {
             })
             .catch((err) => console.log(err));
     }, []);
-
-    //direcionando para a pagina de pedidos unicos de acordo com o id
-    function viewPedidoUnico(id) {
-        fetch(`http://localhost:5000/pedidos/${id}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                navigate(`/pedidos/${id}`);
-            })
-            .catch((err) => console.log(err));
-    }
 
     //delete de pedidos pelo id
     function removePedido(id) {

@@ -5,7 +5,7 @@ import { FaTrashAlt } from 'react-icons/fa';
 
 import { PedidoList } from './styledPedidosList';
 
-function PedidosList({ id, nome, cliente, servicos, produtos, handlView, handleRemove }) {
+function PedidosList({ id, nome, cliente, servicos, produtos, handleRemove }) {
 
     const remove = (e) => {
         e.preventDefault();
