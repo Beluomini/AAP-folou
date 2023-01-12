@@ -74,40 +74,6 @@
       ]
     },
     {
-      "id": 3,
-      "nome": "Pedido 3",
-      "cliente": "BeluoGuras",
-      "servicos": [
-        {
-          "id": 1,
-          "nome": "Tosa ",
-          "valor": 100
-        }
-      ],
-      "produtos": [
-        {
-          "id": 1,
-          "nome": "Produto 1",
-          "quantidade": 1,
-          "valor": 100
-        }
-      ],
-      "status": [
-        {
-          "id": 1,
-          "nome": "Visualizado"
-        },
-        {
-          "id": 2,
-          "nome": "Processando"
-        },
-        {
-          "id": 3,
-          "nome": "Concluído"
-        }
-      ]
-    },
-    {
       "id": 4,
       "nome": "Pedido 4",
       "cliente": "Xesque",
