@@ -5,7 +5,7 @@ import { FaTrashAlt } from 'react-icons/fa';
 
 import { PedidoList } from './styledPedidosList';
 
-function PedidosList({ id, nome, cliente, servicos, produtos, handleRemove }) {
+function PedidosList({ id, client, create_date, payment_date, payment_method, price, handleRemove }) {
 
     const remove = (e) => {
         e.preventDefault();
@@ -14,12 +14,12 @@ function PedidosList({ id, nome, cliente, servicos, produtos, handleRemove }) {
 
     return (
         <PedidoList>
-            <p>Cliente: {cliente}</p>
-            <p>{nome}</p>
-            <p>Serviços: {servicos?.map((servicos) => (servicos.nome))} </p>
-            <p>Valor por Serviço: R${servicos?.map((servicos) => (servicos.valor))} </p>
-            <p>Produtos: {produtos?.map((produtos) => (produtos.nome))}</p>
-            <p>Valor por Produto: R${produtos?.map((produtos) => (produtos.valor))} </p>
+            <p>{id}</p>
+            <p>Cliente: {client}</p>
+            <p>{create_date} </p>
+            <p>{payment_date} </p>
+            <p>{payment_method}</p>
+            <p>{price} </p>
 
             <div className='botoes'>
                 <Link to={`/pedidos/${id}`}>

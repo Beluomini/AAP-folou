@@ -1,6 +1,6 @@
 //ROUTES = SWITCH
 import './App.css';
-import React, { useState } from 'react';
+import React from 'react';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
@@ -11,6 +11,7 @@ import Home from './components/pages/Home';
 import Pedidos from './components/pages/Pedidos';
 import Produtos from './components/pages/Produtos';
 import PedidoCliente from './components/pages/PedidoCliente';
+import EditProduct from './components/pages/EditProduct';
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Route path="/pedidos" element={<Pedidos />} />
           <Route path="/pedidos/:id" element={<PedidoCliente />} />
           <Route path="/produtos" element={<Produtos />} />
+          <Route path="/produtos/:id" element={<EditProduct />} />
           <Route path="/configuracoes" element={<Configuracoes />} />
         </Routes>
       </div>

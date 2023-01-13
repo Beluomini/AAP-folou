@@ -8,6 +8,7 @@ import { PagPedidoUnico } from './styledPedidoCliente';
 import SubmitButton from '../form/SubmitButton';
 import Select from '../form/Select';
 
+import api from "../../services/api";
 function PedidoCliente() {
 
     const { id } = useParams();
@@ -15,33 +16,22 @@ function PedidoCliente() {
     const [pedidoId, setPedidoId] = useState([]);
 
     useEffect(() => {
-        //resgatado do banco direto do banco pela id do url
-        fetch(`http://localhost:5000/pedidos/${id}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                setPedidoId(data);
-            })
-            .catch((err) => console.log(err));
+        api.getOrdersById(id).then((res) => setPedidoId(res))
     }, [id])
 
     return (
         <ContainerPage>
             <PagPedidoUnico>
                 <div className="pedunico">
-                    <h1>Cliente: {pedidoId.cliente}</h1>
+                    <h1>Data do Pedido: {pedidoId.create_date}</h1>
                 </div>
 
-                <div className="itens">
-                    <h1>Itens</h1>
-                    <p>Serviços: {pedidoId.servicos?.map((servicos) => (servicos.nome))}</p>
-                    <p>Produtos: {pedidoId.produtos?.map((produtos) => (produtos.nome))}</p>
-
-                    <Select text='Status do Pedido' name='status' options={pedidoId.status} />
+                <div className="dados">
+                    <p>Data do Pagamento: {pedidoId.payment_date}</p>
+                    <p>Valor: R${pedidoId.price}</p>
+                    <p>Método de Pagamento: {pedidoId.payment_method}</p>
+                    <p>Cupom: {pedidoId.fk_cupom}</p>
+                    <p>Status do Pedido: {pedidoId.status}</p>
                     <SubmitButton text='Salvar' />
                 </div>
             </PagPedidoUnico>

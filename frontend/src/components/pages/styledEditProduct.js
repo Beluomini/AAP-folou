@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const PagPedidoUnico = styled.div`
+export const PagEditProduct = styled.div`
     height: 600px;
     background-color: #766452;
     color: black;
@@ -13,14 +13,14 @@ export const PagPedidoUnico = styled.div`
     display: flex;
     flex-direction: column;
 
-    .pedunico{
+    .prodid{
         display: flex;
         align-items: center;
         justify-content: space-between;
         padding: 50px;
     }
 
-    .dados{
+    .itens{
         display: flex;
         flex-direction: column;
         width: 100%;

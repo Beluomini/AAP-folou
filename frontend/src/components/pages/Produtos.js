@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import { ContainerPage } from '../../components/Main'
 import { PagProdutos } from './styledProdutos';
@@ -13,84 +14,71 @@ import api from "../../services/api";
 
 function Produtos() {
 
-    const [produtos, setProdutos] = useState([]); //lista de objetos de produtos
-    const [newProdut, setNewProdut] = useState({}); //novo produto é um objeto q vai ser inserido na lista de produtos
+    const [products, setProducts] = useState([]); //lista de objetos de produtos
+    const [newProduct, setNewProduct] = useState({}); //novo produto é um objeto q vai ser inserido na lista de produtos
 
-    //pegando os produtos do banco de dados
+    const navigate = useNavigate();
+
+
     useEffect(() => {
-        api.getProducts().then((resposta) => setProdutos(resposta))
-            .then((data) => {
-                console.log(data);
-            })
+        api.getProducts().then((resposta) => setProducts(resposta))
     }, []);
 
-    //delete de pedidos pelo id
-    function removeProduto(id) {
-        fetch(`http://localhost:5000/produtos/${id}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                setProdutos(produtos.filter((produto) => produto.id !== id));
-            })
-            .catch((err) => console.log(err));
+
+    function createProduct(products) {
+        api.createProducts(products)
+            .then((resposta) => setNewProduct(resposta))
+            .then(() => console.log(products))
     }
 
-    function criarProduto(produtos) {
-        fetch('http://localhost:5000/produtos', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(produtos),
-
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data)
-                alert('Produto criado com sucesso!');
-            })
-            .catch((err) => console.log(err));
+    function handleClickEdit(idProducts) {
+        navigate(`/products/${idProducts}`);
     }
 
-    const submit = (e) => {
-        //e.preventDefault();
-        criarProduto(newProdut);
-        setProdutos(newProdut);
-        setNewProdut({}); //limpa o form de novo produto
-        console.log(produtos)
-        console.log(newProdut)
-
+    function handleClickDelete(idProducts) {
+        api
+            .removeProducts(idProducts)
+            .then(() => alert("Excluido com sucesso!"))
+            .catch((err) => alert(`Erro: ${err.message}`));
     }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        createProduct(newProduct);
+        setProducts(newProduct);
+        setNewProduct({});
+        console.log(newProduct)
+    };
 
     function handleChange(e) {
-        setNewProdut(newProdut => (({ ...newProdut, [e.target.name]: e.target.value })))
+        setNewProduct(newProdut => (({ ...newProdut, [e.target.name]: e.target.value })))
     }
 
     return (
         <ContainerPage>
             <h1>Produtos</h1>
             <PagProdutos>
-                {produtos.length >= 0 &&
-                    produtos.map((produtos) => (
+                {products.length >= 0 &&
+                    products.map((products) => (
                         <ProdutosList
-                            id={produtos.id}
-                            key={produtos.id}
-                            name={produtos.name}
-                            price={produtos.price}
-                            quantidade={produtos.quantidade}
-                            handleRemove={removeProduto}
+                            id={products._id}
+                            key={products._id}
+                            description={products.description}
+                            name={products.name}
+                            price={products.price}
+                            stock={products.stock}
+                            category={products.category}
+                            handleRemove={handleClickDelete}
+                            handleEdit={handleClickEdit}
                         />
                     ))}
                 <div>
-                    <form onSubmit={submit}>
-                        <Input type='text' text='Nome do Produto ' name='nome' placeholder='Nome do Produto' handleOnChange={handleChange} value={produtos.nome} />
-                        <Input type='text' text='Quantidade deste Produto ' name='quantidade'
-                            placeholder="Quantidade deste Produto" handleOnChange={handleChange} value={produtos.quantidade} />
-                        <Input type='text' text='Valor deste Produto ' name='valor' placeholder="Valor do Produto" handleOnChange={handleChange} value={produtos.valor} />
+                    <form onSubmit={handleSubmit}>
+                        <Input type='text' text='Nome do Produto ' name='nome' placeholder='Nome do Produto' handleOnChange={handleChange} value={products.name} />
+                        <Input type='text' text='Descrição do Produto ' name='descricao' placeholder='Descrição' handleOnChange={handleChange} value={products.description} />
+                        <Input type='text' text='Quantidade deste Produto ' name='quantidade' placeholder="Quantidade " handleOnChange={handleChange} value={products.stock} />
+                        <Input type='text' text='Valor deste Produto ' name='valor' placeholder="Valor" handleOnChange={handleChange} value={products.price} />
+                        <Input type='text' text='Categoria do Produto ' name='categoria' placeholder='Categoria' handleOnChange={handleChange} value={products.category} />
                         <SubmitButton type="submit" text='Adicionar Novo Produto' />
                     </form>
                 </div>

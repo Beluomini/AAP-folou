@@ -9,54 +9,38 @@ import SubmitButton from '../form/SubmitButton';
 
 import PedidosList from '../list/PedidosList';
 
+import api from "../../services/api";
+
 function Pedidos() {
 
-    const [pedidos, setPedidos] = useState([]);
+    const [orders, setOrders] = useState([]);
 
-    //pegando os pedidos do banco de dados
     useEffect(() => {
-
-        fetch('http://localhost:5000/pedidos', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                setPedidos(data);
-            })
-            .catch((err) => console.log(err));
+        api.getOrders().then((resposta) => setOrders(resposta))
     }, []);
 
     //delete de pedidos pelo id
-    function removePedido(id) {
-        fetch(`http://localhost:5000/pedidos/${id}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                setPedidos(pedidos.filter((pedido) => pedido.id !== id));
-            })
-            .catch((err) => console.log(err));
+    function removeOrder(idOrder) {
+        api
+            .removeOrders(idOrder)
+            .then(() => alert("Excluido com sucesso!"))
+            .catch((err) => alert(`Erro: ${err.message}`));
     }
 
     return (
         <ContainerPage>
             <h1>Pedidos</h1>
             <PagPedidos>
-                {pedidos?.map((pedido) => (
+                {orders?.map((orders) => (
                     <PedidosList
-                        id={pedido.id}
-                        key={pedido.id}
-                        cliente={pedido.cliente}
-                        nome={pedido.nome}
-                        servicos={pedido.servicos}
-                        produtos={pedido.produtos}
-                        handleRemove={removePedido}
+                        id={orders._id}
+                        key={orders._id}
+                        client={orders.client}
+                        create_date={orders.create_date}
+                        payment_date={orders.payment_date}
+                        price={orders.price}
+                        payment_method={orders.payment_method}
+                        handleRemove={removeOrder}
                     />
                 ))}
             </PagPedidos>
