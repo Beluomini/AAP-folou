@@ -2,8 +2,8 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { isDateString, IsMongoId, isMongoId } from 'class-validator';
 import { isValidObjectId, Model } from 'mongoose';
-import { Client, ClientDocument } from 'src/clients/entities/client.entity';
-import { PetShop, PetShopDocument } from 'src/pet-shops/entities/pet-shop.entity';
+import { Client } from 'src/clients/entities/client.entity';
+import { PetShop } from 'src/pet-shops/entities/pet-shop.entity';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
 import { Order, OrderDocument } from './entities/order.entity';
@@ -13,35 +13,44 @@ export class OrdersService {
 
   constructor(
     @InjectModel(Order.name) private orderModel: Model<OrderDocument>, 
-    @InjectModel(Client.name) private clientModel: Model<ClientDocument>,
-    @InjectModel(PetShop.name) private petShopModel: Model<PetShopDocument>
+    @InjectModel(Client.name) private clientModel: Model<OrderDocument>, 
+    @InjectModel(PetShop.name) private petShopModel: Model<OrderDocument>
   ) {}
 
-  create(createOrderDto: CreateOrderDto) {
+  async create(createOrderDto: CreateOrderDto) {
     const Order = new this.orderModel(createOrderDto);
 
-    // if(!isValidObjectId(Order.fk_id_client)){
-    //   throw new HttpException(
-    //     'Chave do cliente inválida',
-    //     HttpStatus.BAD_REQUEST,
-    //   );
-    // }
+    if(isValidObjectId(Order.fk_id_client)){
+      const client = await this.clientModel.findOne({ _id: Order.fk_id_client });
+      if(!client){
+        throw new HttpException(
+          'Cliente com a chave informada não existe',
+          HttpStatus.BAD_REQUEST,
+        );
+      }
+    }else{
+      throw new HttpException(
+        'Chave do cliente inválida',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
 
-    // const client = this.clientModel.findOne({_id: Order.fk_id_client});
-    // if(!client){
-    //   throw new HttpException(
-    //     'Cliente não existe',
-    //     HttpStatus.BAD_REQUEST,
-    //   );
-    // }
+    if(isValidObjectId(Order.fk_id_pet_shop)){
+      const petShop = await this.petShopModel.findOne({ _id: Order.fk_id_pet_shop });
+      if(!petShop){
+        throw new HttpException(
+          'Pet shop com a chave informada não existe',
+          HttpStatus.BAD_REQUEST,
+        );
+      }
+    }else{
+      throw new HttpException(
+        'Chave do pet shop inválida',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
 
-    // const petShop = this.petShopModel.findOne({_id: Order.fk_id_pet_shop});
-    // if(!petShop){
-    //   throw new HttpException(
-    //     'Pet Shop não existe',
-    //     HttpStatus.BAD_REQUEST,
-    //   );
-    // }
+    
 
     if(Order.create_date){
       if(isDateString(Order.create_date)){
