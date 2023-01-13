@@ -102,15 +102,78 @@ export class OrdersService {
   }
 
   findOne(id: string) {
+
+    if(!isValidObjectId(id)){
+      throw new HttpException(
+        'Chave do produto inválida',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    const order = this.OrderModel.findById(id);
+    if (!order) {
+      throw new HttpException(
+        'Pedido não encontrado',
+        HttpStatus.NOT_FOUND,
+      );
+    }
+    
     return this.OrderModel.findById(id);
   }
 
-  update(id: string, updateOrderDto: UpdateOrderDto) {
+  async update(id: string, updateOrderDto: UpdateOrderDto) {
+
+    if(updateOrderDto.fk_id_client){
+      if(isValidObjectId(updateOrderDto.fk_id_client)){
+        const client = await this.ClientModel.findOne({ _id: updateOrderDto.fk_id_client });
+        if(!client){
+          throw new HttpException(
+            'Cliente com a chave informada não existe',
+            HttpStatus.BAD_REQUEST,
+          );
+        }
+      }else{
+        throw new HttpException(
+          'Chave do cliente inválida',
+          HttpStatus.BAD_REQUEST,
+        );
+      }
+    }
+
+    if(updateOrderDto.fk_id_pet_shop){
+      if(isValidObjectId(updateOrderDto.fk_id_pet_shop)){
+        const petShop = await this.PetShopModel.findOne({ _id: updateOrderDto.fk_id_pet_shop });
+        if(!petShop){
+          throw new HttpException(
+            'Pet shop com a chave informada não existe',
+            HttpStatus.BAD_REQUEST,
+          );
+        }
+      }else{
+        throw new HttpException(
+          'Chave do pet shop inválida',
+          HttpStatus.BAD_REQUEST,
+        );
+      }
+    }
+
+    if(updateOrderDto.create_date){
+      if(isDateString(updateOrderDto.create_date)){
+        updateOrderDto.create_date = new Date(updateOrderDto.create_date);
+      }else{
+        throw new HttpException(
+          'Data de criação é inválida, deixe vazio para pegar a data atual ou no formato: YYYY-MM-DD',
+          HttpStatus.BAD_REQUEST,
+        );
+      }
+    }else{
+      updateOrderDto.create_date = new Date();
+    }
 
     if(updateOrderDto.payment_date){
       if(isDateString(updateOrderDto.payment_date)){
         updateOrderDto.payment_date = new Date(updateOrderDto.payment_date);
-        if(updateOrderDto.payment_date < new Date(updateOrderDto.create_date)){
+        if(updateOrderDto.payment_date < updateOrderDto.create_date){
           throw new HttpException(
             'Data de pagamento não pode ser menor que a data de criação',
             HttpStatus.BAD_REQUEST,
@@ -124,18 +187,22 @@ export class OrdersService {
       }
     }
 
-    if (updateOrderDto.payment_method !== 'CREDIT_CARD' && updateOrderDto.payment_method !== 'DEBIT_CARD' && updateOrderDto.payment_method !== 'MONEY' && updateOrderDto.payment_method !== 'PIX'){
-      throw new HttpException(
-        'Método de pagamento inválido, os metodos aceitáveis são: CREDIT_CARD, DEBIT_CARD, MONEY, PIX',
-        HttpStatus.BAD_REQUEST,
-      );
+    if(updateOrderDto.payment_method){
+      if (updateOrderDto.payment_method !== 'CREDIT_CARD' && updateOrderDto.payment_method !== 'DEBIT_CARD' && updateOrderDto.payment_method !== 'MONEY' && updateOrderDto.payment_method !== 'PIX'){
+        throw new HttpException(
+          'Método de pagamento inválido, os metodos aceitáveis são: CREDIT_CARD, DEBIT_CARD, MONEY, PIX',
+          HttpStatus.BAD_REQUEST,
+        );
+      }
     }
 
-    if(updateOrderDto.status !== 'SENT' && updateOrderDto.status !== 'VISUALIZED' && updateOrderDto.status !== 'PROCESSING' && updateOrderDto.status !== 'CANCELED' && updateOrderDto.status !== 'FINISHED'){
-      throw new HttpException(
-        'Status inválido, os status aceitáveis são: SENT, VISUALIZED, PROCESSING, CANCELED, FINISHED',
-        HttpStatus.BAD_REQUEST,
-      );
+    if(updateOrderDto.status){
+      if(updateOrderDto.status !== 'SENT' && updateOrderDto.status !== 'VISUALIZED' && updateOrderDto.status !== 'PROCESSING' && updateOrderDto.status !== 'CANCELED' && updateOrderDto.status !== 'FINISHED'){
+        throw new HttpException(
+          'Status inválido, os status aceitáveis são: SENT, VISUALIZED, PROCESSING, CANCELED, FINISHED',
+          HttpStatus.BAD_REQUEST,
+        );
+      }
     }
 
     return this.OrderModel.findByIdAndUpdate({

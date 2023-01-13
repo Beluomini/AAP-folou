@@ -22,15 +22,6 @@ export class OrdersController {
   @Get(':id')
   @ApiResponse({ status: 404, description: 'Pedido não encontrado' })
   findOne(@Param('id') id: string) {
-
-    const order = this.ordersService.findOne(id);
-    if (!order) {
-      throw new HttpException(
-        'Pedido não encontrado',
-        HttpStatus.NOT_FOUND,
-      );
-    }
-
     return this.ordersService.findOne(id);
   }
 
