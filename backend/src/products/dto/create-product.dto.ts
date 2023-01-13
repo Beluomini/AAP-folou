@@ -1,7 +1,10 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { IsNotEmpty, IsNumber, IsUppercase, Max, Min } from "class-validator";
 import { PetShop } from "src/pet-shops/entities/pet-shop.entity";
 
 export class CreateProductDto {
+
+  @IsNotEmpty()
   @ApiProperty({
     type: PetShop,
     description: "The foreig key to id of the pet-shop",
@@ -9,6 +12,7 @@ export class CreateProductDto {
   })
   fk_id_pet_shop: PetShop;
 
+  @IsNotEmpty()
   @ApiProperty({
     type: String,
     description: "The name of the product",
@@ -23,13 +27,20 @@ export class CreateProductDto {
   })
   description: String;
 
+  @IsNotEmpty()
+  @IsNumber()
+  @Min(0)
   @ApiProperty({
     type: Number,
     description: "The price of the product in R$ (reais)",
-    example: 86.00
+    example: 86.00,
+    minimum: 0
   })
   price: Number;
 
+  @IsNotEmpty()
+  @IsNumber()
+  @Min(0)
   @ApiProperty({
     type: Number,
     description: "The stock of the product",
@@ -44,10 +55,13 @@ export class CreateProductDto {
   })
   image: String;
 
+  @IsNotEmpty()
+  @IsUppercase()
   @ApiProperty({
     type: String,
     description: "The category of the product",
-    example: "Ração"
+    example: "FOOD",
+    enum: ['FOOD', 'TOY', 'CLOTHES', 'ACCESSORIES', 'SERVICE', 'OTHER']
   })
   category: String;
 }

@@ -1,3 +1,4 @@
+import { mixin } from "@nestjs/common/decorators";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsNotEmpty, IsNumber, IsUppercase, MaxLength, Min } from "class-validator";
 import { Types } from "mongoose";
@@ -43,7 +44,8 @@ export class CreateOrderDto {
     @ApiProperty({
         type: Number,
         description: 'The total price of the order in R$ (reais)',
-        example: 100.00
+        example: 100.00,
+        minimum: 0
     })
     price: Number;
     
