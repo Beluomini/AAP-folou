@@ -2,8 +2,8 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { isDateString, IsMongoId, isMongoId } from 'class-validator';
 import { isValidObjectId, Model } from 'mongoose';
-import { Client } from 'src/clients/entities/client.entity';
-import { PetShop } from 'src/pet-shops/entities/pet-shop.entity';
+import { Client, ClientDocument } from 'src/clients/entities/client.entity';
+import { PetShop, PetShopDocument } from 'src/pet-shops/entities/pet-shop.entity';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
 import { Order, OrderDocument } from './entities/order.entity';
@@ -12,16 +12,16 @@ import { Order, OrderDocument } from './entities/order.entity';
 export class OrdersService {
 
   constructor(
-    @InjectModel(Order.name) private orderModel: Model<OrderDocument>, 
-    @InjectModel(Client.name) private clientModel: Model<OrderDocument>, 
-    @InjectModel(PetShop.name) private petShopModel: Model<OrderDocument>
+    @InjectModel(Order.name) private OrderModel: Model<OrderDocument>, 
+    @InjectModel(Client.name) private ClientModel: Model<ClientDocument>, 
+    @InjectModel(PetShop.name) private PetShopModel: Model<PetShopDocument>
   ) {}
 
   async create(createOrderDto: CreateOrderDto) {
-    const Order = new this.orderModel(createOrderDto);
+    const Order = new this.OrderModel(createOrderDto);
 
     if(isValidObjectId(Order.fk_id_client)){
-      const client = await this.clientModel.findOne({ _id: Order.fk_id_client });
+      const client = await this.ClientModel.findOne({ _id: Order.fk_id_client });
       if(!client){
         throw new HttpException(
           'Cliente com a chave informada não existe',
@@ -36,7 +36,7 @@ export class OrdersService {
     }
 
     if(isValidObjectId(Order.fk_id_pet_shop)){
-      const petShop = await this.petShopModel.findOne({ _id: Order.fk_id_pet_shop });
+      const petShop = await this.PetShopModel.findOne({ _id: Order.fk_id_pet_shop });
       if(!petShop){
         throw new HttpException(
           'Pet shop com a chave informada não existe',
@@ -49,8 +49,6 @@ export class OrdersService {
         HttpStatus.BAD_REQUEST,
       );
     }
-
-    
 
     if(Order.create_date){
       if(isDateString(Order.create_date)){
@@ -100,11 +98,11 @@ export class OrdersService {
   }
 
   findAll() {
-    return this.orderModel.find();
+    return this.OrderModel.find();
   }
 
   findOne(id: string) {
-    return this.orderModel.findById(id);
+    return this.OrderModel.findById(id);
   }
 
   update(id: string, updateOrderDto: UpdateOrderDto) {
@@ -140,7 +138,7 @@ export class OrdersService {
       );
     }
 
-    return this.orderModel.findByIdAndUpdate({
+    return this.OrderModel.findByIdAndUpdate({
       _id: id
     },{
       $set: updateOrderDto,
@@ -150,6 +148,6 @@ export class OrdersService {
   }
 
   remove(id: string) {
-    return this.orderModel.deleteOne({ _id: id }).exec();
+    return this.OrderModel.deleteOne({ _id: id }).exec();
   }
 }
