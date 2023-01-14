@@ -10,28 +10,56 @@ export type PurchaseDocument = HydratedDocument<Purchase>;
 @Schema()
 export class Purchase {
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: PetShop.name, required: true })
+  @Prop({ 
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'PetShop', 
+    required: true 
+  })
   fk_id_pet_shop: PetShop;
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: Client.name, required: true })
+  @Prop({ 
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'Client', 
+    required: true 
+  })
   fk_id_client: Client;
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: Order.name, required: true })
+  @Prop({ 
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'Order', 
+    required: true 
+  })
   fk_id_order: Order;
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: Product.name, required: true })
+  @Prop({ 
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Product', 
+    required: true 
+  })
   fk_id_product: Product;
 
-  @Prop({ required: true })
+  @Prop({ 
+    type: Number,
+    required: true,
+    min: 1 
+  })
   quantity: number;
 
-  @Prop({ required: true })
+  @Prop({
+    type: Number,
+    required: true,
+    min: 0 
+  })
   unit_price: number;
 
-  @Prop()
+  @Prop({
+    type: Number
+  })
   total_price: number;
 
-  @Prop()
+  @Prop({
+    type: String
+  })
   description: string;
     
 }
