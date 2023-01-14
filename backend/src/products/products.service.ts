@@ -53,14 +53,14 @@ export class ProductsService {
         'Chave do produto inválida',
         HttpStatus.BAD_REQUEST,
       );
-    }
-
-    const product = await this.ProductModel.findOne({ _id: id });
-    if(!product){
-      throw new HttpException(
-        'Produto com a chave informada não existe',
-        HttpStatus.BAD_REQUEST,
-      );
+    }else{
+      const product = await this.ProductModel.findOne({ _id: id });
+      if(!product){
+        throw new HttpException(
+          'Produto com a chave informada não existe',
+          HttpStatus.NOT_FOUND,
+        );
+      }
     }
 
     return this.ProductModel.findById(id);
