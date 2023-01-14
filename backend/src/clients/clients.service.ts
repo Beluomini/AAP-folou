@@ -9,7 +9,7 @@ import { Client, ClientDocument } from './entities/client.entity';
 export class ClientsService {
 
   constructor(@InjectModel(Client.name) private clientModel: Model<ClientDocument>) {}
-  
+
   async create(createClientDto: CreateClientDto) {
     const Client = new this.clientModel(createClientDto);
 
@@ -59,13 +59,15 @@ export class ClientsService {
       );
     }
 
-    const cpf = updateClientDto.cpf;
-    const clientCpfExists = await this.clientModel.findOne({ cpf });
-    if (clientCpfExists) {
-      throw new HttpException(
-        'O cpf já está sendo usado',
-        HttpStatus.BAD_REQUEST,
-      );
+    if(updateClientDto.cpf){
+      const cpf = updateClientDto.cpf;
+      const clientCpfExists = await this.clientModel.findOne({ cpf });
+      if (clientCpfExists) {
+        throw new HttpException(
+          'O cpf já está sendo usado',
+          HttpStatus.BAD_REQUEST,
+        );
+      }
     }
 
     return this.clientModel.findByIdAndUpdate({
