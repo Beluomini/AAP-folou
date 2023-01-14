@@ -1,11 +1,10 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-import { GrFormView } from 'react-icons/gr';
-import { FaTrashAlt } from 'react-icons/fa';
+import { FaTrashAlt, FaRegEdit } from 'react-icons/fa';
 
 import { PedidoList } from './styledPedidosList';
 
-function PedidosList({ id, client, create_date, payment_date, payment_method, price, handleRemove }) {
+function PedidosList({ id, client, create_date, payment_date, payment_method, price, handleRemove, handleEdit }) {
 
     const remove = (e) => {
         e.preventDefault();
@@ -22,11 +21,11 @@ function PedidosList({ id, client, create_date, payment_date, payment_method, pr
             <p>{price} </p>
 
             <div className='botoes'>
-                <Link to={`/pedidos/${id}`}>
-                    <GrFormView /> Ver Pedido
-                </Link>
                 <button onClick={remove}>
                     <FaTrashAlt /> Excluir
+                </button>
+                <button onClick={handleEdit}>
+                    <FaRegEdit /> Editar
                 </button>
             </div>
         </PedidoList>

@@ -26,11 +26,11 @@ function EditProduct() {
                     {/* <p>Id: {productId?.map((product) => (product._id))}</p> */}
                 </div>
                 <div className="itens">
-                    <p>Nome: {productId?.map((product) => (product.name))}</p>
+                    {/* <p>Nome: {productId?.map((product) => (product.name))}</p>
                     <p>Descrição: {productId?.map((product) => (product.description))}</p>
                     <p>Preço: {productId?.map((product) => (product.price))}</p>
                     <p>Quantidade: {productId?.map((product) => (product.stock))}</p>
-                    <p>Categoria: {productId?.map((product) => (product.category))}</p>
+                    <p>Categoria: {productId?.map((product) => (product.category))}</p> */}
 
                     <SubmitButton text='Salvar' />
                 </div>

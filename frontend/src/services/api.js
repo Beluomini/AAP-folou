@@ -8,7 +8,8 @@ function getProductsById(id) {
 }
 
 function createProducts(newProduct) {
-    fetch('http://localhost:3333/products', {
+    console.log(newProduct)
+    return fetch('http://localhost:3333/products', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -16,11 +17,12 @@ function createProducts(newProduct) {
         body: JSON.stringify(newProduct),
     })
         .then((res) => res.json())
-        .catch((err) => console.log(err));
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err))
 }
 
 function removeProducts(id) {
-    fetch(`http://localhost:3333/products/${id}`, {
+    return fetch(`http://localhost:3333/products/${id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -31,15 +33,14 @@ function removeProducts(id) {
 }
 
 function editProducts(products, id) {
-    fetch(`http://localhost:3333/products/${id}`, {
+    return fetch(`http://localhost:3333/products/${id}`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(products)
     })
-        .then((res) => res.json())
-        .catch((err) => console.log(err));
+        .then((res) => res.json());
 }
 
 //pedidos
@@ -53,7 +54,7 @@ function getOrdersById(id) {
 }
 
 function createOrders(newOrders) {
-    fetch('http://localhost:3333/orders', {
+    return fetch('http://localhost:3333/orders', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -65,7 +66,7 @@ function createOrders(newOrders) {
 }
 
 function removeOrders(id) {
-    fetch(`http://localhost:3333/orders/${id}`, {
+    return fetch(`http://localhost:3333/orders/${id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -76,7 +77,7 @@ function removeOrders(id) {
 }
 
 function editOrders(orders, id) {
-    fetch(`http://localhost:3333/orders/${id}`, {
+    return fetch(`http://localhost:3333/orders/${id}`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
