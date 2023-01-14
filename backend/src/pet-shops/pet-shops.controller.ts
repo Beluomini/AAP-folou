@@ -12,16 +12,7 @@ export class PetShopsController {
   @Post()
   @ApiResponse({ status: 200, description: 'Pet Shop criado com sucesso' })
   @ApiResponse({ status: 400, description: 'O cnpj já está sendo usado' })
-  async create(@Body() createPetShopDto: CreatePetShopDto) {
-
-    const petShopCnpjExists = await this.petShopsService.findOneByCnpj(createPetShopDto.cnpj);
-    if (petShopCnpjExists) {
-      throw new HttpException(
-        'O cnpj já está sendo usado',
-        HttpStatus.BAD_REQUEST,
-      );
-    }
-
+  create(@Body() createPetShopDto: CreatePetShopDto) {
     return this.petShopsService.create(createPetShopDto);
   }
 
@@ -32,55 +23,20 @@ export class PetShopsController {
 
   @Get(':id')
   @ApiResponse({ status: 404, description: 'Pet Shop não encontrado' })
-  async findOne(@Param('id') id: string) {
-    
-    const petShop = await this.petShopsService.findOne(id);
-    if (!petShop) {
-      throw new HttpException(
-        'Pet Shop não encontrado',
-        HttpStatus.NOT_FOUND,
-      );
-    }
-
+  findOne(@Param('id') id: string) {
     return this.petShopsService.findOne(id);
   }
 
   @Patch(':id')
   @ApiResponse({ status: 404, description: 'Pet Shop não encontrado' })
   @ApiResponse({ status: 400, description: 'O cnpj já está sendo usado' })
-  async update(@Param('id') id: string, @Body() updatePetShopDto: UpdatePetShopDto) {
-
-    const petShop = await this.petShopsService.findOne(id);
-    if (!petShop) {
-      throw new HttpException(
-        'Pet Shop não encontrado',
-        HttpStatus.NOT_FOUND,
-      );
-    }
-
-    const petShopCnpjExists = await this.petShopsService.findOneByCnpj(updatePetShopDto.cnpj);
-    if (petShopCnpjExists) {
-      throw new HttpException(
-        'O cnpj já está sendo usado',
-        HttpStatus.BAD_REQUEST,
-      );
-    }
-
+  update(@Param('id') id: string, @Body() updatePetShopDto: UpdatePetShopDto) {
     return this.petShopsService.update(id, updatePetShopDto);
   }
 
   @Delete(':id')
   @ApiResponse({ status: 404, description: 'Pet Shop não encontrado' })
-  async remove(@Param('id') id: string) {
-
-    const petShop = await this.petShopsService.findOne(id);
-    if (!petShop) {
-      throw new HttpException(
-        'Pet Shop não encontrado',
-        HttpStatus.NOT_FOUND,
-      );
-    }
-
+  remove(@Param('id') id: string) {
     return this.petShopsService.remove(id);
   }
 }
