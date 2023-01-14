@@ -9,11 +9,7 @@ import { Client, ClientDocument } from './entities/client.entity';
 export class ClientsService {
 
   constructor(@InjectModel(Client.name) private clientModel: Model<ClientDocument>) {}
-
-  findOneByCpf(cpf: string) {
-    return this.clientModel.findOne({ cpf });
-  }
-
+  
   async create(createClientDto: CreateClientDto) {
     const Client = new this.clientModel(createClientDto);
 
@@ -90,7 +86,7 @@ export class ClientsService {
         HttpStatus.NOT_FOUND,
       );
     }
-    
+
     return this.clientModel.deleteOne({ _id: id }).exec();
   }
 }
