@@ -12,16 +12,7 @@ export class ClientsController {
   @Post()
   @ApiResponse({ status: 200, description: 'Cliente criado com sucesso' })
   @ApiResponse({ status: 400, description: 'O cpf já está sendo usado' })
-  async create(@Body() createClientDto: CreateClientDto) {
-
-    const clientCpfExists = await this.clientsService.findOneByCpf(createClientDto.cpf);
-    if (clientCpfExists) {
-      throw new HttpException(
-        'O cpf já está sendo usado',
-        HttpStatus.BAD_REQUEST,
-      );
-    }
-
+  create(@Body() createClientDto: CreateClientDto) {
     return this.clientsService.create(createClientDto);
   }
 
@@ -33,16 +24,7 @@ export class ClientsController {
 
   @Get(':id')
   @ApiResponse({ status: 404, description: 'Cliente não encontrado' })
-  async findOne(@Param('id') id: string) {
-
-    const client = await this.clientsService.findOne(id);
-    if (!client) {
-      throw new HttpException(
-        'Cliente não encontrado',
-        HttpStatus.NOT_FOUND,
-      );
-    }
-
+  findOne(@Param('id') id: string) {
     return this.clientsService.findOne(id);
   }
 
@@ -50,37 +32,12 @@ export class ClientsController {
   @ApiResponse({ status: 404, description: 'Cliente não encontrado' })
   @ApiResponse({ status: 400, description: 'O cpf já está sendo usado' })
   async update(@Param('id') id: string, @Body() updateClientDto: UpdateClientDto) {
-
-    const client = await this.clientsService.findOne(id);
-    if (!client) {
-      throw new HttpException(
-        'Cliente não encontrado',
-        HttpStatus.NOT_FOUND,
-      );
-    }
-
-    const clientCpfExists = await this.clientsService.findOneByCpf(updateClientDto.cpf);
-    if (clientCpfExists) {
-      throw new HttpException(
-        'O cpf já está sendo usado',
-        HttpStatus.BAD_REQUEST,
-      );
-    }
-
     return this.clientsService.update(id, updateClientDto);
   }
 
   @Delete(':id')
   @ApiResponse({ status: 404, description: 'Cliente não encontrado' })
-  async remove(@Param('id') id: string) {
-    const client = await this.clientsService.findOne(id);
-    if (!client) {
-      throw new HttpException(
-        'Cliente não encontrado',
-        HttpStatus.NOT_FOUND,
-      );
-    }
-
+  remove(@Param('id') id: string) {
     return this.clientsService.remove(id);
   }
 }
