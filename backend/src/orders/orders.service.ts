@@ -101,24 +101,30 @@ export class OrdersService {
     return this.OrderModel.find();
   }
 
-  findOne(id: string) {
+  async findOne(id: string) {
 
     if(!isValidObjectId(id)){
       throw new HttpException(
         'Chave do produto inválida',
         HttpStatus.BAD_REQUEST,
       );
+    }else{
+      const order = await this.OrderModel.findById(id);
+      if (!order) {
+        throw new HttpException(
+          'Pedido não encontrado',
+          HttpStatus.NOT_FOUND,
+        );
+      }
+      
+      return this.OrderModel.findById(id);
     }
 
-    const order = this.OrderModel.findById(id);
-    if (!order) {
-      throw new HttpException(
-        'Pedido não encontrado',
-        HttpStatus.NOT_FOUND,
-      );
-    }
-    
-    return this.OrderModel.findById(id);
+  }
+
+  async getOrderStatus (id:String) {
+      const order = await this.OrderModel.findById(id);
+      return order.status;
   }
 
   async update(id: string, updateOrderDto: UpdateOrderDto) {
