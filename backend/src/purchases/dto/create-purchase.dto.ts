@@ -1,10 +1,13 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { IsNotEmpty, IsNumber, Min } from "class-validator";
 import { Client } from "src/clients/entities/client.entity";
 import { Order } from "src/orders/entities/order.entity";
 import { PetShop } from "src/pet-shops/entities/pet-shop.entity";
 import { Product } from "src/products/entities/product.entity";
 
 export class CreatePurchaseDto {
+
+    @IsNotEmpty()
     @ApiProperty({
         type: PetShop,
         description: 'The foreig key to id of the pet-shop',
@@ -12,6 +15,7 @@ export class CreatePurchaseDto {
     })
     fk_id_pet_shop: PetShop;
 
+    @IsNotEmpty()
     @ApiProperty({
         type: Client,
         description: 'The foreig key to id of the client',
@@ -19,6 +23,7 @@ export class CreatePurchaseDto {
     })
     fk_id_client: Client;
 
+    @IsNotEmpty()
     @ApiProperty({
         type: Order,
         description: 'The foreig key to id of the order',
@@ -26,6 +31,7 @@ export class CreatePurchaseDto {
     })
     fk_id_order: Order;
 
+    @IsNotEmpty()
     @ApiProperty({
         type: Product,
         description: 'The foreig key to id of the product',
@@ -33,6 +39,9 @@ export class CreatePurchaseDto {
     })
     fk_id_product: Product;
 
+    @IsNotEmpty()
+    @IsNumber()
+    @Min(1)
     @ApiProperty({
         type: Number,
         description: 'The quantity of the product',
@@ -40,6 +49,9 @@ export class CreatePurchaseDto {
     })
     quantity: Number;
 
+    @IsNotEmpty()
+    @IsNumber()
+    @Min(0)
     @ApiProperty({
         type: Number,
         description: 'The unit price of the product',
