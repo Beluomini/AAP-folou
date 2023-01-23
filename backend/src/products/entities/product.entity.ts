@@ -26,18 +26,16 @@ export class Product {
   description: string;
 
   @Prop({ 
-    type: Number,
-    required: true,
-    min: 0 
+    type: String,
+    required: true
   })
-  price: number;
+  price: string;
 
   @Prop({
-    type: Number,
-    required: true,
-    min: 0
+    type: String,
+    required: true
   })
-  stock: number;
+  stock: string;
 
   @Prop({
     type: String

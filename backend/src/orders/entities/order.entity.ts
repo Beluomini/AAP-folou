@@ -34,9 +34,9 @@ export class Order {
     payment_date: Date;
 
     @Prop({ 
-        type: Number
+        type: String
     })
-    price: number;
+    price: string;
 
     @Prop({
         type: String,
