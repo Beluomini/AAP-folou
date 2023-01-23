@@ -1,20 +1,13 @@
 import { ProdutoList } from './styledProdutosList';
 import { FaTrashAlt, FaRegEdit } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
 
-import api from "../../services/api";
-
-function ProdutosList({ id, name, price, description, stock, category, handleRemove, handleEdit }) {
-
-    const navigate = useNavigate();
-
+function ProdutosList({ id, name, price, description, image, stock, category, handleRemove, handleEdit }) {
+    console.log(handleEdit) //é uma função inteira
     const remove = (e) => {
-        e.preventDefault();
         handleRemove(id);
     }
 
     const edit = (e) => {
-        e.preventDefault();
         handleEdit(id);
     }
 

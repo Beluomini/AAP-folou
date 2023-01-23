@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes, Link, useHistory } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import React, { useState, useEffect } from 'react';
 
@@ -6,73 +6,35 @@ import { ContainerPage } from '../../components/Main'
 import { PagHome } from './styledHome';
 
 import Input from '../form/Input';
-import Select from '../form/Select';
 import SubmitButton from '../form/SubmitButton';
+
+import api from "../../services/api";
 
 function Home() {
 
+    const { id } = useParams();
     const [petshop, setPetShop] = useState([])
-    const [servicos, setServicos] = useState([])
-    const [produtos, setProdutos] = useState([])
+    const navigate = useNavigate();
 
     useEffect(() => {
-        fetch(`http://localhost:5000/petshop`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                setPetShop(data);
-            })
-            .catch((err) => console.log(err));
+        api.getPetShop().then((resposta) => setPetShop(resposta))
     }, []);
 
-    useEffect(() => {
-        fetch(`http://localhost:5000/servicos`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                setServicos(data);
-            })
-            .catch((err) => console.log(err));
-    }, []);
-
-    useEffect(() => {
-
-        fetch('http://localhost:5000/produtos', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                setProdutos(data);
-            })
-            .catch((err) => console.log(err));
-    }, []);
+    const view = (e) => {
+        navigate(`/configuracoes/${id}`);
+    }
 
     return (
         <ContainerPage>
             <PagHome>
                 <div className='minhaloja'>
-                    <h1>{petshop?.map((petshop) => (petshop.nome))}</h1>
+                    <h1>{petshop?.map((petshop) => (petshop.name))}</h1>
+                    <h1>{petshop?.map((petshop) => (petshop._id))}</h1>
+
                 </div>
-                <div className='corpohome'>
-                    <div className='servicos'>
-                        <Select text='Serviços Meu PetShop' nome='servicos' options={servicos} />
-                    </div>
-                    <div className='produtos'>
-                        <Select text='Produtos Meu PetShop' nome='produtos' options={produtos} />
-                        <SubmitButton text='Adiconar Categorias' name="addcat_id" />
-                    </div>
-                </div>
+                <form onSubmit={view}>
+                    <SubmitButton text='Ver Minha Loja' name="add" />
+                </form>
             </PagHome>
         </ContainerPage>
 

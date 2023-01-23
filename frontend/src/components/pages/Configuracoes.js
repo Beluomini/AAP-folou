@@ -1,117 +1,54 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import { ContainerPage } from '../../components/Main'
 import { PagConfig } from './styledConfig';
 
 import Input from '../form/Input';
-import Select from '../form/Select';
 import SubmitButton from '../form/SubmitButton';
+
+import api from "../../services/api";
 
 function Configuracoes() {
 
     const { id } = useParams();
+    const navigate = useNavigate();
 
-    const [servicos, setServicos] = useState([]);
-    const [animais, setAnimais] = useState([]);
     const [petshop, setPetShop] = useState([]);
-    const [editPetShop, setEditPetShop] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/petshop`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                setPetShop(data);
-            })
-            .catch((err) => console.log(err));
-    }, []);
+        api.getPetShopById(id).then((resposta) => setPetShop(resposta))
+    }, [id]);
 
-    function editarPetshop() {
-        fetch(`http://localhost:5000/petshop`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(petshop)
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                setPetShop(data);
-                console.log(data)
-            })
-            .catch((err) => console.log(err));
+
+    function editPetshop(petshopId, id) {
+        api
+            .editPetShop(petshopId, id)
+            .then(() => alert(`Editado com sucesso!`))
+            .catch((err) => alert(`Erro: ${err.message}`));
     }
 
-    useEffect(() => {
-        fetch(`http://localhost:5000/servicos`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                setServicos(data);
-            })
-            .catch((err) => console.log(err));
-    }, []);
-
-    useEffect(() => {
-        fetch(`http://localhost:5000/animais`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                setAnimais(data);
-            })
-            .catch((err) => console.log(err));
-    }, []);
-
-    const submit = (e) => {
-        e.preventDefault();
-        editarPetshop(petshop)
-        setPetShop(petshop)
-        console.log(petshop)
-    }
+    const handleSubmit = (e) => {
+        editPetshop(petshop, id);
+    };
 
     function handleChange(e) {
-        setEditPetShop(editpetshop => ({ ...editpetshop, [e.target.name]: e.target.value }))
+        setPetShop(editpetshop => ({ ...editpetshop, [e.target.name]: e.target.value }))
     }
 
     return (
         <ContainerPage>
-            <h1>Edição dos dados do seu PetShop</h1>
+            <h1>Edição dos dados do seu PetShop: {petshop?.map((petshop) => (petshop._id))}</h1>
             <PagConfig>
-                <form onSubmit={submit}>
+                <form onSubmit={handleSubmit}>
                     <div className='form_dados'>
-                        <Input type='text' value={petshop.nome} text='Nome Estabelecimento' name='nome' placeholder='Nome do Estabelecimento' handleOnChange={handleChange} />
-                        <Input type='text' value={petshop.endereco} text='Insira o Endereço ' name='endereco' placeholder="Endereço" handleOnChange={handleChange} />
-                        <Input type='text' value={petshop.telefone} text='Telefone para Contato' name='telefone' placeholder="Telefone para Contato" handleOnChange={handleChange} />
+                        <Input type='text' value={petshop.name} text='Nome PetShop ' name='name' placeholder='Nome do Estabelecimento' handleOnChange={handleChange} />
                         <Input type='text' value={petshop.email} text='Insira o Email ' name='email' placeholder="Email" handleOnChange={handleChange} />
-                        <Input type='text' value={petshop.senha} text='Insira sua Senha ' name='senha' placeholder="Senha" handleOnChange={handleChange} />
-                        <Input type='text' value={petshop.confirma_senha} text='Confirmar Senha' name='csenha' placeholder="Confirmação Senha" handleOnChange={handleChange} />
-                    </div>
-                    <div className='endereco'>
-                        <Input type='text' value={petshop.cep} text='CEP' name='cep' placeholder="CEP" />
-                        <Input type='text' value={petshop.cidade} text='Cidade' name='cidade' placeholder="Cidade" handleOnChange={handleChange} />
-                        <Input type='text' value={petshop.estado} text='Estado' name='estado' placeholder="Estado" handleOnChange={handleChange} />
-                        <Input type='text' value={petshop.rua} text='Rua/Avenida' name='rua' placeholder="Rua/Avenida" handleOnChange={handleChange} />
-                        <Input type='text' value={petshop.numero} text='Número' name='numero' placeholder="Número" handleOnChange={handleChange} />
-                        <Input type='text' value={petshop.complemento} text='Complemento' name='complemento' placeholder="Complemento" handleOnChange={handleChange} />
-                    </div>
-                    <div className='form_add'>
-                        <Select text='Serviços' name='servicos' options={servicos} />
-                        <Input type='text' text='Adicionar novo Serviço ' name='addservico' placeholder="Novo Serviço" />
-                        <Select text='Animais' name='animais' options={animais} />
-                        <Input type='text' text='Adicionar novo Animal ' name='addanimal' placeholder="Novo Animal" />
+                        <Input type='text' value={petshop.password} text='Insira sua Senha ' name='password' placeholder="Senha" handleOnChange={handleChange} />
+                        <Input type='text' value={petshop.cnpj} text='CNPJ ' name='cnpj' placeholder="CNPJ" handleOnChange={handleChange} />
+                        <Input type='text' value={petshop.contact} text='Telefone para Contato ' name='contact' placeholder="Telefone para Contato" handleOnChange={handleChange} />
+                        <Input type='text' value={petshop.cep} text='CEP ' name='cep' placeholder="CEP" />
+                        <Input type='text' value={petshop.address} text='Insira o Endereço ' name='address' placeholder="Endereço" handleOnChange={handleChange} />
                         <SubmitButton text='Salvar' />
                     </div>
                 </form>

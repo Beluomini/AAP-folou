@@ -1,8 +1,7 @@
-//ROUTES = SWITCH
 import './App.css';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useParams } from 'react-router-dom';
 
 import Navbar from './components/Header/Navbar';
 
@@ -13,8 +12,14 @@ import Produtos from './components/pages/Produtos';
 import PedidoCliente from './components/pages/PedidoCliente';
 import EditProduct from './components/pages/EditProduct';
 
+import api from './services/api';
+
 
 function App() {
+
+  const [petshop, setPetShop] = useState([])
+
+
   return (
     <Router>
 

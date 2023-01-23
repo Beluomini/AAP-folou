@@ -1,7 +1,7 @@
-//import styles from './Navbar.module.css';
 import { Header } from './styledNavbar'
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import api from '../../services/api';
+import React, { useState, useEffect } from 'react';
 
 function Navbar() {
     return (
@@ -21,9 +21,8 @@ function Navbar() {
                         <li>
                             <Link to="produtos">Produtos</Link>
                         </li>
-
                         <li>
-                            <Link to="/configuracoes">Configurações</Link>
+                            <Link to="configuracoes">Configurações</Link>
                         </li>
                     </ul>
                 </nav>

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const ProdutoList = styled.div`
 
-        height: 170px;
+        height: 200px;
         background-color: #D0BAA0;
         padding: 30px;
         max-width: 300px;

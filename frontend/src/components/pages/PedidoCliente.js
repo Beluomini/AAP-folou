@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import { useState, useEffect } from 'react';
 
@@ -6,34 +6,53 @@ import { ContainerPage } from '../../components/Main'
 import { PagPedidoUnico } from './styledPedidoCliente';
 
 import SubmitButton from '../form/SubmitButton';
-import Select from '../form/Select';
+import Input from '../form/Input';
 
 import api from "../../services/api";
 function PedidoCliente() {
 
     const { id } = useParams();
+    const navigate = useNavigate();
 
-    const [pedidoId, setPedidoId] = useState([]);
+    const [ordersId, setOrdersId] = useState([]);
 
     useEffect(() => {
-        api.getOrdersById(id).then((res) => setPedidoId(res))
+        api.getOrdersById(id).then((resposta) => setOrdersId(resposta))
     }, [id])
+
+    function editOrder(id, ordersId) {
+        api
+            .editOrders(ordersId, id)
+            .then(() => alert(`Editado com sucesso!`))
+            .then(() => navigate('/pedidos'))
+            .catch((err) => alert(`Erro: ${err.message}`));
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        editOrder(id, ordersId);
+    };
+
+    function handleChange(e) {
+        const { name, value } = e.target;
+        setOrdersId(editOrder => ({ ...editOrder, [name]: value }))
+    }
 
     return (
         <ContainerPage>
+            <h1>Edição do Pedido do Cliente : {ordersId.fk_id_client}</h1>
             <PagPedidoUnico>
-                <div className="pedunico">
-                    <h1>Data do Pedido: {pedidoId.create_date}</h1>
-                </div>
-
-                <div className="dados">
-                    <p>Data do Pagamento: {pedidoId.payment_date}</p>
-                    <p>Valor: R${pedidoId.price}</p>
-                    <p>Método de Pagamento: {pedidoId.payment_method}</p>
-                    <p>Cupom: {pedidoId.fk_cupom}</p>
-                    <p>Status do Pedido: {pedidoId.status}</p>
+                <form onSubmit={handleSubmit}>
+                    <Input type='text' text='Id petshop' name='fk_id_pet_shop' placeholder='PetShop' handleOnChange={handleChange} value={ordersId.fk_id_pet_shop} />
+                    <Input type='text' text='Id Cliente' name='fk_id_client' placeholder='Cliente' handleOnChange={handleChange} value={ordersId.fk_id_client} />
+                    <Input type='text' text='Data de Criação' name='create_date' placeholder='Data de Criação' handleOnChange={handleChange} value={ordersId.create_date} />
+                    <Input type='text' text='Data do Pagamento' name='payment_date' placeholder='Data do Pagamento' handleOnChange={handleChange} value={ordersId.payment_date} />
+                    <Input type='text' text='Preço deste Pedido' name='price' placeholder="Preço " handleOnChange={handleChange} value={ordersId.price} />
+                    <Input type='text' text='Método de Pagamento' name='payment_method' placeholder="Método de Pagamento" handleOnChange={handleChange} value={ordersId.payment_method} />
+                    <Input type='text' text='Cupom' name='fk_cupom' placeholder='Cupom' handleOnChange={handleChange} value={ordersId.fk_cupom} />
+                    <Input type='text' text='Status do Pedido ' name='status' placeholder='Status' handleOnChange={handleChange} value={ordersId.status} />
                     <SubmitButton text='Salvar' />
-                </div>
+                </form>
             </PagPedidoUnico>
         </ContainerPage >
     )

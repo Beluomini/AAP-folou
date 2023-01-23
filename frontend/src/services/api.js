@@ -8,7 +8,6 @@ function getProductsById(id) {
 }
 
 function createProducts(newProduct) {
-    console.log(newProduct)
     return fetch('http://localhost:3333/products', {
         method: 'POST',
         headers: {
@@ -16,9 +15,7 @@ function createProducts(newProduct) {
         },
         body: JSON.stringify(newProduct),
     })
-        .then((res) => res.json())
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err))
+        .then((res) => res.json());
 }
 
 function removeProducts(id) {
@@ -88,9 +85,31 @@ function editOrders(orders, id) {
         .catch((err) => console.log(err));
 }
 
+// dados do petshop
+
+function getPetShop() {
+    return fetch("http://localhost:3333/pet-shops").then((res) => res.json());
+}
+
+function getPetShopById(id) {
+    return fetch(`http://localhost:3333/pet-shops/${id}`).then((res) => res.json());
+}
+
+function editPetShop(petshop, id) {
+    return fetch(`http://localhost:3333/pet-shops/${id}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(petshop)
+    })
+        .then((res) => res.json())
+        .catch((err) => console.log(err));
+}
+
 
 export default {
     getProducts, getProductsById, createProducts, removeProducts, editProducts,
-    getOrders, getOrdersById, createOrders, removeOrders, editOrders
-
+    getOrders, getOrdersById, createOrders, removeOrders, editOrders,
+    getPetShop, getPetShopById, editPetShop
 };

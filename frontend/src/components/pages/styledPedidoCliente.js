@@ -13,16 +13,13 @@ export const PagPedidoUnico = styled.div`
     display: flex;
     flex-direction: column;
 
-    .pedunico{
+    form{
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: space-between;
         padding: 50px;
     }
 
-    .dados{
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-    }
+    
 `;

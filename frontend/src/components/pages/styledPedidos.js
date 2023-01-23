@@ -10,8 +10,18 @@ export const PagPedidos = styled.div`
     text-align: center;
     border-radius: 5px;
     box-shadow: 0px 0px 3px #ccc;
-    display: flex;
+    display: block;
     flex-direction:column;
     flex-wrap: wrap;
     
+    form{
+        width: 50%;
+        margin: auto;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .btnnovoprod {
+        margin-top: 25px;
+    }
 `;
