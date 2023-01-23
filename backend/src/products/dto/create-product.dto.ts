@@ -28,19 +28,14 @@ export class CreateProductDto {
   description: String;
 
   @IsNotEmpty()
-  @IsNumber()
-  @Min(0)
   @ApiProperty({
     type: Number,
     description: "The price of the product in R$ (reais)",
-    example: 86.00,
-    minimum: 0
+    example: 86.00
   })
   price: Number;
 
   @IsNotEmpty()
-  @IsNumber()
-  @Min(0)
   @ApiProperty({
     type: Number,
     description: "The stock of the product",

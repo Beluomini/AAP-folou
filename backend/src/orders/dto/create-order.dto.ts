@@ -38,12 +38,11 @@ export class CreateOrderDto {
     payment_date: Date;
     
     @ApiProperty({
-        type: Number,
+        type: String,
         description: 'The total price of the order in R$ (reais)',
-        example: 100.00,
-        minimum: 0
+        example: 100.00
     })
-    price: Number;
+    price: String;
     
     @IsNotEmpty()
     @IsUppercase()
