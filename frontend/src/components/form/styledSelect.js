@@ -5,7 +5,7 @@ export const StyleSelect = styled.div`
         display: flex;
         flex-direction: column;
         margin: auto;
-        width: 25%;
+        width: 50%;
     }
     .fomr_control label{
         margin-bottom: 1em;

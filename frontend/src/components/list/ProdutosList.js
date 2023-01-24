@@ -2,7 +2,7 @@ import { ProdutoList } from './styledProdutosList';
 import { FaTrashAlt, FaRegEdit } from 'react-icons/fa';
 
 function ProdutosList({ id, name, price, description, image, stock, category, handleRemove, handleEdit }) {
-    console.log(handleEdit) //é uma função inteira
+
     const remove = (e) => {
         handleRemove(id);
     }

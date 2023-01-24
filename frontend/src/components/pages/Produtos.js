@@ -6,6 +6,7 @@ import { PagProdutos } from './styledProdutos';
 
 import Input from '../form/Input';
 import SubmitButton from '../form/SubmitButton';
+import SelectCategory from '../form/SelectCategory';
 
 import ProdutosList from '../list/ProdutosList';
 
@@ -38,14 +39,15 @@ function Produtos() {
             .then(() => alert("Excluido com sucesso!"))
             .catch((err) => alert(`Erro: ${err.message}`));
     }
-
     const handleSubmit = (e) => {
         createProduct(products);
     };
 
     function handleChange(e) {
-        const { name, value } = e.target;
-        setProducts(newProdut => ({ ...newProdut, [name]: value }))
+        if (e.target.value === 'number') {
+            e.target.value = parseInt(e.target.value)
+        }
+        setProducts(newProdut => ({ ...newProdut, [e.target.name]: e.target.value }))
     }
 
     return (
@@ -72,10 +74,10 @@ function Produtos() {
                         <Input type='text' text='Fk id petshop ' name='fk_id_pet_shop' placeholder='Id petshop' handleOnChange={handleChange} value={products.fk_id_pet_shop} />
                         <Input type='text' text='Nome do Produto ' name='name' placeholder='Nome do Produto' handleOnChange={handleChange} value={products.name} />
                         <Input type='text' text='Descrição do Produto ' name='description' placeholder='Descrição' handleOnChange={handleChange} value={products.description} />
-                        <Input type='text' text='Quantidade deste Produto ' name='stock' placeholder="Quantidade " handleOnChange={handleChange} value={products.stock} />
+                        <Input type='number' text='Quantidade deste Produto ' name='stock' placeholder="Quantidade " handleOnChange={handleChange} value={products.stock} />
                         <Input type='text' text='Imagem ' name='image' placeholder='Nome da Img' handleOnChange={handleChange} value={products.image} />
-                        <Input type='text' text='Valor deste Produto ' name='price' placeholder="Valor" handleOnChange={handleChange} value={products.price} />
-                        <Input type='text' text='Categoria do Produto ' name='category' placeholder='Categoria' handleOnChange={handleChange} value={products.category} />
+                        <Input type='number' text='Valor deste Produto ' name='price' placeholder="Valor" handleOnChange={handleChange} value={products.price} />
+                        <SelectCategory text='Abrir Seleção' name='category' value={products.category} handleOnChange={handleChange} />
                         <SubmitButton type="submit" text='Adicionar Novo Produto' />
                     </form>
                 </div>

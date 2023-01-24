@@ -5,6 +5,8 @@ import { ContainerPage } from '../../components/Main'
 import { PagPedidos } from './styledPedidos';
 
 import Input from '../form/Input';
+import SelectOrderStatus from '../form/SelectStatus';
+import SelectPayment from '../form/SelectPayment';
 import SubmitButton from '../form/SubmitButton';
 
 import PedidosList from '../list/PedidosList';
@@ -37,7 +39,6 @@ function Pedidos() {
 
     function handleClickEdit(idOrder) {
         navigate(`/pedidos/${idOrder}`);
-        console.log(orders.id)
     }
 
     const handleSubmit = (e) => {
@@ -77,11 +78,11 @@ function Pedidos() {
                         <Input type='text' text='fk_id_client ' name='fk_id_client' placeholder='fk_id_client' handleOnChange={handleChange} value={orders.fk_id_client} />
                         <Input type='text' text='fk_id_pet_shop ' name='fk_id_pet_shop' placeholder='fk_id_pet_shop' handleOnChange={handleChange} value={orders.fk_id_pet_shop} />
                         <Input type='text' text='Data de Criação ' name='create_date' placeholder='Data de Criação' handleOnChange={handleChange} value={orders.create_date} />
-                        <Input type='text' text='Data do Pagamento ' name='payment_date' placeholder='Data do Pagamento' handleOnChange={handleChange} value={orders.payment_date} />
+                        <SelectPayment text='Método de Pagamento' name='payment_method' handleOnChange={handleChange} value={orders.payment_method} />
                         <Input type='text' text='Preço deste Pedido ' name='price' placeholder="Preço " handleOnChange={handleChange} value={orders.price} />
                         <Input type='text' text='Método de Pagamento ' name='payment_method' placeholder="Método de Pagamento" handleOnChange={handleChange} value={orders.payment_method} />
                         <Input type='text' text='fk_cupom ' name='fk_cupom' placeholder="fk_cupom " handleOnChange={handleChange} value={orders.fk_cupom} />
-                        <Input type='text' text='Status do Pedido ' name='status' placeholder='Status' handleOnChange={handleChange} value={orders.status} />
+                        <SelectOrderStatus text='Status do Pedido' name='status' value={orders.status} />
                         <SubmitButton type="submit" text='Adicionar Novo Pedido' />
                     </form>
 
@@ -90,5 +91,8 @@ function Pedidos() {
         </ContainerPage>
     );
 }
+
+//<Input type='text' text='Data do Pagamento ' name='payment_date' placeholder='Data do Pagamento' handleOnChange={handleChange} value={orders.payment_date} />
+//<Input type='text' text='Status do Pedido ' name='status' placeholder='Status' handleOnChange={handleChange} value={orders.status} />
 
 export default Pedidos

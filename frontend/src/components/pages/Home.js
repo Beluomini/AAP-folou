@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import React, { useState, useEffect } from 'react';
 
@@ -9,10 +9,9 @@ import Input from '../form/Input';
 import SubmitButton from '../form/SubmitButton';
 
 import api from "../../services/api";
+import Configuracoes from './Configuracoes';
 
 function Home() {
-
-    const { id } = useParams();
     const [petshop, setPetShop] = useState([])
     const navigate = useNavigate();
 
@@ -20,8 +19,8 @@ function Home() {
         api.getPetShop().then((resposta) => setPetShop(resposta))
     }, []);
 
-    const view = (e) => {
-        navigate(`/configuracoes/${id}`);
+    const view = () => {
+        navigate(`/configuracoes`);
     }
 
     return (
@@ -30,7 +29,6 @@ function Home() {
                 <div className='minhaloja'>
                     <h1>{petshop?.map((petshop) => (petshop.name))}</h1>
                     <h1>{petshop?.map((petshop) => (petshop._id))}</h1>
-
                 </div>
                 <form onSubmit={view}>
                     <SubmitButton text='Ver Minha Loja' name="add" />

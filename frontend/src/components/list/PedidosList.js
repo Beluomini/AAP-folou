@@ -3,6 +3,7 @@ import { FaTrashAlt, FaRegEdit } from 'react-icons/fa';
 import { PedidoList } from './styledPedidosList';
 
 function PedidosList({ id, fk_id_client, fk_id_pet_shop, create_date, payment_date, payment_method, price, fk_cupom, status, handleRemove, handleEdit }) {
+
     const remove = (e) => {
         handleRemove(id);
     }

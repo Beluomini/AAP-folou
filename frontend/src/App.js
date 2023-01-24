@@ -19,7 +19,6 @@ function App() {
 
   const [petshop, setPetShop] = useState([])
 
-
   return (
     <Router>
 
