@@ -49,6 +49,10 @@ export class ClientsService {
     return this.clientModel.findById(id);
   }
 
+  async findOneByEmail(email: string): Promise<Client | undefined> {
+    return await this.clientModel.findOne({ email });
+  }
+
   async update(id: string, updateClientDto: UpdateClientDto) {
     
     const client = await this.clientModel.findOne({ _id: id });

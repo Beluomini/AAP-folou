@@ -9,6 +9,7 @@ import { Client, ClientSchema } from './entities/client.entity';
     MongooseModule.forFeature([{ name: Client.name, schema: ClientSchema }]),
   ],
   controllers: [ClientsController],
-  providers: [ClientsService]
+  providers: [ClientsService],
+  exports: [ClientsService]
 })
 export class ClientsModule {}

@@ -1,4 +1,5 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Request, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ClientsService } from './clients.service';
 import { CreateClientDto } from './dto/create-client.dto';
@@ -8,6 +9,12 @@ import { UpdateClientDto } from './dto/update-client.dto';
 @Controller('clients')
 export class ClientsController {
   constructor(private readonly clientsService: ClientsService) {}
+
+  @UseGuards(AuthGuard('local'))
+  @Post('login')
+  async login(@Request() req) {
+    return req.user;
+  }
 
   @Post()
   @ApiResponse({ status: 200, description: 'Cliente criado com sucesso' })
