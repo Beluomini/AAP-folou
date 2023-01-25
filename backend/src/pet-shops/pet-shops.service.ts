@@ -53,8 +53,8 @@ export class PetShopsService {
     return this.petShopModel.findOne({ cnpj });
   }
 
-  findOneByEmail(email: string) {
-    return this.petShopModel.findOne({ email });
+  async findOneByEmail(email: string): Promise<PetShop | undefined> {
+    return await this.petShopModel.findOne({ email });
   }
 
   async update(id: string, updatePetShopDto: UpdatePetShopDto) {

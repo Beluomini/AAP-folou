@@ -1,13 +1,20 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException, HttpStatus, UseGuards, Request } from '@nestjs/common';
 import { PetShopsService } from './pet-shops.service';
 import { CreatePetShopDto } from './dto/create-pet-shop.dto';
 import { UpdatePetShopDto } from './dto/update-pet-shop.dto';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
 
 @ApiTags('pet-shops')
 @Controller('pet-shops')
 export class PetShopsController {
   constructor(private readonly petShopsService: PetShopsService) {}
+
+  @UseGuards(AuthGuard('local'))
+  @Post('login')
+  async login(@Request() req) {
+    return req.user;
+  }
 
   @Post()
   @ApiResponse({ status: 200, description: 'Pet Shop criado com sucesso' })
