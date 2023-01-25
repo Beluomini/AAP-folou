@@ -9,6 +9,7 @@ import { PetShop, PetShopSchema } from './entities/pet-shop.entity';
     MongooseModule.forFeature([{ name: PetShop.name, schema: PetShopSchema }]),
   ],
   controllers: [PetShopsController],
-  providers: [PetShopsService]
+  providers: [PetShopsService],
+  exports: [PetShopsService]
 })
 export class PetShopsModule {}

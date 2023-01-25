@@ -53,6 +53,10 @@ export class PetShopsService {
     return this.petShopModel.findOne({ cnpj });
   }
 
+  findOneByEmail(email: string) {
+    return this.petShopModel.findOne({ email });
+  }
+
   async update(id: string, updatePetShopDto: UpdatePetShopDto) {
 
     if(!isValidObjectId(id)){
