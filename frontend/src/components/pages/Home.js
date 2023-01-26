@@ -19,18 +19,23 @@ function Home() {
         api.getPetShop().then((resposta) => setPetShop(resposta))
     }, []);
 
-    const view = () => {
+    const handleSubmit = () => {
         navigate(`/configuracoes`);
     }
 
     return (
         <ContainerPage>
+            <h1>Dados Meu PetShop</h1>
             <PagHome>
                 <div className='minhaloja'>
                     <h1>{petshop?.map((petshop) => (petshop.name))}</h1>
-                    <h1>{petshop?.map((petshop) => (petshop._id))}</h1>
+                    <h2>Email: {petshop?.map((petshop) => (petshop.email))}</h2>
+                    <h2>CNPJ: {petshop?.map((petshop) => (petshop.cnpj))}</h2>
+                    <h2>Contato: {petshop?.map((petshop) => (petshop.contact))}</h2>
+                    <h2>CEP: {petshop?.map((petshop) => (petshop.cep))}</h2>
+                    <h2>Endereço: {petshop?.map((petshop) => (petshop.address))}</h2>
                 </div>
-                <form onSubmit={view}>
+                <form onSubmit={handleSubmit}>
                     <SubmitButton text='Ver Minha Loja' name="add" />
                 </form>
             </PagHome>

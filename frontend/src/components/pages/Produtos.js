@@ -44,9 +44,6 @@ function Produtos() {
     };
 
     function handleChange(e) {
-        if (e.target.value === 'number') {
-            e.target.value = parseInt(e.target.value)
-        }
         setProducts(newProdut => ({ ...newProdut, [e.target.name]: e.target.value }))
     }
 

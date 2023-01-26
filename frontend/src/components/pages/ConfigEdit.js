@@ -19,9 +19,8 @@ function ConfigEdit({ id }) {
 
     function editPetshop(petshopId, id) {
         api
-            .editPetShop(petshopId, id)
+            .editPetShops(petshopId, id)
             .then(() => alert(`Editado com sucesso!`))
-            .then(() => navigate(`/`))
             .catch((err) => alert(`Erro: ${err.message}`));
     }
 

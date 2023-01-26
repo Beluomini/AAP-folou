@@ -17,11 +17,12 @@ function SelectCategory({ text, name, value, handleOnChange }) {
                 <label htmlFor={name}>{text}</label>
                 <select name={name} id={name} onChange={handleOnChange}>
                     <option>Categoria</option>
-                    {options?.map((option) => (
-                        <option value={option.value} key={option.value}>
-                            {option.label}
-                        </option>
-                    ))}
+                    {options.length >= 0 &&
+                        options.map((option) => (
+                            <option value={option.value} key={option.value}>
+                                {option.label}
+                            </option>
+                        ))}
                 </select>
             </div>
         </StyleSelect>

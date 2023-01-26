@@ -13,16 +13,11 @@ export const PagEditProduct = styled.div`
     display: flex;
     flex-direction: column;
 
-    .prodid{
+    form{
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: space-between;
         padding: 50px;
-    }
-
-    .itens{
-        display: flex;
-        flex-direction: column;
-        width: 100%;
     }
 `;
