@@ -11,8 +11,10 @@ import Pedidos from './components/pages/Pedidos';
 import Produtos from './components/pages/Produtos';
 import PedidoCliente from './components/pages/PedidoCliente';
 import EditProduct from './components/pages/EditProduct';
+import Login from './components/pages/Login';
 
 import api from './services/api';
+
 
 
 function App() {
@@ -26,7 +28,7 @@ function App() {
 
       <div>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Login />} />
           <Route path="/pedidos" element={<Pedidos />} />
           <Route path="/pedidos/:id" element={<PedidoCliente />} />
           <Route path="/produtos" element={<Produtos />} />
