@@ -15,6 +15,7 @@ export const StyleInput = styled.div`
         padding: 10px;
         border-radius: 10px;
         border: none;
+        width: 50%;
     }
     .form_control input::placeholder{
         color: #7b7b7b;
