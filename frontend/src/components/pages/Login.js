@@ -20,15 +20,17 @@ function Login() {
         api
             .loginPetShop(loginPetShop)
             .then((res) => {
-                if (res.sucess) {
+                console.log(res)
+                if (res.statusCode == 201) {
                     alert(`Logado com sucesso!`);
                     navigate('/pedidos');
                 }
                 else {
-                    setError('Erro ao efetuar login, email ou senha inválidos!');
+                    setError('Email ou senha incorretos');
                 }
+
             })
-            .catch((err) => alert(`Erro: ${err.message} ${error} `));
+            .catch((err) => alert(`Erro: ${err.message} ${error}`));
     }
 
     function handleChange(e) {
