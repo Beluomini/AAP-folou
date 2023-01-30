@@ -23,19 +23,19 @@ export class CreateOrderDto {
     fk_id_pet_shop: PetShop;
     
     @ApiProperty({
-        type: Date,
+        type: String,
         description: 'The date of the order',
         example: '2020-11-22',
-        default: new Date()
+        default: String(new Date())
     })
-    create_date: Date;
+    create_date: String;
     
     @ApiProperty({
-        type: Date,
+        type: String,
         description: 'The date of the payment of the order',
         example: '2020-11-03'
     })
-    payment_date: Date;
+    payment_date: String;
     
     @ApiProperty({
         type: String,
