@@ -89,7 +89,28 @@ export class OrdersService {
       
       return this.OrderModel.findById(id);
     }
+  }
 
+  async findByPetshop(petshopId: String){
+    if(isValidObjectId(petshopId)){
+      return this.OrderModel.find({ fk_id_pet_shop : petshopId });
+    }else{
+      throw new HttpException(
+        'Chave do pet shop inválida',
+        HttpStatus.BAD_REQUEST,
+        );
+    }
+  }
+
+  async findByClient(clientId: String){
+    if(isValidObjectId(clientId)){
+      return this.OrderModel.find({ fk_id_client : clientId });
+    }else{
+      throw new HttpException(
+        'Chave do client inválida',
+        HttpStatus.BAD_REQUEST,
+        );
+    }
   }
 
   async getOrderStatus (id:String) {

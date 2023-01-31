@@ -25,6 +25,16 @@ export class OrdersController {
     return this.ordersService.findOne(id);
   }
 
+  @Get('petshop/:id')
+  findByPetshop(@Param('id') id: string) {
+    return this.ordersService.findByPetshop(id);
+  }
+
+  @Get('client/:id')
+  findByClient(@Param('id') id: string) {
+    return this.ordersService.findByClient(id);
+  }
+
   @Patch(':id')
   @ApiResponse({ status: 404, description: 'Pedido não encontrado' })
   @ApiResponse({ status: 400, description: 'Data de pagamento inválida, o formato aceitável é: YYYY-MM-DD' })
