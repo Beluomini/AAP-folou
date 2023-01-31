@@ -24,6 +24,26 @@ export class PurchasesController {
     return this.purchasesService.findOne(id);
   }
 
+  @Get('petshop/:id')
+  findByPetshop(@Param('id') id: string) {
+    return this.purchasesService.findByPetshop(id);
+  }
+
+  @Get('client/:id')
+  findByClient(@Param('id') id: string) {
+    return this.purchasesService.findByClient(id);
+  }
+
+  @Get('order/:id')
+  findByOrder(@Param('id') id: string) {
+    return this.purchasesService.findByOrder(id);
+  }
+
+  @Get('product/:id')
+  findByProduct(@Param('id') id: string) {
+    return this.purchasesService.findByProduct(id);
+  }
+  
   @Patch(':id')
   update(@Param('id') id: string, @Body() updatePurchaseDto: UpdatePurchaseDto) {
     return this.purchasesService.update(id, updatePurchaseDto);

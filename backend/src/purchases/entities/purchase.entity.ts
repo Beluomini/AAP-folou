@@ -39,23 +39,23 @@ export class Purchase {
   fk_id_product: Product;
 
   @Prop({ 
-    type: Number,
+    type: String,
     required: true,
     min: 1 
   })
-  quantity: number;
+  quantity: string;
 
   @Prop({
-    type: Number,
+    type: String,
     required: true,
     min: 0 
   })
-  unit_price: number;
+  unit_price: string;
 
   @Prop({
-    type: Number
+    type: String
   })
-  total_price: number;
+  total_price: string;
 
   @Prop({
     type: String

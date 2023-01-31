@@ -40,31 +40,27 @@ export class CreatePurchaseDto {
     fk_id_product: Product;
 
     @IsNotEmpty()
-    @IsNumber()
-    @Min(1)
     @ApiProperty({
-        type: Number,
+        type: String,
         description: 'The quantity of the product',
         example: 3
     })
-    quantity: Number;
+    quantity: String;
 
     @IsNotEmpty()
-    @IsNumber()
-    @Min(0)
     @ApiProperty({
-        type: Number,
+        type: String,
         description: 'The unit price of the product',
         example: 10.00
     })
-    unit_price: Number;
+    unit_price: String;
 
     @ApiProperty({
-        type: Number,
+        type: String,
         description: 'The total price of the product',
         example: 30.00
     })
-    total_price: Number;
+    total_price: String;
 
     @ApiProperty({
         type: String,

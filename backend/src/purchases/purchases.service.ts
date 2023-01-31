@@ -101,6 +101,50 @@ export class PurchasesService {
     return this.purchaseModel.findById(id);
   }
 
+  async findByPetshop(petshopId: String){
+    if(isValidObjectId(petshopId)){
+      return this.purchaseModel.find({ fk_id_pet_shop : petshopId });
+    }else{
+      throw new HttpException(
+        'Chave do pet shop inválida',
+        HttpStatus.BAD_REQUEST,
+        );
+    }
+  }
+
+  async findByClient(clientId: String){
+    if(isValidObjectId(clientId)){
+      return this.purchaseModel.find({ fk_id_client : clientId });
+    }else{
+      throw new HttpException(
+        'Chave do cliente inválida',
+        HttpStatus.BAD_REQUEST,
+        );
+    }
+  }
+
+  async findByOrder(orderId: String){
+    if(isValidObjectId(orderId)){
+      return this.purchaseModel.find({ fk_id_order : orderId });
+    }else{
+      throw new HttpException(
+        'Chave do pedido inválida',
+        HttpStatus.BAD_REQUEST,
+        );
+    }
+  }
+
+  async findByProduct(productId: String){
+    if(isValidObjectId(productId)){
+      return this.purchaseModel.find({ fk_id_product : productId });
+    }else{
+      throw new HttpException(
+        'Chave do produto inválida',
+        HttpStatus.BAD_REQUEST,
+        );
+    }
+  }
+
   async update(id: string, updatePurchaseDto: UpdatePurchaseDto) {
 
     if(isValidObjectId(updatePurchaseDto.fk_id_client)){
@@ -164,7 +208,7 @@ export class PurchasesService {
     }
 
     if(!updatePurchaseDto.total_price){
-      updatePurchaseDto.total_price = Number(updatePurchaseDto.quantity) * Number(updatePurchaseDto.unit_price);
+      updatePurchaseDto.total_price = String(Number(updatePurchaseDto.quantity) * Number(updatePurchaseDto.unit_price));
     }
 
     return this.purchaseModel.findByIdAndUpdate({ 
