@@ -9,10 +9,9 @@ import { useNavigate } from 'react-router-dom';
 
 import api from '../../services/api';
 
-function Login() {
+function Login({ petshops }) {
 
     const [login, setLogin] = useState([]);
-    const [error, setError] = useState(' ');
 
     const navigate = useNavigate();
 
@@ -20,17 +19,18 @@ function Login() {
         api
             .loginPetShop(loginPetShop)
             .then((res) => {
-                console.log(res)
-                if (res.statusCode == 201) {
+                if (res.$isNew == false) {
                     alert(`Logado com sucesso!`);
-                    navigate('/pedidos');
+                    localStorage.setItem('petshopid', JSON.stringify(res._doc._id))
+                    navigate(`/home/${res._id}`);
+                    console.log(res)
                 }
                 else {
-                    setError('Email ou senha incorretos');
+                    alert(`Erro: ${res.message}`);
+                    console.log(res)
                 }
-
             })
-            .catch((err) => alert(`Erro: ${err.message} ${error}`));
+            .catch((err) => alert(`Erro: ${err.message}`));
     }
 
     function handleChange(e) {
@@ -41,6 +41,8 @@ function Login() {
         e.preventDefault();
         efetuaLogin(login);
     };
+
+
 
     return (
         <PagLogin>

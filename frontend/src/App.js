@@ -15,11 +15,14 @@ import Login from './components/pages/Login';
 
 import api from './services/api';
 
-
-
 function App() {
 
   const [petshop, setPetShop] = useState([])
+
+  useEffect(() => {
+    api.getPetShop().then((resposta) => setPetShop(resposta))
+    console.log(petshop)
+  }, []);
 
   return (
     <Router>
@@ -28,12 +31,13 @@ function App() {
 
       <div>
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={<Login petshops={petshop?.map((res) => (res))} />} />
+          <Route path="/home/:id" element={<Home id={petshop?.map((res) => (res._id))} />} />
           <Route path="/pedidos" element={<Pedidos />} />
           <Route path="/pedidos/:id" element={<PedidoCliente />} />
           <Route path="/produtos" element={<Produtos />} />
           <Route path="/produtos/:id" element={<EditProduct />} />
-          <Route path="/configuracoes" element={<Configuracoes />} />
+          <Route path="/configuracoes/:id" element={<Configuracoes id={petshop._id} />} />
         </Routes>
       </div>
     </Router>

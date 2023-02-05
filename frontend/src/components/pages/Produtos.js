@@ -40,6 +40,7 @@ function Produtos() {
             .catch((err) => alert(`Erro: ${err.message}`));
     }
     const handleSubmit = (e) => {
+        console.log(products)
         createProduct(products);
     };
 

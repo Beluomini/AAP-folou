@@ -12,17 +12,32 @@ import api from "../../services/api";
 
 function Configuracoes() {
     const [petshop, setPetShop] = useState([]);
+    const navigate = useNavigate();
+
+    function handleChange(e) {
+        setPetShop(editpetshop => ({ ...editpetshop, [e.target.name]: e.target.value }))
+    }
 
     useEffect(() => {
-        api.getPetShop().then((resposta) => setPetShop(resposta))
+        const userFromStorage = localStorage.getItem('petshopid')
+        console.log(typeof (userFromStorage))
+        console.log((userFromStorage.substring(1, userFromStorage.length - 1)))
+        if (!userFromStorage) {
+            navigate(`/`);
+        }
+        else {
+            api.getPetShopById(userFromStorage.substring(1, userFromStorage.length - 1)).then((resposta) => setPetShop(resposta))
+        }
+        console.log(petshop)
     }, []);
 
     return (
         <ContainerPage>
             <h1>Edição dos dados do seu PetShop: {petshop.length >= 0 && petshop.map((petshop) => (petshop._id))}</h1>
             <PagConfig>
+                <Input type='text' value={petshop.name} text='Nome PetShop ' name='name' placeholder='Nome do Estabelecimento' handleOnChange={handleChange} />
                 {petshop.length >= 0 && petshop.map((petshop) => (
-                    <ConfigEdit id={petshop._id} />
+                    <ConfigEdit />
                 ))}
             </PagConfig>
         </ContainerPage>

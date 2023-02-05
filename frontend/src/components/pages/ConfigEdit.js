@@ -11,11 +11,12 @@ import api from "../../services/api";
 function ConfigEdit({ id }) {
 
     const [petshop, setPetShop] = useState([]);
+    const [user, setUser] = useState()
     const navigate = useNavigate();
 
-    useEffect(() => {
-        api.getPetShopById(id).then((resposta) => setPetShop(resposta))
-    }, [id]);
+    // useEffect(() => {
+    //     api.getPetShopById(id).then((resposta) => setPetShop(resposta))
+    // }, [id]);
 
     function editPetshop(petshopId, id) {
         api
@@ -31,6 +32,19 @@ function ConfigEdit({ id }) {
     function handleChange(e) {
         setPetShop(editpetshop => ({ ...editpetshop, [e.target.name]: e.target.value }))
     }
+
+    useEffect(() => {
+        const userFromStorage = localStorage.getItem('petshopid')
+        console.log(userFromStorage)
+        if (!userFromStorage) {
+            navigate(`/`);
+        }
+        else {
+            api.getPetShopById(userFromStorage).then((resposta) => setPetShop(resposta))
+        }
+        console.log(petshop)
+
+    }, []);
 
     return (
         <ContainerPage>

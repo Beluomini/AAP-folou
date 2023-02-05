@@ -42,11 +42,18 @@ function Pedidos() {
     }
 
     const handleSubmit = (e) => {
+        if (orders.payment_date === undefined) {
+            delete (orders.payment_date)
+        }
+        if (orders.create_date === undefined) {
+            delete (orders.create_date)
+        }
+        console.log(orders, orders.payment_date, orders.create_date)
         createOrder(orders);
     };
 
-
     function handleChange(e) {
+
         setOrders(newOrder => ({ ...newOrder, [e.target.name]: e.target.value }))
     }
 
