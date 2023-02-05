@@ -50,36 +50,6 @@ export class OrdersService {
       );
     }
 
-    if(Order.create_date){
-      if(isDateString(Order.create_date)){
-        Order.create_date = new Date(Order.create_date);
-      }else{
-        throw new HttpException(
-          'Data de criação é inválida, deixe vazio para pegar a data atual ou no formato: YYYY-MM-DD',
-          HttpStatus.BAD_REQUEST,
-        );
-      }
-    }else{
-      Order.create_date = new Date();
-    }
-
-    if(Order.payment_date){
-      if(isDateString(Order.payment_date)){
-        Order.payment_date = new Date(Order.payment_date);
-        if(Order.payment_date < Order.create_date){
-          throw new HttpException(
-            'Data de pagamento não pode ser menor que a data de criação',
-            HttpStatus.BAD_REQUEST,
-          );
-        }
-      }else{
-        throw new HttpException(
-          'Data de pagamento é inválida, deixe vazio para pegar a data atual ou no formato: YYYY-MM-DD',
-          HttpStatus.BAD_REQUEST,
-        );
-      }
-    }
-
     if (Order.payment_method !== 'CREDIT_CARD' && Order.payment_method !== 'DEBIT_CARD' && Order.payment_method !== 'MONEY' && Order.payment_method !== 'PIX'){
       throw new HttpException(
         'Método de pagamento inválido, os metodos aceitáveis são: CREDIT_CARD, DEBIT_CARD, MONEY, PIX',
@@ -119,7 +89,28 @@ export class OrdersService {
       
       return this.OrderModel.findById(id);
     }
+  }
 
+  async findByPetshop(petshopId: String){
+    if(isValidObjectId(petshopId)){
+      return this.OrderModel.find({ fk_id_pet_shop : petshopId });
+    }else{
+      throw new HttpException(
+        'Chave do pet shop inválida',
+        HttpStatus.BAD_REQUEST,
+        );
+    }
+  }
+
+  async findByClient(clientId: String){
+    if(isValidObjectId(clientId)){
+      return this.OrderModel.find({ fk_id_client : clientId });
+    }else{
+      throw new HttpException(
+        'Chave do client inválida',
+        HttpStatus.BAD_REQUEST,
+        );
+    }
   }
 
   async getOrderStatus (id:String) {
@@ -158,36 +149,6 @@ export class OrdersService {
       }else{
         throw new HttpException(
           'Chave do pet shop inválida',
-          HttpStatus.BAD_REQUEST,
-        );
-      }
-    }
-
-    if(updateOrderDto.create_date){
-      if(isDateString(updateOrderDto.create_date)){
-        updateOrderDto.create_date = new Date(updateOrderDto.create_date);
-      }else{
-        throw new HttpException(
-          'Data de criação é inválida, deixe vazio para pegar a data atual ou no formato: YYYY-MM-DD',
-          HttpStatus.BAD_REQUEST,
-        );
-      }
-    }else{
-      updateOrderDto.create_date = new Date();
-    }
-
-    if(updateOrderDto.payment_date){
-      if(isDateString(updateOrderDto.payment_date)){
-        updateOrderDto.payment_date = new Date(updateOrderDto.payment_date);
-        if(updateOrderDto.payment_date < updateOrderDto.create_date){
-          throw new HttpException(
-            'Data de pagamento não pode ser menor que a data de criação',
-            HttpStatus.BAD_REQUEST,
-          );
-        }
-      }else{
-        throw new HttpException(
-          'Data de pagamento é inválida, deixe vazio para pegar a data atual ou no formato: YYYY-MM-DD',
           HttpStatus.BAD_REQUEST,
         );
       }

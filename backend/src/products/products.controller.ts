@@ -24,6 +24,11 @@ export class ProductsController {
     return this.productsService.findOne(id);
   }
 
+  @Get('petshop/:id')
+  findByPetshop(@Param('id') id: string) {
+    return this.productsService.findByPetshop(id);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDto) {
     return this.productsService.update(id, updateProductDto);

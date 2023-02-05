@@ -23,15 +23,15 @@ export class Order {
     fk_id_pet_shop: PetShop;
 
     @Prop({ 
-        type: Date,
-        default: new Date()
+        type: String,
+        default: String(new Date())
     })
-    create_date: Date;
+    create_date: String;
 
     @Prop({
-        type: Date
+        type: String
     })
-    payment_date: Date;
+    payment_date: String;
 
     @Prop({ 
         type: String

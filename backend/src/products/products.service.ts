@@ -66,6 +66,17 @@ export class ProductsService {
     return this.ProductModel.findById(id);
   }
 
+  async findByPetshop(petshopId: String){
+    if(isValidObjectId(petshopId)){
+      return this.ProductModel.find({ fk_id_pet_shop : petshopId });
+    }else{
+      throw new HttpException(
+        'Chave do pet shop inválida',
+        HttpStatus.BAD_REQUEST,
+        );
+    }
+  }
+
   async update(id: string, updateProductDto: UpdateProductDto) {
   
     if(!isValidObjectId(id)){
