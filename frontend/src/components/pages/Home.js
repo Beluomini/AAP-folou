@@ -23,6 +23,18 @@ function Home() {
         navigate(`/configuracoes`);
     }
 
+    useEffect(() => {
+        const userFromStorage = localStorage.getItem('user')
+        const userFromStorageFormat = userFromStorage ? JSON.parse(userFromStorage) : undefined
+        if (!userFromStorage) {
+            navigate(`/`);
+        }
+        if (userFromStorageFormat) {
+            setUser(userFromStorageFormat)
+        }
+    }, []);
+    console.log(user)
+
     return (
         <ContainerPage>
             <h1>Dados Meu PetShop</h1>
