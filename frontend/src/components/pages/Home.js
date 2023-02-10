@@ -21,10 +21,6 @@ function Home({ id }) {
         navigate(`/configuracoes`);
     }
 
-    // useEffect(() => {
-    //     api.getPetShopById(id).then((resposta) => setPetShop(resposta))
-    // }, [id]);
-
     useEffect(() => {
         const userFromStorage = localStorage.getItem('user')
         const userFromStorageFormat = userFromStorage ? JSON.parse(userFromStorage) : undefined
@@ -36,10 +32,6 @@ function Home({ id }) {
         }
     }, []);
     console.log(user)
-
-    useEffect(() => {
-        api.getPetShop().then((resposta) => setPetShop(resposta))
-    }, []);
 
     return (
         <ContainerPage>
