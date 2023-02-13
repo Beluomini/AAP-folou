@@ -60,7 +60,6 @@ function Pedidos() {
         if (orders.create_date === undefined) {
             delete (orders.create_date)
         }
-        console.log(orders, orders.payment_date, orders.create_date)
         createOrder(orders);
     };
 
