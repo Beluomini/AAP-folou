@@ -16,11 +16,23 @@ import api from "../../services/api";
 function Pedidos() {
 
     const [orders, setOrders] = useState([]);
+    const [user, setUser] = useState()
 
     const navigate = useNavigate();
 
     useEffect(() => {
         api.getOrders().then((resposta) => setOrders(resposta))
+    }, []);
+
+    useEffect(() => { //verifica se o usuário está logado
+        const userFromStorage = localStorage.getItem('petshopid')
+        const userFromStorageFormat = userFromStorage ? JSON.parse(userFromStorage) : undefined
+        if (!userFromStorage) {
+            navigate(`/`);
+        }
+        if (userFromStorageFormat) {
+            setUser(userFromStorageFormat)
+        }
     }, []);
 
     function createOrder(orders) {
@@ -53,7 +65,6 @@ function Pedidos() {
     };
 
     function handleChange(e) {
-
         setOrders(newOrder => ({ ...newOrder, [e.target.name]: e.target.value }))
     }
 
@@ -91,7 +102,6 @@ function Pedidos() {
                         <SelectOrderStatus text='Status do Pedido' name='status' value={orders.status} handleOnChange={handleChange} />
                         <SubmitButton type="submit" text='Adicionar Novo Pedido' />
                     </form>
-
                 </div>
             </PagPedidos>
         </ContainerPage>

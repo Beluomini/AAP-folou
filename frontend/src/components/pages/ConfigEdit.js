@@ -8,7 +8,7 @@ import Input from '../form/Input';
 
 import api from "../../services/api";
 
-function ConfigEdit({ id }) {
+function ConfigEdit() {
 
     const [petshop, setPetShop] = useState([]);
     const [user, setUser] = useState()
@@ -26,7 +26,7 @@ function ConfigEdit({ id }) {
     }
 
     const handleSubmit = (e) => {
-        editPetshop(petshop, id);
+        editPetshop(petshop, user);
     };
 
     function handleChange(e) {

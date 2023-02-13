@@ -16,7 +16,7 @@ function PedidoCliente() {
 
     const { id } = useParams();
     const navigate = useNavigate();
-
+    console.log(id)
     const [ordersId, setOrdersId] = useState([]);
 
     useEffect(() => {
@@ -32,6 +32,7 @@ function PedidoCliente() {
     }
 
     const handleSubmit = (e) => {
+        e.preventDefault();
         editOrder(ordersId, id);
     };
 

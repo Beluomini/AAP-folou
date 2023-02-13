@@ -9,9 +9,8 @@ import { useNavigate } from 'react-router-dom';
 
 import api from '../../services/api';
 
-function Login({ petshops }) {
-
-    const [login, setLogin] = useState([]);
+function Login() {
+    const [petshop, setPetShop] = useState([]);
 
     const navigate = useNavigate();
 
@@ -22,26 +21,24 @@ function Login({ petshops }) {
                 if (res.$isNew == false) {
                     alert(`Logado com sucesso!`);
                     localStorage.setItem('petshopid', JSON.stringify(res._doc._id))
-                    navigate(`/home/${res._id}`);
-                    console.log(res)
+                    localStorage.setItem('petshopdados', JSON.stringify(res._doc))
+                    navigate(`/home`);
                 }
                 else {
                     alert(`Erro: ${res.message}`);
-                    console.log(res)
                 }
             })
             .catch((err) => alert(`Erro: ${err.message}`));
     }
 
     function handleChange(e) {
-        setLogin(login => ({ ...login, [e.target.name]: e.target.value }))
+        setPetShop(login => ({ ...login, [e.target.name]: e.target.value }))
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        efetuaLogin(login);
+        efetuaLogin(petshop);
     };
-
 
 
     return (
