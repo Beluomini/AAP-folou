@@ -55,6 +55,13 @@ export class ClientsService {
 
   async update(id: string, updateClientDto: UpdateClientDto) {
     
+    if(!isValidObjectId(id)){
+      throw new HttpException(
+        'Chave do client inválida',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
     const client = await this.clientModel.findOne({ _id: id });
     if(!client){
       throw new HttpException(
@@ -66,9 +73,9 @@ export class ClientsService {
     if(updateClientDto.cpf){
       const cpf = updateClientDto.cpf;
       const clientCpfExists = await this.clientModel.findOne({ cpf });
-      if (clientCpfExists) {
+      if (clientCpfExists && updateClientDto.cpf != client.cpf) {
         throw new HttpException(
-          'O cpf já está sendo usado',
+          'O CPF já está sendo usado',
           HttpStatus.BAD_REQUEST,
         );
       }

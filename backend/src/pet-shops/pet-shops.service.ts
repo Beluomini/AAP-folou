@@ -64,20 +64,20 @@ export class PetShopsService {
         'Chave do petshop inválida',
         HttpStatus.BAD_REQUEST,
       );
-    }else{
-      const petshop = await this.petShopModel.findOne({ _id: id });
-      if(!petshop){
-        throw new HttpException(
-          'Petshop com a chave informada não existe',
-          HttpStatus.NOT_FOUND,
-        );
-      }
+    }
+
+    const petshop = await this.petShopModel.findOne({ _id: id });
+    if(!petshop){
+      throw new HttpException(
+        'Petshop com a chave informada não existe',
+        HttpStatus.NOT_FOUND,
+      );
     }
 
     if(updatePetShopDto.cnpj){
       const cnpj = updatePetShopDto.cnpj;
       const petShopCnpjExists = await this.petShopModel.findOne({ cnpj });
-      if (petShopCnpjExists) {
+      if (petShopCnpjExists && updatePetShopDto.cnpj != petshop.cnpj) {
         throw new HttpException(
           'O CNPJ já está sendo usado',
           HttpStatus.BAD_REQUEST,
