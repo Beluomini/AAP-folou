@@ -1,36 +1,57 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import React, { useState, useEffect } from 'react';
 
 import { ContainerPage } from '../../components/Main'
 import { PagHome } from './styledHome';
 
-import Input from '../form/Input';
 import SubmitButton from '../form/SubmitButton';
 
 import api from "../../services/api";
-import Configuracoes from './Configuracoes';
+
 
 function Home() {
     const [petshop, setPetShop] = useState([])
+
+    const [user, setUser] = useState()
+
     const navigate = useNavigate();
 
-    useEffect(() => {
-        api.getPetShop().then((resposta) => setPetShop(resposta))
-    }, []);
+    const petshopid = localStorage.getItem('petshopid') //como string
+    const petshopidFormat = petshopid ? JSON.parse(petshopid) : undefined //como objeto
 
-    const view = () => {
+    const handleSubmit = () => {
         navigate(`/configuracoes`);
     }
 
+    useEffect(() => { //verifica se o usuário está logado
+        const userFromStorage = localStorage.getItem('petshopid')
+        const userFromStorageFormat = userFromStorage ? JSON.parse(userFromStorage) : undefined
+        if (!userFromStorage) {
+            navigate(`/`);
+        }
+        if (userFromStorageFormat) {
+            setUser(userFromStorageFormat)
+        }
+    }, []);
+
+    useEffect(() => {
+        api.getPetShopById(petshopidFormat).then(res => setPetShop(res))
+    }, [petshopidFormat])
+
     return (
         <ContainerPage>
+            <h1>Dados Meu PetShop</h1>
             <PagHome>
                 <div className='minhaloja'>
-                    <h1>{petshop?.map((petshop) => (petshop.name))}</h1>
-                    <h1>{petshop?.map((petshop) => (petshop._id))}</h1>
+                    <h1>{petshop.name}</h1>
+                    <h2>Email: {petshop.email}</h2>
+                    <h2>CNPJ: {petshop.cnpj}</h2>
+                    <h2>Contato: {petshop.contact}</h2>
+                    <h2>CEP: {petshop.cep}</h2>
+                    <h2>Endereço: {petshop.address}</h2>
                 </div>
-                <form onSubmit={view}>
+                <form onSubmit={handleSubmit}>
                     <SubmitButton text='Ver Minha Loja' name="add" />
                 </form>
             </PagHome>

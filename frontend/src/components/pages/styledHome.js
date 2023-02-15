@@ -13,7 +13,7 @@ export const PagHome = styled.div`
     box-shadow: 0px 0px 3px #ccc;
 
     .minhaloja {
-        height: 75px;
+        height: 500px;
         background-color: #D0BAA0;
         padding: 30px;
         max-width: auto;
@@ -21,14 +21,6 @@ export const PagHome = styled.div`
         text-align: center;
         border-radius: 5px;
         box-shadow: 0px 0px 3px #ccc;
-    }
-
-    .corpohome{
-        padding: 150px 20px 0px 20px;
-    }
-
-    .planos{
-        margin-bottom: 100px;
     }
 
 `;

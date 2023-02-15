@@ -11,18 +11,19 @@ import SelectPayment from "../form/SelectPayment";
 import SelectStatus from "../form/SelectStatus";
 
 import api from "../../services/api";
+
 function PedidoCliente() {
 
     const { id } = useParams();
     const navigate = useNavigate();
-
+    console.log(id)
     const [ordersId, setOrdersId] = useState([]);
 
     useEffect(() => {
         api.getOrdersById(id).then((resposta) => setOrdersId(resposta))
     }, [id])
 
-    function editOrder(id, ordersId) {
+    function editOrder(ordersId, id) {
         api
             .editOrders(ordersId, id)
             .then(() => alert(`Editado com sucesso!`))
@@ -32,7 +33,7 @@ function PedidoCliente() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        editOrder(id, ordersId);
+        editOrder(ordersId, id);
     };
 
     function handleChange(e) {
@@ -48,11 +49,11 @@ function PedidoCliente() {
                     <Input type='text' text='Id petshop' name='fk_id_pet_shop' placeholder='PetShop' handleOnChange={handleChange} value={ordersId.fk_id_pet_shop} />
                     <Input type='text' text='Id Cliente' name='fk_id_client' placeholder='Cliente' handleOnChange={handleChange} value={ordersId.fk_id_client} />
                     <Input type='text' text='Data de Criação' name='create_date' placeholder='Data de Criação' handleOnChange={handleChange} value={ordersId.create_date} />
-                    <SelectPayment text='Método de Pagamento' name='payment_method' handleOnChange={handleChange} value={ordersId.payment_method} />
+                    <Input type='text' text='Data de Pagamento ' name='payment_date' placeholder='Data de Pagamento' handleOnChange={handleChange} value={ordersId.payment_date} />
+                    <SelectPayment text='Método de Pagamento' name='payment_method' value={ordersId.payment_method} handleOnChange={handleChange} />
                     <Input type='text' text='Preço deste Pedido' name='price' placeholder="Preço " handleOnChange={handleChange} value={ordersId.price} />
-                    <Input type='text' text='Método de Pagamento' name='payment_method' placeholder="Método de Pagamento" handleOnChange={handleChange} value={ordersId.payment_method} />
                     <Input type='text' text='Cupom' name='fk_cupom' placeholder='Cupom' handleOnChange={handleChange} value={ordersId.fk_cupom} />
-                    <SelectStatus text='Status' name='status' value={ordersId.status} />
+                    <SelectStatus text='Status' name='status' value={ordersId.status} handleOnChange={handleChange} />
                     <SubmitButton text='Salvar' />
                 </form>
             </PagPedidoUnico>

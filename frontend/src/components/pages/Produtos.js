@@ -15,11 +15,23 @@ import api from "../../services/api";
 function Produtos() {
 
     const [products, setProducts] = useState([]);
+    const [user, setUser] = useState()
 
     const navigate = useNavigate();
 
     useEffect(() => {
         api.getProducts().then((resposta) => setProducts(resposta))
+    }, []);
+
+    useEffect(() => { //verifica se o usuário está logado
+        const userFromStorage = localStorage.getItem('petshopid')
+        const userFromStorageFormat = userFromStorage ? JSON.parse(userFromStorage) : undefined
+        if (!userFromStorage) {
+            navigate(`/`);
+        }
+        if (userFromStorageFormat) {
+            setUser(userFromStorageFormat)
+        }
     }, []);
 
     function createProduct(products) {
@@ -40,13 +52,11 @@ function Produtos() {
             .catch((err) => alert(`Erro: ${err.message}`));
     }
     const handleSubmit = (e) => {
+        console.log(products)
         createProduct(products);
     };
 
     function handleChange(e) {
-        if (e.target.value === 'number') {
-            e.target.value = parseInt(e.target.value)
-        }
         setProducts(newProdut => ({ ...newProdut, [e.target.name]: e.target.value }))
     }
 

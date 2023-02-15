@@ -1,7 +1,6 @@
 import './App.css';
-import React, { useState, useEffect } from 'react';
-
-import { BrowserRouter as Router, Route, Routes, useParams } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import Navbar from './components/Header/Navbar';
 
@@ -11,29 +10,23 @@ import Pedidos from './components/pages/Pedidos';
 import Produtos from './components/pages/Produtos';
 import PedidoCliente from './components/pages/PedidoCliente';
 import EditProduct from './components/pages/EditProduct';
-
-import api from './services/api';
+import Login from './components/pages/Login';
 
 
 function App() {
 
-  const [petshop, setPetShop] = useState([])
-
   return (
     <Router>
-
       <Navbar />
-
-      <div>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/pedidos" element={<Pedidos />} />
-          <Route path="/pedidos/:id" element={<PedidoCliente />} />
-          <Route path="/produtos" element={<Produtos />} />
-          <Route path="/produtos/:id" element={<EditProduct />} />
-          <Route path="/configuracoes" element={<Configuracoes />} />
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/pedidos" element={<Pedidos />} />
+        <Route path="/pedidos/:id" element={<PedidoCliente />} />
+        <Route path="/produtos" element={<Produtos />} />
+        <Route path="/produtos/:id" element={<EditProduct />} />
+        <Route path="/configuracoes" element={<Configuracoes />} />
+      </Routes>
     </Router>
   );
 }
