@@ -13,11 +13,16 @@ import SelectStatus from "../form/SelectStatus";
 import api from "../../services/api";
 
 function PedidoCliente() {
-
     const { id } = useParams();
     const navigate = useNavigate();
-    console.log(id)
-    const [ordersId, setOrdersId] = useState([]);
+    const petshop = localStorage.getItem('petshopid') //como string
+    const petshopFormat = petshop ? JSON.parse(petshop) : undefined //como objeto
+    const [ordersId, setOrdersId] = useState([
+        {
+            fk_id_client: '',
+            fk_id_pet_shop: petshopFormat,
+        }
+    ]);
 
     useEffect(() => {
         api.getOrdersById(id).then((resposta) => setOrdersId(resposta))
@@ -46,7 +51,6 @@ function PedidoCliente() {
             <h1>Edição do Pedido do Cliente : {ordersId.fk_id_client}</h1>
             <PagPedidoUnico>
                 <form onSubmit={handleSubmit}>
-                    <Input type='text' text='Id petshop' name='fk_id_pet_shop' placeholder='PetShop' handleOnChange={handleChange} value={ordersId.fk_id_pet_shop} />
                     <Input type='text' text='Id Cliente' name='fk_id_client' placeholder='Cliente' handleOnChange={handleChange} value={ordersId.fk_id_client} />
                     <Input type='text' text='Data de Criação' name='create_date' placeholder='Data de Criação' handleOnChange={handleChange} value={ordersId.create_date} />
                     <Input type='text' text='Data de Pagamento ' name='payment_date' placeholder='Data de Pagamento' handleOnChange={handleChange} value={ordersId.payment_date} />

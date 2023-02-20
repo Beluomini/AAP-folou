@@ -40,7 +40,6 @@ function Login() {
         efetuaLogin(petshop);
     };
 
-
     return (
         <PagLogin>
             <h1>Faça Login em seu PetShop</h1>

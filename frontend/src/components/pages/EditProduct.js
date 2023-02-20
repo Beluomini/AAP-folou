@@ -11,9 +11,14 @@ import SelectCategory from '../form/SelectCategory';
 import api from "../../services/api";
 
 function EditProduct() {
-
+    const petshop = localStorage.getItem('petshopid') //como string
+    const petshopFormat = petshop ? JSON.parse(petshop) : undefined //como objeto
     const { id } = useParams();
-    const [productId, setProductId] = useState([]);
+    const [productId, setProductId] = useState([
+        {
+            fk_id_pet_shop: petshopFormat
+        }
+    ]);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -42,7 +47,6 @@ function EditProduct() {
             <h1>Edição do Produto: {productId.name}</h1>
             <PagEditProduct>
                 <form onSubmit={handleSubmit}>
-                    <Input type='text' text='Fk id petshop ' name='fk_id_pet_shop' placeholder='Id petshop' handleOnChange={handleChange} value={productId.fk_id_pet_shop} />
                     <Input type='text' text='Nome do Produto ' name='name' placeholder='Nome do Produto' handleOnChange={handleChange} value={productId.name} />
                     <Input type='text' text='Descrição do Produto ' name='description' placeholder='Descrição' handleOnChange={handleChange} value={productId.description} />
                     <Input type='number' text='Quantidade deste Produto ' name='stock' placeholder="Quantidade " handleOnChange={handleChange} value={productId.stock} />

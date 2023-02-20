@@ -20,9 +20,7 @@ function Configuracoes() {
     }
 
     function editPetshop(petshop, id) {
-        console.log(petshop, id)
         delete petshop.cnpj
-        console.log(petshop, id)
         api
             .editPetShops(petshop, id)
             .then(() => alert(`Editado com sucesso!`))
