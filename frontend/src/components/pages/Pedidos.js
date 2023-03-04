@@ -23,7 +23,7 @@ function Pedidos() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        api.getOrders().then((resposta) => setOrders(resposta))
+        api.getOrdersPetshop(petshopFormat).then((resposta) => setOrders(resposta))
     }, []);
 
     useEffect(() => { //verifica se o usuário está logado

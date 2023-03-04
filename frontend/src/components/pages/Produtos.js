@@ -22,7 +22,7 @@ function Produtos() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        api.getProducts().then((resposta) => setProducts(resposta))
+        api.getProductsPetshop(petshopFormat).then((resposta) => setProducts(resposta))
     }, []);
 
     useEffect(() => { //verifica se o usuário está logado
