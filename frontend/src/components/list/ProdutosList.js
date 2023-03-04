@@ -5,10 +5,12 @@ function ProdutosList({ id, name, price, description, image, stock, category, ha
 
     const remove = (e) => {
         handleRemove(id);
+        e.preventDefault();
     }
 
     const edit = (e) => {
         handleEdit(id);
+        e.preventDefault();
     }
 
     return (

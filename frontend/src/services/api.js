@@ -113,10 +113,19 @@ function editPetShops(petshop, id) {
     })
         .then((res) => res.json())
 }
+function deletePetShops(id) {
+    return fetch(`http://localhost:3333/pet-shops/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+        .then((res) => res.json())
+}
 
 
 export default {
     getProducts, getProductsById, createProducts, removeProducts, editProducts,
     getOrders, getOrdersById, createOrders, removeOrders, editOrders,
-    getPetShop, getPetShopById, editPetShops, loginPetShop
+    getPetShop, getPetShopById, editPetShops, loginPetShop, deletePetShops
 };
