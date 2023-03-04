@@ -17,12 +17,12 @@ function PedidoCliente() {
     const navigate = useNavigate();
     const petshop = localStorage.getItem('petshopid') //como string
     const petshopFormat = petshop ? JSON.parse(petshop) : undefined //como objeto
-    const [ordersId, setOrdersId] = useState([
+    const [ordersId, setOrdersId] = useState(
         {
             fk_id_client: '',
             fk_id_pet_shop: petshopFormat,
         }
-    ]);
+    );
 
     useEffect(() => {
         api.getOrdersById(id).then((resposta) => setOrdersId(resposta))

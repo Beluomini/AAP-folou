@@ -4,13 +4,13 @@ import { FaTrashAlt, FaRegEdit } from 'react-icons/fa';
 function ProdutosList({ id, name, price, description, image, stock, category, handleRemove, handleEdit }) {
 
     const remove = (e) => {
-        e.preventDefault();
         handleRemove(id);
+        e.preventDefault();
     }
 
     const edit = (e) => {
-        e.preventDefault();
         handleEdit(id);
+        e.preventDefault();
     }
 
     return (

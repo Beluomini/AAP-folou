@@ -14,11 +14,11 @@ function EditProduct() {
     const petshop = localStorage.getItem('petshopid') //como string
     const petshopFormat = petshop ? JSON.parse(petshop) : undefined //como objeto
     const { id } = useParams();
-    const [productId, setProductId] = useState([
+    const [productId, setProductId] = useState(
         {
             fk_id_pet_shop: petshopFormat
         }
-    ]);
+    );
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -35,6 +35,7 @@ function EditProduct() {
 
     const handleSubmit = (e) => {
         editProduct(productId, id);
+        navigate("/produtos")
     };
 
     function handleChange(e) {

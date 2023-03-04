@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { ContainerPage } from '../../components/Main'
 import { PagProdutos } from './styledProdutos';
 
-import Input from '../form/Input';
 import SubmitButton from '../form/SubmitButton';
-import SelectCategory from '../form/SelectCategory';
 
 import ProdutosList from '../list/ProdutosList';
 
@@ -15,11 +13,11 @@ import api from "../../services/api";
 function Produtos() {
     const petshop = localStorage.getItem('petshopid') //como string
     const petshopFormat = petshop ? JSON.parse(petshop) : undefined //como objeto
-    const [products, setProducts] = useState([
+    const [products, setProducts] = useState(
         {
             fk_id_pet_shop: petshopFormat,
         }
-    ]);
+    );
     const [user, setUser] = useState()
     const navigate = useNavigate();
 
@@ -38,12 +36,6 @@ function Produtos() {
         }
     }, []);
 
-    function createProduct(products) {
-        api
-            .createProducts(products)
-            .then(() => alert(`Criado com sucesso!`))
-            .catch((err) => alert(`Erro: ${err.message}`));
-    }
 
     function handleClickEdit(idProducts) {
         navigate(`/produtos/${idProducts}`);
@@ -59,9 +51,6 @@ function Produtos() {
         navigate('/newproduto')
     };
 
-    function handleChange(e) {
-        setProducts(newProdut => ({ ...newProdut, [e.target.name]: e.target.value }))
-    }
 
     return (
         <ContainerPage>

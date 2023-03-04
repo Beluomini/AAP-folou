@@ -29,7 +29,6 @@ function NewProduto() {
     const navigate = useNavigate();
 
     function handleChange(e) {
-        console.log(products)
         setProducts(newOrder => ({ ...newOrder, [e.target.name]: e.target.value }))
     }
 
@@ -43,6 +42,7 @@ function NewProduto() {
     const handleSubmit = (e) => {
         e.preventDefault();
         createProduct(products);
+        navigate("/produtos")
     };
 
     useEffect(() => { //verifica se o usuário está logado

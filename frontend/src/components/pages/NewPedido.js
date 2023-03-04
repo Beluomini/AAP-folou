@@ -14,12 +14,12 @@ import api from "../../services/api";
 function NewPedido() {
     const petshop = localStorage.getItem('petshopid') //como string
     const petshopFormat = petshop ? JSON.parse(petshop) : undefined //como objeto
-    const [orders, setOrders] = useState([
+    const [orders, setOrders] = useState(
         {
             fk_id_client: '',
             fk_id_pet_shop: petshopFormat,
         }
-    ]);
+    );
     const [user, setUser] = useState()
     const navigate = useNavigate();
 

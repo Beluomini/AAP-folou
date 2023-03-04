@@ -10,11 +10,12 @@ import SubmitButton from '../form/SubmitButton';
 import api from "../../services/api";
 
 function Configuracoes() {
-    const [petshop, setPetShop] = useState([]); //inicializa o estado com um array vazio
+    const [petshop, setPetShop] = useState({});
     const petshopid = localStorage.getItem('petshopid') //como string
     const petshopidFormat = petshopid ? JSON.parse(petshopid) : undefined //como objeto
     const [user, setUser] = useState()
     const navigate = useNavigate();
+
     function handleChange(e) {
         setPetShop(editpetshop => ({ ...editpetshop, [e.target.name]: e.target.value }))
     }
@@ -30,6 +31,7 @@ function Configuracoes() {
     const handleSubmit = (e) => {
         e.preventDefault();
         editPetshop(petshop, petshopidFormat);
+        navigate('/home')
     };
 
     useEffect(() => { //verifica se o usuário está logado
