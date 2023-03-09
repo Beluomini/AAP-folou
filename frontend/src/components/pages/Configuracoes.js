@@ -3,7 +3,6 @@ import { useParams, useNavigate } from "react-router-dom";
 
 import { ContainerPage } from '../../components/Main'
 import { PagConfig } from './styledConfig';
-import ConfigEdit from './ConfigEdit';
 
 import Input from '../form/Input';
 import SubmitButton from '../form/SubmitButton';
@@ -11,19 +10,18 @@ import SubmitButton from '../form/SubmitButton';
 import api from "../../services/api";
 
 function Configuracoes() {
-    const [petshop, setPetShop] = useState([]); //inicializa o estado com um array vazio
+    const [petshop, setPetShop] = useState({});
     const petshopid = localStorage.getItem('petshopid') //como string
     const petshopidFormat = petshopid ? JSON.parse(petshopid) : undefined //como objeto
     const [user, setUser] = useState()
     const navigate = useNavigate();
+
     function handleChange(e) {
         setPetShop(editpetshop => ({ ...editpetshop, [e.target.name]: e.target.value }))
     }
 
     function editPetshop(petshop, id) {
-        console.log(petshop, id)
         delete petshop.cnpj
-        console.log(petshop, id)
         api
             .editPetShops(petshop, id)
             .then(() => alert(`Editado com sucesso!`))
@@ -33,6 +31,7 @@ function Configuracoes() {
     const handleSubmit = (e) => {
         e.preventDefault();
         editPetshop(petshop, petshopidFormat);
+        navigate('/home')
     };
 
     useEffect(() => { //verifica se o usuário está logado
@@ -58,7 +57,6 @@ function Configuracoes() {
                     <Input type='text' value={petshop.name} text='Nome PetShop ' name='name' placeholder='Nome do Estabelecimento' handleOnChange={handleChange} />
                     <Input type='text' value={petshop.email} text='Insira o Email ' name='email' placeholder="Email" handleOnChange={handleChange} />
                     <Input type='text' value={petshop.password} text='Insira sua Senha ' name='password' placeholder="Senha" handleOnChange={handleChange} />
-
                     <Input type='text' value={petshop.contact} text='Telefone para Contato ' name='contact' placeholder="Telefone para Contato" handleOnChange={handleChange} />
                     <Input type='text' value={petshop.cep} text='CEP ' name='cep' placeholder="CEP" />
                     <Input type='text' value={petshop.address} text='Insira o Endereço ' name='address' placeholder="Endereço" handleOnChange={handleChange} />

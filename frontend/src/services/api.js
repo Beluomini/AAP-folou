@@ -7,6 +7,10 @@ function getProductsById(id) {
     return fetch(`http://localhost:3333/products/${id}`).then((res) => res.json());
 }
 
+function getProductsPetshop(id) {
+    return fetch(`http://localhost:3333/products/petshop/${id}`).then((res) => res.json());
+}
+
 function createProducts(newProduct) {
     return fetch('http://localhost:3333/products', {
         method: 'POST',
@@ -48,6 +52,10 @@ function getOrders() {
 
 function getOrdersById(id) {
     return fetch(`http://localhost:3333/orders/${id}`).then((res) => res.json());
+}
+
+function getOrdersPetshop(id) {
+    return fetch(`http://localhost:3333/orders/petshop/${id}`).then((res) => res.json());
 }
 
 function createOrders(newOrders) {
@@ -113,10 +121,19 @@ function editPetShops(petshop, id) {
     })
         .then((res) => res.json())
 }
+function deletePetShops(id) {
+    return fetch(`http://localhost:3333/pet-shops/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+        .then((res) => res.json())
+}
 
 
 export default {
-    getProducts, getProductsById, createProducts, removeProducts, editProducts,
-    getOrders, getOrdersById, createOrders, removeOrders, editOrders,
-    getPetShop, getPetShopById, editPetShops, loginPetShop
+    getProducts, getProductsById, getProductsPetshop, createProducts, removeProducts, editProducts,
+    getOrders, getOrdersById, getOrdersPetshop, createOrders, removeOrders, editOrders,
+    getPetShop, getPetShopById, editPetShops, loginPetShop, deletePetShops
 };

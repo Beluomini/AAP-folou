@@ -1,6 +1,6 @@
 import { PagLogin } from './styledLogin';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import Input from '../form/Input';
 import SubmitButton from '../form/SubmitButton';
@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import api from '../../services/api';
 
 function Login() {
-    const [petshop, setPetShop] = useState([]);
+    const [petshop, setPetShop] = useState({});
 
     const navigate = useNavigate();
 
@@ -39,7 +39,6 @@ function Login() {
         e.preventDefault();
         efetuaLogin(petshop);
     };
-
 
     return (
         <PagLogin>

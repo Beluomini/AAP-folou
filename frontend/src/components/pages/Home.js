@@ -11,7 +11,7 @@ import api from "../../services/api";
 
 
 function Home() {
-    const [petshop, setPetShop] = useState([])
+    const [petshop, setPetShop] = useState({})
 
     const [user, setUser] = useState()
 
