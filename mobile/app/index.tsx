@@ -1,13 +1,47 @@
+import axios from 'axios';
+import { useState } from 'react';
 import {View, Text, StyleSheet, TextInput, Image, Pressable } from 'react-native';
 
+import api from '../services/api';
+
 export default function TabOneScreen() {
+  const [email, setEmail] = useState("biskela@gmail.com");
+  const [senha, setSenha] = useState("biskela123456");
+
+  async function login() {
+    console.log(email);
+    console.log(senha);
+    const response = await api.post('/clients/login/', {
+      email: email,
+      senha: senha
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
+  async function teste() {
+    console.log(email);
+    console.log(senha);
+    const response = await api.get('/clients')
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
   return (
     <View style={styles.container}>
       <Image style={styles.stretch} source={require('../assets/images/aapfolou.png')} />
       <Text style={styles.title}>Login</Text>
-      <TextInput style={styles.input} placeholder="Email" />
-      <TextInput style={styles.input} placeholder="Senha" />
-      <Pressable style={styles.loginBtn} onPress={() => console.log('Pressed')}>
+      <TextInput style={styles.input} value={email} placeholder="Email" onChangeText={setEmail} />
+      <TextInput style={styles.input} value={senha} placeholder="Senha" onChangeText={setSenha} />
+      <Pressable style={styles.loginBtn} onPress={ () => {teste()} }>
         <Text style={styles.logintxt}>Entrar</Text>
       </Pressable>
     </View>
