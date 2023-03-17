@@ -13,25 +13,19 @@ export const PagNewPedido = styled.div`
     display: flex;
     flex-direction:column;
     flex-wrap: wrap;
-
+    
     form{
-        width: 70%;
+        width: 25%;
         margin: auto;
+        margin-top: 40px;
         text-align: center;
-        padding: 10px;
     }
 
-    .form_dados{       
-        width: 100%; 
-        margin-right: 50px;
-        justify-content: space-between;
+    img{
+        width: 100px;
+    }
+    .voltar{
+        margin-top: 40px;
     }
 
-    .form_add{
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        padding: 20px;
-    }
-
-`;
+`; 

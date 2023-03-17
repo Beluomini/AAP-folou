@@ -10,14 +10,13 @@ export const PagPedidos = styled.div`
     text-align: center;
     border-radius: 5px;
     box-shadow: 0px 0px 3px #ccc;
-    display: block;
+    display: flex;
     flex-direction:column;
     flex-wrap: wrap;
+    overflow: auto;
     
     form{
-        width: 50%;
-        margin: auto;
-        text-align: center;
+        display: block;
         padding: 10px;
     }
 

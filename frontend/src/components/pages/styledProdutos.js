@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const PagProdutos = styled.div`
-    height: 1000px;
+    height: 650px;
     background-color: #766452;
     color: black;
     padding: 30px;
@@ -10,15 +10,14 @@ export const PagProdutos = styled.div`
     text-align: center;
     border-radius: 5px;
     box-shadow: 0px 0px 3px #ccc;
-    display: block;
+    display: flex;
     flex-direction:column;
     flex-wrap: wrap;
+    overflow: auto;
 
     form{
-        width: 50%;
-        margin: auto;
-        text-align: center;
-        padding: 10px;
+        display: block;
+        padding: 15px;
     }
 
     .btnnovoprod {

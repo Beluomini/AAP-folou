@@ -42,6 +42,7 @@ function NewPedido() {
             delete (orders.create_date)
         }
         createOrder(orders);
+        navigate('/pedidos')
     };
 
     useEffect(() => { //verifica se o usuário está logado
@@ -55,11 +56,16 @@ function NewPedido() {
         }
     }, []);
 
+    const handleVoltar = () => {
+        navigate('/pedidos')
+    }
+
     return (
         <ContainerPage>
             <h1>Criação de um novo Pedido</h1>
             <PagNewPedido>
                 <div>
+                    <img src='../../../aapfolou4.png' />
                     <form onSubmit={handleSubmit}>
                         <Input type='text' text='id_client' name='fk_id_client' placeholder='id_client' handleOnChange={handleChange} value={orders.fk_id_client} />
                         <Input type='text' text='Data de Criação ' name='create_date' placeholder='Data de Criação' handleOnChange={handleChange} value={orders.create_date} />
@@ -69,6 +75,9 @@ function NewPedido() {
                         <Input type='text' text='fk_cupom ' name='fk_cupom' placeholder="fk_cupom " handleOnChange={handleChange} value={orders.fk_cupom} />
                         <SelectOrderStatus text='Status do Pedido' name='status' value={orders.status} handleOnChange={handleChange} />
                         <SubmitButton type="submit" text='Adicionar Novo Pedido' />
+                    </form>
+                    <form className='voltar' onSubmit={handleVoltar}>
+                        <SubmitButton type='submit' text='Voltar' />
                     </form>
                 </div>
             </PagNewPedido>

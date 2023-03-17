@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const PagPedidoUnico = styled.div`
-    height: 600px;
+    height: 800px;
     background-color: #766452;
     color: black;
     padding: 30px;
@@ -10,16 +10,15 @@ export const PagPedidoUnico = styled.div`
     text-align: center;
     border-radius: 5px;
     box-shadow: 0px 0px 3px #ccc;
-    display: flex;
-    flex-direction: column;
-
+    
     form{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-between;
-        padding: 50px;
+        width: 25%;
+        margin: auto;
+        margin-top: 40px;
+        text-align: center;
     }
 
-    
+    img{
+        width: 100px;
+    }
 `;

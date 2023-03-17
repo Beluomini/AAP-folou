@@ -131,9 +131,19 @@ function deletePetShops(id) {
         .then((res) => res.json())
 }
 
+//cliente
+function getClientes() {
+    return fetch("http://localhost:3333/clients").then((res) => res.json());
+}
+
+function getClientesById(id) {
+    return fetch(`http://localhost:3333/clients/${id}`).then((res) => res.json());
+}
+
 
 export default {
     getProducts, getProductsById, getProductsPetshop, createProducts, removeProducts, editProducts,
     getOrders, getOrdersById, getOrdersPetshop, createOrders, removeOrders, editOrders,
-    getPetShop, getPetShopById, editPetShops, loginPetShop, deletePetShops
+    getPetShop, getPetShopById, editPetShops, loginPetShop, deletePetShops,
+    getClientes, getClientesById
 };

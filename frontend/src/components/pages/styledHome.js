@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const PagHome = styled.div`
-    height: 600px;
+    height: 700px;
     background-color: #766452;
     color: black;
     padding: 30px;
@@ -13,7 +13,7 @@ export const PagHome = styled.div`
     box-shadow: 0px 0px 3px #ccc;
 
     .minhaloja {
-        height: 500px;
+        height: 560px;
         background-color: #D0BAA0;
         padding: 30px;
         max-width: auto;
@@ -22,5 +22,10 @@ export const PagHome = styled.div`
         border-radius: 5px;
         box-shadow: 0px 0px 3px #ccc;
     }
+    
+    img{
+        width: 100px;
+    }
+    
 
 `;

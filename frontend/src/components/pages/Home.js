@@ -44,7 +44,8 @@ function Home() {
             <h1>Dados Meu PetShop</h1>
             <PagHome>
                 <div className='minhaloja'>
-                    <h1>{petshop.name}</h1>
+                    <img src='../../../aapfolou4.png' />
+                    <h1>{petshop.name} </h1>
                     <h2>Email: {petshop.email}</h2>
                     <h2>CNPJ: {petshop.cnpj}</h2>
                     <h2>Contato: {petshop.contact}</h2>
