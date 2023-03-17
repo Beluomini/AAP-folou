@@ -2,9 +2,9 @@ import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import {View, Text, StyleSheet, TextInput, Image, Pressable } from 'react-native';
 
-import api from '../services/api';
+import api from '../../services/api';
 
-export default function FirstScreen() {
+export default function LoginScreen() {
 
   const router = useRouter();
 
@@ -32,7 +32,7 @@ export default function FirstScreen() {
 
   return (
     <View style={styles.container}>
-      <Image style={styles.stretch} source={require('../assets/images/aapfolou.png')} />
+      <Image style={styles.stretch} source={require('../../assets/images/aapfolou.png')} />
       <Text style={styles.title}>Login</Text>
       <TextInput style={styles.input} value={email} placeholder="Email" onChangeText={setEmail} />
       <TextInput style={styles.input} value={senha} placeholder="Senha" onChangeText={setSenha} />

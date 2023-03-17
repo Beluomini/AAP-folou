@@ -8,9 +8,9 @@
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/images/aapfolou.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#766452"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -20,8 +20,8 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/images/aapfolou.png",
+        "backgroundColor": "#766452"
       }
     },
     "web": {

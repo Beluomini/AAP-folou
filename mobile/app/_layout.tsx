@@ -12,7 +12,7 @@ export {
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: 'index',
+  initialRouteName: './Login/index',
 };
 
 export default function RootLayout() {
@@ -43,7 +43,9 @@ function RootLayoutNav() {
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <Stack>
           <Stack.Screen name="index" options={{ headerShown: false }} />
-          <Stack.Screen name="modal" options={{ headerShown: false, presentation: 'modal' }} />
+          <Stack.Screen name="Login/index" options={{ headerShown: false }} />
+          <Stack.Screen name="Home/index" options={{ headerShown: false }} />
+          <Stack.Screen name="Home/modal" options={{ headerShown: false, presentation: 'modal' }} />
         </Stack>
       </ThemeProvider>
     </>
