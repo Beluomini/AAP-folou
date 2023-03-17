@@ -42,11 +42,15 @@ function Login() {
 
     return (
         <PagLogin>
-            <h1>Faça Login em seu PetShop</h1>
+            <h1>Bem Vindo Ao AAP FOLOU</h1>
             <form onSubmit={handleSubmit}>
+                <div className='logo'>
+                    <img src='../../../aapfolou2.png' />
+                </div>
+                <h2>Faça Login em seu PetShop</h2>
                 <div className='form_input'>
                     <Input text='Email ' type='text' name='email' placeholder='Email' handleOnChange={handleChange} />
-                    <Input text='Senha ' type='text' name='password' placeholder='Senha' handleOnChange={handleChange} />
+                    <Input text='Senha ' type='password' name='password' placeholder='Senha' handleOnChange={handleChange} />
                     <SubmitButton text='Efetuar Login' />
                 </div>
             </form>

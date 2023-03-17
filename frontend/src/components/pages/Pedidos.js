@@ -77,7 +77,7 @@ function Pedidos() {
                     <SubmitButton text='Criar Pedido' name="add" />
                 </form>
             </PagPedidos>
-        </ContainerPage>
+        </ContainerPage >
     );
 }
 

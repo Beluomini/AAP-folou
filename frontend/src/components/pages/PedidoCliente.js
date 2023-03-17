@@ -23,10 +23,15 @@ function PedidoCliente() {
             fk_id_pet_shop: petshopFormat,
         }
     );
+    const [cliente, setCliente] = useState({})
 
     useEffect(() => {
         api.getOrdersById(id).then((resposta) => setOrdersId(resposta))
     }, [id])
+
+    useEffect(() => {
+        api.getClientesById(ordersId.fk_id_client).then((resposta) => setCliente(resposta))
+    }, [ordersId.fk_id_client]);
 
     function editOrder(ordersId, id) {
         api
@@ -46,11 +51,16 @@ function PedidoCliente() {
         setOrdersId(editOrder => ({ ...editOrder, [name]: value }))
     }
 
+    const handleVoltar = () => {
+        navigate('/pedidos')
+    }
+
     return (
         <ContainerPage>
-            <h1>Edição do Pedido do Cliente : {ordersId.fk_id_client}</h1>
+            <h1>Edição do Pedido do Cliente : {cliente.name}</h1>
             <PagPedidoUnico>
                 <form onSubmit={handleSubmit}>
+                    <img src='../../../aapfolou4.png' />
                     <Input type='text' text='Id Cliente' name='fk_id_client' placeholder='Cliente' handleOnChange={handleChange} value={ordersId.fk_id_client} />
                     <Input type='text' text='Data de Criação' name='create_date' placeholder='Data de Criação' handleOnChange={handleChange} value={ordersId.create_date} />
                     <Input type='text' text='Data de Pagamento ' name='payment_date' placeholder='Data de Pagamento' handleOnChange={handleChange} value={ordersId.payment_date} />
@@ -60,6 +70,10 @@ function PedidoCliente() {
                     <SelectStatus text='Status' name='status' value={ordersId.status} handleOnChange={handleChange} />
                     <SubmitButton text='Salvar' />
                 </form>
+                <form className='voltar' onSubmit={handleVoltar}>
+                    <SubmitButton type='submit' text='Voltar' />
+                </form>
+
             </PagPedidoUnico>
         </ContainerPage >
     )
