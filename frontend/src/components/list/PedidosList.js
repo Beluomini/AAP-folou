@@ -25,7 +25,6 @@ function PedidosList({ id, fk_id_client, fk_id_pet_shop, create_date, payment_da
         api.getClientesById(fk_id_client).then((resposta) => setCliente(resposta))
     }, []);
 
-    console.log(cliente)
     useEffect(() => {
         api.getPetShopById(fk_id_pet_shop).then((resposta) => setPetshop(resposta))
     }, []);

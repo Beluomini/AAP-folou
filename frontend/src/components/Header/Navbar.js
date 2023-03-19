@@ -18,9 +18,6 @@ function Navbar() {
                 <nav>
                     <ul>
                         <li>
-                            <Link to="/">Login</Link>
-                        </li>
-                        <li>
                             <Link to="/home">Home</Link>
                         </li>
                         <li>
