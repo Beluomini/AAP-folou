@@ -43,11 +43,15 @@ function EditProduct() {
         setProductId(editProdut => ({ ...editProdut, [name]: value }))
     }
 
+    const handleVoltar = () => {
+        navigate('/produtos')
+    }
     return (
         <ContainerPage>
             <h1>Edição do Produto: {productId.name}</h1>
             <PagEditProduct>
                 <form onSubmit={handleSubmit}>
+                    <img src='../../../aapfolou6.png' />
                     <Input type='text' text='Nome do Produto ' name='name' placeholder='Nome do Produto' handleOnChange={handleChange} value={productId.name} />
                     <Input type='text' text='Descrição do Produto ' name='description' placeholder='Descrição' handleOnChange={handleChange} value={productId.description} />
                     <Input type='number' text='Quantidade deste Produto ' name='stock' placeholder="Quantidade " handleOnChange={handleChange} value={productId.stock} />
@@ -55,6 +59,9 @@ function EditProduct() {
                     <Input type='number' text='Valor deste Produto ' name='price' placeholder="Valor" handleOnChange={handleChange} value={productId.price} />
                     <SelectCategory text='Abrir Seleção' name='category' value={productId.category} handleOnChange={handleChange} />
                     <SubmitButton type="submit" text='Salvar' />
+                </form>
+                <form className='voltar' onSubmit={handleVoltar}>
+                    <SubmitButton type='submit' text='Voltar' />
                 </form>
             </PagEditProduct>
         </ContainerPage >
