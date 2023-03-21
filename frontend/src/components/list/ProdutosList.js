@@ -15,7 +15,6 @@ function ProdutosList({ id, name, price, description, image, stock, category, ha
 
     return (
         <ProdutoList>
-            <p>{id}</p>
             <p>{name}</p>
             <p>{description}</p>
             <p>R${price}/Unidade</p>

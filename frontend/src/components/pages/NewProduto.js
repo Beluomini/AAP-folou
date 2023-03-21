@@ -56,11 +56,16 @@ function NewProduto() {
         }
     }, []);
 
+    const handleVoltar = () => {
+        navigate('/produtos')
+    }
+
     return (
         <ContainerPage>
             <h1>Criação de um novo Produto</h1>
             <PagNewProduto>
                 <div>
+                    <img src='../../../aapfolou4.png' />
                     <form onSubmit={handleSubmit}>
                         <Input type='text' text='Nome do Produto ' name='name' placeholder='Nome do Produto' handleOnChange={handleChange} value={products.name} />
                         <Input type='text' text='Descrição do Produto ' name='description' placeholder='Descrição' handleOnChange={handleChange} value={products.description} />
@@ -69,6 +74,9 @@ function NewProduto() {
                         <Input type='number' text='Valor deste Produto ' name='price' placeholder="Valor" handleOnChange={handleChange} value={products.price} />
                         <SelectCategory text='Abrir Seleção' name='category' value={products.category} handleOnChange={handleChange} />
                         <SubmitButton type="submit" text='Adicionar Novo Produto' />
+                    </form>
+                    <form className='voltar' onSubmit={handleVoltar}>
+                        <SubmitButton type='submit' text='Voltar' />
                     </form>
                 </div>
             </PagNewProduto>

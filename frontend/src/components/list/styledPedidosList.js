@@ -12,7 +12,8 @@ export const PedidoList = styled.div`
         border-radius: 5px;
         box-shadow: 0px 0px 3px #ccc;
         align-items: center;
-    
+        overflow: auto;
+
         p{
                 margin: 0px;
         }

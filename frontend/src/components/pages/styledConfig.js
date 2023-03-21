@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const PagConfig = styled.div`
-    height: 850px;
+    height: 750px;
     background-color: #766452;
     color: black;
     padding: 30px;
@@ -15,23 +15,14 @@ export const PagConfig = styled.div`
     flex-wrap: wrap;
 
     form{
-        width: 70%;
+        width: 25%;
         margin: auto;
+        margin-top: 40px;
         text-align: center;
-        padding: 10px;
     }
 
-    .form_dados{       
-        width: 100%; 
-        margin-right: 50px;
-        justify-content: space-between;
-    }
-
-    .form_add{
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        padding: 20px;
+    img{
+        width: 200px;
     }
 
 `;
