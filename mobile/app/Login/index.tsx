@@ -1,6 +1,6 @@
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
-import {View, Text, StyleSheet, TextInput, Image, Pressable } from 'react-native';
+import {View, Text, StyleSheet, TextInput, Image, Pressable, Alert } from 'react-native';
 
 import api from '../../services/api';
 
@@ -21,13 +21,17 @@ export default function LoginScreen() {
       if (res.$isNew == false) {
         console.log(res._doc._id);
         router.push('/Home');
-      }
-      else {
+      }else {
+        if(res.message == "Unauthorized") {
+          Alert.alert('Erro', 'Cliente não encontrado. \nEmail ou senha incoorretos', [
+            {text: 'Ok', style: 'cancel',},
+          ]);
+        }else{
           alert(`Erro: ${res.message}`);
+        }
       }
     })
-    .catch((err) => alert(`Erro: ${err.message}`));;
-      // console.log(response);
+    .catch((err) => { alert(`Erro: ${err.response.data.message}`); });
     }
 
   return (
