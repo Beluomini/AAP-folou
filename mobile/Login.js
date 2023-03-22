@@ -15,8 +15,7 @@ export default function LoginScreen({navigation, route}) {
     const response = await api.loginClient(body)
     .then((res) => {
       if (res.$isNew == false) {
-        console.log(res._doc._id);
-        navigation.navigate('Home', {idUser: res._doc._id});
+        navigation.navigate('Home', {idClient: res._doc._id});
       }else {
         if(res.message == "Unauthorized") {
           Alert.alert('Erro', 'Cliente não encontrado. \nEmail ou senha incoorretos', [
