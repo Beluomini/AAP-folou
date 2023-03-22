@@ -16,7 +16,7 @@ export default function LoginScreen({navigation, route}) {
     .then((res) => {
       if (res.$isNew == false) {
         console.log(res._doc._id);
-        navigation.navigate('Home', {id: res._doc._id});
+        navigation.navigate('Home', {idUser: res._doc._id});
       }else {
         if(res.message == "Unauthorized") {
           Alert.alert('Erro', 'Cliente não encontrado. \nEmail ou senha incoorretos', [
