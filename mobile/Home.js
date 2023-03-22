@@ -11,7 +11,7 @@ export default function HomeScreen({navigation, route}) {
 
   function productNavigate(id) {
     return () => {
-      navigation.navigate('Product', {idProduct: id});
+      navigation.navigate('Product', {idProduct: id, idClient: route.params.idClient});
     }
   }
 
@@ -19,7 +19,6 @@ export default function HomeScreen({navigation, route}) {
     api.getProducts().then((res) => {
       setProducts(res);
     })
-    console.log(products);
   }, []);
 
   return (
