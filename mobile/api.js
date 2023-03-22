@@ -3,8 +3,23 @@ function getProducts() {
     return fetch("http://192.168.0.136:3333/products").then((res) => res.json());
 }
 
-function getOrdersById(id) {
-    return fetch(`http://localhost:3333/orders/${id}`).then((res) => res.json());
+function getProductById(id) {
+    return fetch(`http://192.168.0.136:3333/products/${id}`).then((res) => res.json());
+}
+
+function getPurchaseById(id) {
+    return fetch(`http://192.168.0.136:3333/purchases/${id}`).then((res) => res.json());
+}
+
+function createPurchase(newPurchase) {
+    return fetch('http://192.168.0.136:3333/purchases', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newPurchase),
+    })
+        .then((res) => res.json())
 }
 
 function createOrders(newOrders) {
@@ -60,6 +75,6 @@ function getClientesById(id) {
 
 
 export default {
-    getProducts, getOrdersById, createOrders, removeOrders, 
+    getProducts, getProductById, getPurchaseById, createPurchase, removeOrders, 
     editOrders, getPetShopById, loginClient, getClientesById
 };
