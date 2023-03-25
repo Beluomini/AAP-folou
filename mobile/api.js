@@ -1,18 +1,18 @@
 //produtos
 function getProducts() {
-    return fetch("http://192.168.15.122:3333/products").then((res) => res.json());
+    return fetch("http://10.0.0.3:3333/products").then((res) => res.json());
 }
 
 function getProductById(id) {
-    return fetch(`http://192.168.15.122:3333/products/${id}`).then((res) => res.json());
+    return fetch(`http://10.0.0.3:3333/products/${id}`).then((res) => res.json());
 }
 
 function getPurchaseById(id) {
-    return fetch(`http://192.168.15.122:3333/purchases/${id}`).then((res) => res.json());
+    return fetch(`http://10.0.0.3:3333/purchases/${id}`).then((res) => res.json());
 }
 
 function createPurchase(newPurchase) {
-    return fetch('http://192.168.15.122:3333/purchases', {
+    return fetch('http://10.0.0.3:3333/purchases', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ function getPetShopById(id) {
 }
 
 function loginClient(loginClient) {
-    return fetch('http://192.168.15.122:3333/clients/login', {
+    return fetch('http://10.0.0.3:3333/clients/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
