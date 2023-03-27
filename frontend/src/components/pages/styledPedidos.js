@@ -13,6 +13,7 @@ export const PagPedidos = styled.div`
     display: flex;
     flex-direction:column;
     flex-wrap: wrap;
+    flex-flow: row wrap;
     overflow: auto;
     
     form{

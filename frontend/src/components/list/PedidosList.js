@@ -32,7 +32,6 @@ function PedidosList({ id, fk_id_client, fk_id_pet_shop, create_date, payment_da
     return (
         <PedidoList>
             <p>Cliente: {cliente.name}</p>
-            <p>Pet Shop: {petshop.name}</p>
             <p>Data Criação: {create_date} </p>
             <p>Data Pagamento: {payment_date} </p>
             <p>Método Pagamento: {payment_method}</p>
