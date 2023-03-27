@@ -22,9 +22,10 @@ export default function ProductScreen({ navigation, route }) {
       fk_id_client: route.params.idClient,
       fk_id_pet_shop: product.fk_id_pet_shop,
       fk_id_product: route.params.idProduct,
+      quantity: quantidade,
       create_date: String(ano + "-" + mes + "-" + dia),
       payment_date: "",
-      price: 0,
+      price: product.price,
       payment_method: "PIX",
       fk_cupom: "",
       status: "SENT"
