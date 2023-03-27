@@ -6,19 +6,27 @@ import api from "./api";
 import { MaterialIcons } from '@expo/vector-icons';
 import Header from './Header';
 
-export default function HomeScreen({ navigation, route }) {
-  const [idClient, setIdClient] = useState(route.params.idClient);
-  const [products, setProducts] = useState([]);
+export default function MyOrdersScreen({ navigation, route }) {
 
-  function productNavigate(id) {
-    return () => {
-      navigation.navigate('Product', { idProduct: id, idClient: idClient, idOrder: route.params.idOrder });
-    }
-  }
+  const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    api.getProducts().then((res) => {
-      setProducts(res);
+    const fetchData = async () => {
+      api.getOrdersByClient(route.params.idClient).then((res) => {
+        res.forEach(item => {
+          api.getProductById(item.fk_id_product).then((resp) => {
+            item["productName"] = resp.name;
+          })
+          api.getPetShopById(item.fk_id_pet_shop).then((resp) => {
+            item["petShopName"] = resp.name;
+          })
+        });
+        setOrders(res);
+      })
+    }
+
+    fetchData().catch((err) => {
+      console.log(err);
     })
   }, []);
 
@@ -28,26 +36,18 @@ export default function HomeScreen({ navigation, route }) {
       <Header navigation={navigation} />
 
       <View style={styles.productView}>
-
-    
-        <Pressable style={styles.homeBtn} onPress={() => { navigation.navigate('MyOrders', { idClient: idClient }) }}>
-          <Text style={styles.title}>Minhas compras</Text>
-          <MaterialIcons name="shopping-cart" size={24} color="black" />
-        </Pressable>
       
-        <Text style={styles.title}>Produtos</Text>
+        <Text style={styles.title}>Compras</Text>
 
         <FlatList
-          data={products}
+          data={orders}
           renderItem={({ item }) =>
             <View style={styles.productViewItem}>
-              <Text style={styles.productTitle} >{item.name}</Text>
-              <Text style={styles.productTitle} >{item.description}</Text>
+              <Text style={styles.productTitle} >{item.create_date}</Text>
+              <Text style={styles.productTitle} >Pet Shop: {item.petShopName}</Text>
+              <Text style={styles.productTitle} >Produto: {item.productName}</Text>
               <Text style={styles.productTitle} >R${item.price},00</Text>
-              <Image style={styles.productImg} source={{ uri: item.image }} />
-              <Pressable style={styles.productBtn} onPress={productNavigate(item._id)}>
-                <Text style={styles.productTxt}>Comprar</Text>
-              </Pressable>
+              <Text style={styles.productTitle} >Quantidade: {item.quantity}</Text>
             </View>
           }
         />
