@@ -9,15 +9,45 @@ export default function ProductScreen({navigation, route}) {
 
   const productId = route.params.idProduct;
   const [product, setProduct] = useState([]);
-
+  const [orderQtd, setOrderQtd] = useState(0);
   const [quantidade, setQuantidade] = useState(1);
 
   function comprarProduto() {
-    console.log("id do produto: " + route.params.idProduct);
-    console.log("id do cliente: " + route.params.idClient);
-    console.log("id do petshop: " + product.fk_id_pet_shop);
-    console.log("quantidade: " + quantidade);
-    console.log("valor: " + product.price);
+    const newOrder = api.createOrder({
+      fk_id_client: route.params.idClient,
+      fk_id_pet_shop: product.fk_id_pet_shop,
+      create_date: "",
+	    payment_date: "",
+      price: 0,
+      payment_method: "PIX",
+      fk_cupom: "",
+      status: "SENT"
+    }).then((res) => {
+      console.log(res);
+
+      const newPurchase = api.createPurchase({
+
+        fk_id_order: res._id,
+        fk_id_product: route.params.idProduct,
+        fk_id_client: route.params.idClient,
+        fk_id_pet_shop: product.fk_id_pet_shop,
+        quantity: quantidade,
+        unit_price: product.price,
+        description: product.description
+      }).then((res) => {
+        console.log(res);
+
+        
+        const orderdata = api.getProductOrder(res.fk_id_order).then((res) => {
+          console.log(res.length);
+          setOrderQtd(res.length);
+          navigation.navigate('Home', {idClient: route.params.idClient, idOrder: res.fk_id_order, qtdOrder: orderQtd});
+        })
+
+        
+      })
+
+    })
 
   }
 
@@ -30,7 +60,6 @@ export default function ProductScreen({navigation, route}) {
   return (
     <View style={styles.container}>
       <Header navigation={navigation} />
-      <Text style={styles.title}>Produto</Text>
       <Text style={styles.productTitle} >{product.name}</Text>
       <Text style={styles.productTitle} >{product.description}</Text>
       <Text style={styles.productTitle} >R${product.price},00</Text>
@@ -55,6 +84,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#766452',
+  },
+  homeBtn: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 12,
+    paddingHorizontal: 32,
+    borderRadius: 10,
+    elevation: 3,
   },
   title: {
     fontSize: 20,
