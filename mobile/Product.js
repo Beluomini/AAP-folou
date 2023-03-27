@@ -9,15 +9,32 @@ export default function ProductScreen({ navigation, route }) {
 
   const productId = route.params.idProduct;
   const [product, setProduct] = useState([]);
-
-  const [quantidade, setQuantidade] = useState(1);
+  const [quantidade, setQuantidade] = useState("");
 
   function comprarProduto() {
-    console.log("id do produto: " + route.params.idProduct);
-    console.log("id do cliente: " + route.params.idClient);
-    console.log("id do petshop: " + product.fk_id_pet_shop);
-    console.log("quantidade: " + quantidade);
-    console.log("valor: " + product.price);
+
+    const hoje = new Date();
+    const ano = hoje.getFullYear();
+    const mes = ("0" + (hoje.getMonth() + 1)).slice(-2);
+    const dia = ("0" + hoje.getDate()).slice(-2);
+
+    const newOrder = api.createOrder({
+      fk_id_client: route.params.idClient,
+      fk_id_pet_shop: product.fk_id_pet_shop,
+      fk_id_product: route.params.idProduct,
+      quantity: quantidade,
+      create_date: String(ano + "-" + mes + "-" + dia),
+      payment_date: "",
+      price: product.price,
+      payment_method: "PIX",
+      fk_cupom: "",
+      status: "SENT"
+    }).then((res) => {
+      
+      console.log(res);
+      navigation.navigate('Home', {idClient: route.params.idClient, idOrder: res.fk_id_order});
+
+    })
 
   }
 

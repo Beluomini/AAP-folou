@@ -1,17 +1,36 @@
+const ip = '192.168.15.122';
+
+//produtos
 function getProducts() {
-    return fetch("http://192.168.15.122:3333/products").then((res) => res.json());
+    return fetch("http:/" + ip + ":3333/products").then((res) => res.json());
 }
 
 function getProductById(id) {
-    return fetch(`http://192.168.15.122:3333/products/${id}`).then((res) => res.json());
+    return fetch(`http://` + ip + `:3333/products/${id}`).then((res) => res.json());
 }
 
-function getPurchaseByOrder(id) {
-    return fetch(`http://192.168.15.122:3333/purchases/order/${id}`).then((res) => res.json());
+function getPetShopById(id) {
+    return fetch(`http://` + ip + `:3333/pet-shops/${id}`).then((res) => res.json());
+}
+
+function getPurchaseById(id) {
+    return fetch(`http://` + ip + `:3333/purchases/${id}`).then((res) => res.json());
+}
+
+function getPurchaseByOrder(idOrder) {
+    return fetch(`http://` + ip + `:3333/purchases/order/${idOrder}`).then((res) => res.json());
+}
+
+function getOrderById(id) {
+    return fetch(`http://` + ip + `:3333/orders/${id}`).then((res) => res.json());
+}
+
+function getOrdersByClient(idClient) {
+    return fetch(`http://` + ip + `:3333/orders/client/${idClient}`).then((res) => res.json());
 }
 
 function createPurchase(newPurchase) {
-    return fetch('http://192.168.15.122:3333/purchases', {
+    return fetch('http://' + ip + ':3333/purchases', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -21,8 +40,8 @@ function createPurchase(newPurchase) {
         .then((res) => res.json())
 }
 
-function createOrders(newOrders) {
-    return fetch('http://localhost:3333/orders', {
+function createOrder(newOrders) {
+    return fetch('http://' + ip + ':3333/orders', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -53,12 +72,8 @@ function editOrders(orders, id) {
         .then((res) => res.json())
 }
 
-function getPetShopById(id) {
-    return fetch(`http://localhost:3333/pet-shops/${id}`).then((res) => res.json());
-}
-
 function loginClient(loginClient) {
-    return fetch('http://192.168.15.122:3333/clients/login', {
+    return fetch('http://' + ip + ':3333/clients/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -74,6 +89,7 @@ function getClientesById(id) {
 
 
 export default {
-    getProducts, getProductById, getPurchaseByOrder, createPurchase, removeOrders,
-    editOrders, getPetShopById, loginClient, getClientesById
+    getProducts, getProductById, getPurchaseById, createPurchase, removeOrders,
+    editOrders, getPetShopById, loginClient, getClientesById, createOrder,
+    getPurchaseByOrder, getOrderById, getOrdersByClient
 };
