@@ -33,7 +33,7 @@ export default function MyOrdersScreen({ navigation, route }) {
   return (
     <View style={styles.container}>
 
-      <Header navigation={navigation} />
+      <Header navigation={navigation} route={route} idClient={route.params.idClient} />
 
       <View style={styles.productView}>
       
