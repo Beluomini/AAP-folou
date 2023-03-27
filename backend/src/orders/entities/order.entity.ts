@@ -32,6 +32,13 @@ export class Order {
 
     @Prop({ 
         type: String,
+        required: true,
+        min: 1 
+    })
+    quantity: String;
+
+    @Prop({ 
+        type: String,
         default: String(new Date())
     })
     create_date: String;
