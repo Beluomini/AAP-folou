@@ -181,7 +181,16 @@ export class OrdersService {
     })
   }
 
-  remove(id: string) {
+  async remove(id: string) {
+
+    const order = await this.OrderModel.findOne({ _id: id });
+    if(!order){
+      throw new HttpException(
+        'Order com a chave informada não existe',
+        HttpStatus.NOT_FOUND,
+      );
+    }
+
     return this.OrderModel.deleteOne({ _id: id }).exec();
   }
 }
