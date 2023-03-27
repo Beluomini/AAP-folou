@@ -3,6 +3,7 @@ import { maxLength } from 'class-validator';
 import mongoose, { HydratedDocument, Types } from 'mongoose';
 import { Client } from 'src/clients/entities/client.entity';
 import { PetShop } from 'src/pet-shops/entities/pet-shop.entity';
+import { Product } from 'src/products/entities/product.entity';
 
 export type OrderDocument = HydratedDocument<Order>;
 
@@ -21,6 +22,13 @@ export class Order {
         required: true 
     })
     fk_id_pet_shop: PetShop;
+
+    @Prop({ 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Product', 
+        required: true 
+    })
+    fk_id_product: Product;
 
     @Prop({ 
         type: String,
