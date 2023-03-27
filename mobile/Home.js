@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import {View, Text, StyleSheet, TextInput, Image, Pressable, Alert, FlatList } from 'react-native';
 import api from "./api";
 
+// https://icons.expo.fyi/
 import { MaterialIcons } from '@expo/vector-icons';
 import Header from './Header';
 
@@ -28,6 +29,20 @@ export default function HomeScreen({navigation, route}) {
       
       <View style={styles.productView}>
         <Text style={styles.title}>Produtos</Text>
+        
+        <Pressable style={styles.homeBtn} onPress={ () => { 
+          if(route.params.idOrder) {
+            navigation.navigate('Cart', {idOrder: route.params.idOrder }) 
+          } else {
+            Alert.alert("Você ainda não selecionou nenhum item");
+          } 
+        }}>          
+        <Text style={styles.title}>Produto</Text>
+          <MaterialIcons name="shopping-cart" size={24} color="black" />
+        </Pressable>
+
+        <Text style={styles.title}>Produtos: { route.params.qtdOrder ? 0 : route.params.qtdOrder }</Text>
+
         <FlatList
           data={products}
           renderItem={({item}) =>  
