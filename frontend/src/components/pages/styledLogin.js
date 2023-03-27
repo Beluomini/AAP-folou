@@ -44,4 +44,10 @@ export const PagLogin = styled.div`
 
         }
     }
+
+    .link{
+        display: block;
+        flex-wrap: wrap;
+        margin-top: 220px;
+    }
 `;

@@ -6,10 +6,10 @@ import { PedidoList } from './styledPedidosList';
 
 import api from "../../services/api";
 
-function PedidosList({ id, fk_id_client, fk_id_pet_shop, create_date, payment_date, payment_method, price, fk_cupom, status, handleRemove, handleEdit }) {
+function PedidosList({ id, fk_id_product, fk_id_client, fk_id_pet_shop, create_date, payment_date, payment_method, price, fk_cupom, status, handleRemove, handleEdit }) {
 
     const [cliente, setCliente] = useState({});
-    const [petshop, setPetshop] = useState({});
+    const [produto, setProduto] = useState({});
 
     const remove = (e) => {
         e.preventDefault();
@@ -26,12 +26,13 @@ function PedidosList({ id, fk_id_client, fk_id_pet_shop, create_date, payment_da
     }, []);
 
     useEffect(() => {
-        api.getPetShopById(fk_id_pet_shop).then((resposta) => setPetshop(resposta))
+        api.getProductsById(fk_id_product).then((resposta) => setProduto(resposta))
     }, []);
 
     return (
         <PedidoList>
             <p>Cliente: {cliente.name}</p>
+            <p>Produto: {produto.name}</p>
             <p>Data Criação: {create_date} </p>
             <p>Data Pagamento: {payment_date} </p>
             <p>Método Pagamento: {payment_method}</p>

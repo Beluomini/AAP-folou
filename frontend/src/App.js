@@ -13,6 +13,7 @@ import EditProduct from './components/pages/EditProduct';
 import Login from './components/pages/Login';
 import NewPedido from './components/pages/NewPedido';
 import NewProduto from './components/pages/NewProduto';
+import Registrar from './components/pages/Registrar';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/registrar" element={<Registrar />} />
         <Route path="/home" element={<Home />} />
         <Route path="/pedidos" element={<Pedidos />} />
         <Route path="/newpedido" element={<NewPedido />} />
