@@ -94,13 +94,24 @@ function createClient(newClient) {
         .then((res) => res.json())
 }
 
+function editClient(client, id) {
+    return fetch(`http://`+ip+`:3333/clients/${id}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(client)
+    })
+        .then((res) => res.json())
+}
+
 function getClientesById(id) {
-    return fetch(`http://localhost:3333/clients/${id}`).then((res) => res.json());
+    return fetch(`http://`+ip+`:3333/clients/${id}`).then((res) => res.json());
 }
 
 
 export default {
     getProducts, getProductById, getPurchaseById, createPurchase, removeOrders, 
     editOrders, getPetShopById, loginClient, getClientesById, createOrder,
-    getPurchaseByOrder, getOrderById, getOrdersByClient, createClient
+    getPurchaseByOrder, getOrderById, getOrdersByClient, createClient, editClient
 };
