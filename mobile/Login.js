@@ -38,6 +38,9 @@ export default function LoginScreen({navigation, route}) {
       <Pressable style={styles.loginBtn} onPress={ () => {login()} }>
         <Text style={styles.logintxt}>Entrar</Text>
       </Pressable>
+      <Pressable style={styles.loginBtn} onPress={ () => {navigation.navigate('Register')} }>
+        <Text style={styles.logintxt}>Criar conta</Text>
+      </Pressable>
     </View>
   );
 }
@@ -81,6 +84,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     elevation: 3,
     backgroundColor: '#A78D73',
+    margin: 10,
   },
   logintxt: {
     fontSize: 16,

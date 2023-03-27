@@ -2,18 +2,26 @@ import { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, Image, Pressable, Alert } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
-export default function Header({ navigation, route }) {
+export default function Header({ navigation, route, idClient }) {
 
   return (
     <View style={styles.container}>
 
       <Image style={styles.stretch} source={require('./assets/aapfolou.png')} />
 
-      <Pressable style={styles.homeBtn} onPress={() => { navigation.navigate('Home', { idUser: 1 }) }}>
+      <Pressable style={styles.homeBtn} onPress={() => { navigation.navigate('Home', { idClient: idClient }) }}>
         <MaterialIcons name="home" size={24} color="black" />
       </Pressable>
+      
+      <Pressable style={styles.homeBtn} onPress={() => { navigation.navigate('MyOrders', { idClient: idClient }) }}>
+          <MaterialIcons name="shopping-cart" size={24} color="black" />
+        </Pressable>
+      
+      <Pressable style={styles.homeBtn} onPress={() => { navigation.navigate('Perfil', { idClient: idClient }) }}>
+          <MaterialIcons name="person" size={24} color="black" />
+        </Pressable>
 
-      <Pressable style={styles.homeBtn} onPress={() => { navigation.navigate('Login', { idUser: 1 }) }}>
+      <Pressable style={styles.homeBtn} onPress={() => { navigation.navigate('Login', { idClient: null }) }}>
         <MaterialIcons name="logout" size={24} color="black" />
       </Pressable>
 

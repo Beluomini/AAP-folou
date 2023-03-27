@@ -25,15 +25,9 @@ export default function HomeScreen({ navigation, route }) {
   return (
     <View style={styles.container}>
 
-      <Header navigation={navigation} />
+      <Header navigation={navigation} route={route} idClient={idClient} />
 
       <View style={styles.productView}>
-
-    
-        <Pressable style={styles.homeBtn} onPress={() => { navigation.navigate('MyOrders', { idClient: idClient }) }}>
-          <Text style={styles.title}>Minhas compras</Text>
-          <MaterialIcons name="shopping-cart" size={24} color="black" />
-        </Pressable>
       
         <Text style={styles.title}>Produtos</Text>
 
@@ -51,7 +45,9 @@ export default function HomeScreen({ navigation, route }) {
             </View>
           }
         />
+        
       </View>
+      
     </View>
   );
 }
