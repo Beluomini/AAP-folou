@@ -20,12 +20,10 @@ function Registrar() {
         api
             .registerPetShop(registroPetShop)
             .then((res) => {
-                console.log(res)
                 if (res.message) {
                     alert(`Erro: ${res.message}`);
                 }
                 else {
-                    console.log(res)
                     alert(`Registro efetuado com sucesso!`);
                     localStorage.setItem('petshopid', JSON.stringify(res._id))
                     localStorage.setItem('petshopdados', JSON.stringify(res))
