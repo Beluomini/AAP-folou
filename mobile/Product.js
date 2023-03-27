@@ -9,43 +9,29 @@ export default function ProductScreen({ navigation, route }) {
 
   const productId = route.params.idProduct;
   const [product, setProduct] = useState([]);
-  const [orderQtd, setOrderQtd] = useState(0);
-  const [quantidade, setQuantidade] = useState(1);
+  const [quantidade, setQuantidade] = useState("");
 
   function comprarProduto() {
+
+    const hoje = new Date();
+    const ano = hoje.getFullYear();
+    const mes = ("0" + (hoje.getMonth() + 1)).slice(-2);
+    const dia = ("0" + hoje.getDate()).slice(-2);
+
     const newOrder = api.createOrder({
       fk_id_client: route.params.idClient,
       fk_id_pet_shop: product.fk_id_pet_shop,
-      create_date: "",
-	    payment_date: "",
+      fk_id_product: route.params.idProduct,
+      create_date: String(ano + "-" + mes + "-" + dia),
+      payment_date: "",
       price: 0,
       payment_method: "PIX",
       fk_cupom: "",
       status: "SENT"
     }).then((res) => {
+      
       console.log(res);
-
-      const newPurchase = api.createPurchase({
-
-        fk_id_order: res._id,
-        fk_id_product: route.params.idProduct,
-        fk_id_client: route.params.idClient,
-        fk_id_pet_shop: product.fk_id_pet_shop,
-        quantity: quantidade,
-        unit_price: product.price,
-        description: product.description
-      }).then((res) => {
-        console.log(res);
-
-        
-        const orderdata = api.getProductOrder(res.fk_id_order).then((res) => {
-          console.log(res.length);
-          setOrderQtd(res.length);
-          navigation.navigate('Home', {idClient: route.params.idClient, idOrder: res.fk_id_order, qtdOrder: orderQtd});
-        })
-
-        
-      })
+      navigation.navigate('Home', {idClient: route.params.idClient, idOrder: res.fk_id_order});
 
     })
 

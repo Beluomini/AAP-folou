@@ -1,4 +1,4 @@
-const ip = '10.253.24.229';
+const ip = '192.168.0.136';
 
 //produtos
 function getProducts() {

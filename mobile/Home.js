@@ -12,7 +12,7 @@ export default function HomeScreen({ navigation, route }) {
 
   function productNavigate(id) {
     return () => {
-      navigation.navigate('Product', { idProduct: id, idClient: route.params.idClient });
+      navigation.navigate('Product', { idProduct: id, idClient: route.params.idClient, idOrder: route.params.idOrder });
     }
   }
 
@@ -28,20 +28,8 @@ export default function HomeScreen({ navigation, route }) {
       <Header navigation={navigation} />
 
       <View style={styles.productView}>
+      
         <Text style={styles.title}>Produtos</Text>
-        
-        <Pressable style={styles.homeBtn} onPress={ () => { 
-          if(route.params.idOrder) {
-            navigation.navigate('Cart', {idOrder: route.params.idOrder }) 
-          } else {
-            Alert.alert("Você ainda não selecionou nenhum item");
-          } 
-        }}>          
-        <Text style={styles.title}>Produto</Text>
-          <MaterialIcons name="shopping-cart" size={24} color="black" />
-        </Pressable>
-
-        <Text style={styles.title}>Produtos: { route.params.qtdOrder ? 0 : route.params.qtdOrder }</Text>
 
         <FlatList
           data={products}
