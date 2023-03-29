@@ -32,8 +32,8 @@ function NewProduto() {
         setProducts(newOrder => ({ ...newOrder, [e.target.name]: e.target.value }))
     }
 
-    function createProduct(products) {
-        api
+    async function createProduct(products) {
+        await api
             .createProducts(products)
             .then(() => alert(`Criado com sucesso!`))
             .catch((err) => alert(`Erro: ${err.message}`));

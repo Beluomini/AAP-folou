@@ -100,9 +100,6 @@ function Pedidos() {
                             handleEdit={handleClickEdit}
                         />
                     ))}
-                <form onSubmit={handleSubmit}>
-                    <SubmitButton text='Criar Pedido' name="add" />
-                </form>
             </PagPedidos>
         </ContainerPage >
     );
