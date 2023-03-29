@@ -26,4 +26,10 @@ export const PagProdutos = styled.div`
         margin-top: 25px;
     }
 
+    img{
+        max-width: 100px;
+        border-radius: 50px;
+        margin: 10px;
+    }
+
 `;

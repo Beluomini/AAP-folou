@@ -50,12 +50,12 @@ export const PagRegistrar = styled.div`
     }
 
     .btn{
-        position: absolute;
+        position: relative;
         display: flex;
         flex-wrap: nowrap;
         flex-direction: column;
         align-self: center;
-        
+        margin-top: 22px;
     }
 
     .link{

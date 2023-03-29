@@ -27,7 +27,7 @@ function Registrar() {
                     alert(`Registro efetuado com sucesso!`);
                     localStorage.setItem('petshopid', JSON.stringify(res._id))
                     localStorage.setItem('petshopdados', JSON.stringify(res))
-                    navigate(`/login`);
+                    navigate(`/home`);
                 }
             })
             .catch((err) => alert(`Erro: ${err.message}`));
@@ -51,14 +51,13 @@ function Registrar() {
                 </div>
                 <h2>Faça o Registro do seu PetShop</h2>
                 <div className='form_input'>
-                    <Input text='Nome do Proprietário ' type='text' name='name' placeholder='Nome' handleOnChange={handleChange} />
+                    <Input text='Nome do PetShop ' type='text' name='name' placeholder='Nome' handleOnChange={handleChange} />
                     <Input text='Email ' type='text' name='email' placeholder='Email' handleOnChange={handleChange} />
                     <Input text='Senha ' type='password' name='password' placeholder='Senha' handleOnChange={handleChange} />
                     <Input text='CNPJ ' type='text' name='cnpj' placeholder='CNPJ' handleOnChange={handleChange} />
                     <Input text='Contato ' type='text' name='contact' placeholder='Contato' handleOnChange={handleChange} />
                     <Input text='CEP ' type='text' name='cep' placeholder='CEP' handleOnChange={handleChange} />
                     <Input text='Endereço ' type='text' name='address' placeholder='Endereço' handleOnChange={handleChange} />
-                    <div></div>
                     <SubmitButton className='btn' text='Efetuar Registro' />
                 </div>
             </form>

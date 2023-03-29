@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const PedidoList = styled.div`
 
-        max-height: 300px;
+        max-height: 250px;
         background-color: #D0BAA0;
         padding: 30px;
         width: 350px;

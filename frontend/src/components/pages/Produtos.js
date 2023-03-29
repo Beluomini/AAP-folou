@@ -71,6 +71,7 @@ function Produtos() {
                         <ProdutosList
                             id={products._id}
                             key={products._id}
+                            img={products.image}
                             description={products.description}
                             name={products.name}
                             price={products.price}
