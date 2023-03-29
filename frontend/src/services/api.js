@@ -110,6 +110,16 @@ function loginPetShop(loginPetShop) {
     })
         .then((res) => res.json());
 }
+function registerPetShop(registerPetShop) {
+    return fetch('http://localhost:3333/pet-shops', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(registerPetShop),
+    })
+        .then((res) => res.json());
+}
 
 function editPetShops(petshop, id) {
     return fetch(`http://localhost:3333/pet-shops/${id}`, {
@@ -144,6 +154,6 @@ function getClientesById(id) {
 export default {
     getProducts, getProductsById, getProductsPetshop, createProducts, removeProducts, editProducts,
     getOrders, getOrdersById, getOrdersPetshop, createOrders, removeOrders, editOrders,
-    getPetShop, getPetShopById, editPetShops, loginPetShop, deletePetShops,
+    getPetShop, getPetShopById, editPetShops, loginPetShop, deletePetShops, registerPetShop,
     getClientes, getClientesById
 };

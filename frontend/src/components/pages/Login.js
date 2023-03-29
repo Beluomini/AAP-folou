@@ -2,6 +2,8 @@ import { PagLogin } from './styledLogin';
 
 import React, { useState } from 'react';
 
+import { Link } from 'react-router-dom';
+
 import Input from '../form/Input';
 import SubmitButton from '../form/SubmitButton';
 
@@ -54,6 +56,9 @@ function Login() {
                     <SubmitButton text='Efetuar Login' />
                 </div>
             </form>
+            <div className='link'>
+                <Link to="/registrar">Não possui registro? Clique aqui!</Link>
+            </div>
         </PagLogin >
     )
 
