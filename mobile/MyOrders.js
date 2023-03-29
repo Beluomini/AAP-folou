@@ -12,8 +12,8 @@ export default function MyOrdersScreen({ navigation, route }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      api.getOrdersByClient(route.params.idClient).then((res) => {
-        res.forEach(item => {
+      await api.getOrdersByClient(route.params.idClient).then(async (res) => {
+        await res.forEach(item => {
           api.getProductById(item.fk_id_product).then((resp) => {
             item["productName"] = resp.name;
           })
