@@ -5,7 +5,7 @@ export const PagProdutos = styled.div`
     background-color: #766452;
     color: black;
     padding: 30px;
-    max-width: 1000px;
+    width: 900px;
     margin: auto;
     text-align: center;
     border-radius: 5px;
@@ -13,7 +13,9 @@ export const PagProdutos = styled.div`
     display: flex;
     flex-direction:column;
     flex-wrap: wrap;
+    flex-flow: row wrap;
     overflow: auto;
+    justify-content: space-between;
 
     form{
         display: block;
@@ -22,6 +24,12 @@ export const PagProdutos = styled.div`
 
     .btnnovoprod {
         margin-top: 25px;
+    }
+
+    img{
+        max-width: 100px;
+        border-radius: 50px;
+        margin: 10px;
     }
 
 `;

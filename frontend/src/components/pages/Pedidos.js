@@ -23,7 +23,28 @@ function Pedidos() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        api.getOrdersPetshop(petshopFormat).then((resposta) => setOrders(resposta))
+        const fetchData = async () => {
+
+            api.getOrdersPetshop(petshopFormat).then((res) => {
+                if (res.length == 0) {
+                    alert("Nenhuma pedido encontrado!")
+                }
+                res.forEach(item => {
+                    api.getProductsById(item.fk_id_product).then((resp) => {
+                        item["productName"] = resp.name;
+                    })
+                    api.getPetShopById(item.fk_id_pet_shop).then((resp) => {
+                        item["petShopName"] = resp.name;
+                    })
+                });
+                setOrders(res);
+            })
+        }
+
+        fetchData().catch((err) => {
+            console.log(err);
+        })
+
     }, []);
 
     useEffect(() => { //verifica se o usuário está logado
@@ -40,7 +61,12 @@ function Pedidos() {
     function handleClickDelete(idOrder) {
         api
             .removeOrders(idOrder)
-            .then(() => alert("Excluido com sucesso!"))
+            .then(() => {
+                alert("Excluido com sucesso!")
+                const novo = orders.filter((item) => item._id !== idOrder);
+                setOrders(novo);
+            }
+            )
             .catch((err) => alert(`Erro: ${err.message}`));
     }
 
@@ -61,6 +87,7 @@ function Pedidos() {
                         <PedidosList
                             id={orders._id}
                             key={orders._id}
+                            fk_id_product={orders.fk_id_product}
                             fk_id_client={orders.fk_id_client}
                             fk_id_pet_shop={orders.fk_id_pet_shop}
                             create_date={orders.create_date}

@@ -22,7 +22,13 @@ function Produtos() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        api.getProductsPetshop(petshopFormat).then((resposta) => setProducts(resposta))
+        api.getProductsPetshop(petshopFormat).then((res) => {
+            if (res.length == 0) {
+                alert("Nenhuma pedido encontrado!")
+            }
+            setProducts(res)
+        })
+
     }, []);
 
     useEffect(() => { //verifica se o usuário está logado
@@ -44,7 +50,11 @@ function Produtos() {
     function handleClickDelete(idProducts) {
         api
             .removeProducts(idProducts)
-            .then(() => alert("Excluido com sucesso!"))
+            .then(() => {
+                alert("Excluido com sucesso!")
+                const novo = products.filter((products) => products._id !== idProducts);
+                setProducts(novo);
+            })
             .catch((err) => alert(`Erro: ${err.message}`));
     }
     const handleSubmit = (e) => {
@@ -61,6 +71,7 @@ function Produtos() {
                         <ProdutosList
                             id={products._id}
                             key={products._id}
+                            img={products.image}
                             description={products.description}
                             name={products.name}
                             price={products.price}

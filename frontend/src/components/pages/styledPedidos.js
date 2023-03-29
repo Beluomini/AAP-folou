@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 export const PagPedidos = styled.div`
-    height: 1000px;
+    height: 750px;
     background-color: #766452;
     color: black;
     padding: 30px;
-    max-width: 1000px;
+    width: 1000px;
     margin: auto;
     text-align: center;
     border-radius: 5px;
@@ -13,6 +13,7 @@ export const PagPedidos = styled.div`
     display: flex;
     flex-direction:column;
     flex-wrap: wrap;
+    flex-flow: row wrap;
     overflow: auto;
     
     form{
