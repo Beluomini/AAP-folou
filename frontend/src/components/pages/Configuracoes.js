@@ -61,7 +61,7 @@ function Configuracoes() {
                     <form onSubmit={handleSubmit}>
                         <Input type='text' value={petshop.name} text='Nome PetShop ' name='name' placeholder='Nome do Estabelecimento' handleOnChange={handleChange} />
                         <Input type='text' value={petshop.email} text='Insira o Email ' name='email' placeholder="Email" handleOnChange={handleChange} />
-                        <Input type='text' value={petshop.password} text='Insira sua Senha ' name='password' placeholder="Senha" handleOnChange={handleChange} />
+                        <Input type='password' value={petshop.password} text='Insira sua Senha ' name='password' placeholder="Senha" handleOnChange={handleChange} />
                         <Input type='text' value={petshop.contact} text='Telefone para Contato ' name='contact' placeholder="Telefone para Contato" handleOnChange={handleChange} />
                         <Input type='text' value={petshop.cep} text='CEP ' name='cep' placeholder="CEP" />
                         <Input type='text' value={petshop.address} text='Insira o Endereço ' name='address' placeholder="Endereço" handleOnChange={handleChange} />

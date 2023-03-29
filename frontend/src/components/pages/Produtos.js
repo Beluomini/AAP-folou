@@ -22,11 +22,18 @@ function Produtos() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        api.getProductsPetshop(petshopFormat).then((res) => {
-            if (res.length == 0) {
-                alert("Nenhuma pedido encontrado!")
-            }
-            setProducts(res)
+        const fetchData = async () => {
+
+            api.getProductsPetshop(petshopFormat).then((res) => {
+                if (res.length == 0) {
+                    alert("Nenhuma pedido encontrado!")
+                }
+                setProducts(res)
+            })
+        }
+
+        fetchData().catch((err) => {
+            console.log(err);
         })
 
     }, []);
