@@ -21,4 +21,10 @@ export const ProdutoList = styled.div`
                 padding: 20px;
                 justify-content: space-between;
         }
+        img{
+                max-width: 100px;
+                border-radius: 50px;
+                margin: 10px;
+                max-height: 100px;
+        }
 `;
