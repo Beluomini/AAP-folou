@@ -1,4 +1,4 @@
-
+# Backend (API) 📊
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
 
@@ -16,17 +16,11 @@ $ npm install
 ## Para executar a API
 
 ```bash
-$ npm run start
+$ npm start
 ```
 
 ## Documentação
 A documentação da API é feita no swagger e pode ser acessada pelo no [link](http://localhost:3333/api)
-
-## Para executar os testes
-
-```bash
-$ npm run test
-```
 
 ## Autor
 
