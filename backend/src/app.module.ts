@@ -6,10 +6,12 @@ import { OrdersModule } from './orders/orders.module';
 import { PurchasesModule } from './purchases/purchases.module';
 import { ProductsModule } from './products/products.module';
 import { AuthModule } from './auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb+srv://beluomini:aapfolou@app-folou.ws7wgxl.mongodb.net/test'),
+    ConfigModule.forRoot(),
+    MongooseModule.forRoot(process.env.MONGO_URI),
     PetShopsModule,
     ClientsModule,
     OrdersModule,
